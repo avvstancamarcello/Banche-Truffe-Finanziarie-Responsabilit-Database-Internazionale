@@ -1,0 +1,164 @@
+{
+  "countries": [
+    {
+      "name": "Italia",
+      "code": "IT",
+      "description": "Legislazione sulla responsabilità bancaria in Italia per le truffe da piattaforme di bonifico online.",
+      "regulations": [
+        {
+          "title": "Direttiva PSD2 (Payment Services Directive 2)",
+          "year": "2018",
+          "description": "Implementata in Italia con D.Lgs. 218/2017. Stabilisce obblighi di autenticazione forte (SCA) e responsabilità della banca in caso di transazioni non autorizzate."
+        },
+        {
+          "title": "Codice del Consumo (D.Lgs. 206/2005)",
+          "year": "2005",
+          "description": "Tutela i diritti dei consumatori, inclusa la protezione contro pratiche commerciali scorrette nelle transazioni finanziarie."
+        }
+      ],
+      "bankResponsibility": "Le banche italiane sono responsabili per transazioni non autorizzate se non hanno implementato misure di sicurezza adeguate (es. autenticazione a due fattori). Il cliente può richiedere il rimborso entro 13 mesi dalla transazione fraudolenta.",
+      "reportingProcedure": "Segnalazione immediata alla banca, denuncia alla Polizia Postale, reclamo all'ABF (Arbitro Bancario Finanziario).",
+      "contactAuthority": "Banca d'Italia - Arbitro Bancario Finanziario (ABF), Polizia Postale, Consob"
+    },
+    {
+      "name": "Germania",
+      "code": "DE",
+      "description": "Normativa tedesca sulla responsabilità bancaria per le frodi nelle transazioni online.",
+      "regulations": [
+        {
+          "title": "Zahlungsdiensteaufsichtsgesetz (ZAG)",
+          "year": "2018",
+          "description": "Legge tedesca sui servizi di pagamento che implementa la PSD2. Stabilisce i diritti dei consumatori e gli obblighi delle banche."
+        },
+        {
+          "title": "BGB § 675u (Bürgerliches Gesetzbuch)",
+          "year": "2018",
+          "description": "Codice Civile tedesco - sezione sui servizi di pagamento. Regola la responsabilità per operazioni non autorizzate."
+        }
+      ],
+      "bankResponsibility": "Le banche tedesche devono rimborsare immediatamente le transazioni non autorizzate, salvo colpa grave del cliente. Il cliente è responsabile solo fino a 50 euro in caso di uso improprio prima della notifica.",
+      "reportingProcedure": "Notifica immediata alla banca, denuncia alla Polizei (polizia), reclamo alla BaFin se necessario.",
+      "contactAuthority": "BaFin (Federal Financial Supervisory Authority), Verbraucherzentrale (Centro Consumatori)"
+    },
+    {
+      "name": "Francia",
+      "code": "FR",
+      "description": "Regolamentazione francese sulla protezione dei clienti bancari contro le truffe online.",
+      "regulations": [
+        {
+          "title": "Code Monétaire et Financier",
+          "year": "2018",
+          "description": "Recepisce la PSD2 in Francia. Articoli L133-16 e seguenti regolano i servizi di pagamento e la responsabilità delle banche."
+        },
+        {
+          "title": "Loi Hamon (Loi sur la consommation)",
+          "year": "2014",
+          "description": "Rafforza i diritti dei consumatori, inclusa la protezione nelle transazioni bancarie online."
+        }
+      ],
+      "bankResponsibility": "La banca è responsabile per transazioni non autorizzate a meno che il cliente non abbia agito con negligenza grave o frode. Rimborso entro un giorno lavorativo dalla notifica.",
+      "reportingProcedure": "Contattare immediatamente la banca, fare una déclaration alla gendarmeria o police, segnalare a TRACFIN per sospette frodi.",
+      "contactAuthority": "ACPR (Autorité de Contrôle Prudentiel et de Résolution), Banque de France - Médiateur"
+    },
+    {
+      "name": "Spagna",
+      "code": "ES",
+      "description": "Legislazione spagnola sulla responsabilità bancaria nelle frodi di pagamento online.",
+      "regulations": [
+        {
+          "title": "Real Decreto-ley 19/2018",
+          "year": "2018",
+          "description": "Transpone la PSD2 in Spagna, modificando la legge 16/2009 sui servizi di pagamento."
+        },
+        {
+          "title": "Ley 16/2009 de Servicios de Pago",
+          "year": "2009",
+          "description": "Legge sui servizi di pagamento che stabilisce diritti e obblighi nelle transazioni elettroniche."
+        }
+      ],
+      "bankResponsibility": "Le banche spagnole devono rimborsare le transazioni non autorizzate immediatamente, massimo entro il giorno lavorativo successivo. Il cliente non è responsabile se ha notificato prontamente la frode.",
+      "reportingProcedure": "Notifica immediata alla banca, denuncia alla Policía Nacional o Guardia Civil, reclamo al Banco de España.",
+      "contactAuthority": "Banco de España - Servicio de Reclamaciones, CNMV (per questioni di investimento)"
+    },
+    {
+      "name": "Regno Unito",
+      "code": "GB",
+      "description": "Normativa britannica post-Brexit sulla responsabilità bancaria per le truffe di pagamento.",
+      "regulations": [
+        {
+          "title": "Payment Services Regulations 2017",
+          "year": "2017",
+          "description": "Implementa la PSD2 nel Regno Unito. Stabilisce i diritti dei consumatori per le transazioni non autorizzate."
+        },
+        {
+          "title": "Contingent Reimbursement Model Code (CRM Code)",
+          "year": "2019",
+          "description": "Codice volontario per il rimborso delle vittime di frodi di pagamento push autorizzate (APP fraud)."
+        }
+      ],
+      "bankResponsibility": "Le banche UK devono rimborsare le transazioni non autorizzate. Per le frodi APP (Authorised Push Payment), le banche aderenti al CRM Code devono rimborsare se non hanno dato adeguati avvertimenti.",
+      "reportingProcedure": "Contattare immediatamente la banca, segnalare ad Action Fraud (polizia), reclamo al Financial Ombudsman Service.",
+      "contactAuthority": "Financial Conduct Authority (FCA), Financial Ombudsman Service, Action Fraud"
+    },
+    {
+      "name": "Stati Uniti",
+      "code": "US",
+      "description": "Regolamentazione statunitense sulla protezione dei consumatori nelle transazioni bancarie elettroniche.",
+      "regulations": [
+        {
+          "title": "Electronic Fund Transfer Act (EFTA)",
+          "year": "1978",
+          "description": "Regola le transazioni elettroniche di fondi e stabilisce i diritti dei consumatori, inclusa la Regulation E."
+        },
+        {
+          "title": "Regulation E (12 CFR Part 1005)",
+          "year": "2013",
+          "description": "Implementa l'EFTA, stabilisce la responsabilità limitata del consumatore (max $50) per transazioni non autorizzate se notificate entro 2 giorni."
+        }
+      ],
+      "bankResponsibility": "Le banche devono rimborsare le transazioni non autorizzate. La responsabilità del consumatore è limitata a $50 se notificato entro 2 giorni, $500 se entro 60 giorni. Dopo 60 giorni, responsabilità illimitata.",
+      "reportingProcedure": "Notificare immediatamente la banca, filing report con FBI IC3 (Internet Crime Complaint Center), FTC (Federal Trade Commission).",
+      "contactAuthority": "Consumer Financial Protection Bureau (CFPB), Federal Trade Commission (FTC), FBI IC3"
+    },
+    {
+      "name": "Canada",
+      "code": "CA",
+      "description": "Legislazione canadese sulla responsabilità bancaria per le frodi nelle transazioni online.",
+      "regulations": [
+        {
+          "title": "Canadian Code of Practice for Consumer Debit Card Services",
+          "year": "2019",
+          "description": "Codice volontario che stabilisce standard per la protezione dei consumatori nelle transazioni con carte di debito."
+        },
+        {
+          "title": "Payment Card Networks Act",
+          "year": "2010",
+          "description": "Regola le reti di carte di pagamento e stabilisce obblighi di trasparenza e protezione."
+        }
+      ],
+      "bankResponsibility": "Le banche canadesi, aderendo al codice volontario, devono rimborsare le transazioni non autorizzate se il cliente ha agito in buona fede e ha notificato prontamente la frode.",
+      "reportingProcedure": "Contattare immediatamente la banca, segnalare al Canadian Anti-Fraud Centre, reclamo al Financial Consumer Agency of Canada (FCAC).",
+      "contactAuthority": "Financial Consumer Agency of Canada (FCAC), Canadian Anti-Fraud Centre, Ombudsman for Banking Services and Investments (OBSI)"
+    },
+    {
+      "name": "Australia",
+      "code": "AU",
+      "description": "Normativa australiana sulla protezione dei consumatori nelle transazioni bancarie elettroniche.",
+      "regulations": [
+        {
+          "title": "ePayments Code",
+          "year": "2011",
+          "description": "Codice che regola le transazioni elettroniche e stabilisce i diritti dei consumatori e le responsabilità delle istituzioni finanziarie."
+        },
+        {
+          "title": "Australian Consumer Law",
+          "year": "2011",
+          "description": "Legge sulla protezione dei consumatori che si applica anche ai servizi finanziari."
+        }
+      ],
+      "bankResponsibility": "Le istituzioni finanziarie devono rimborsare le transazioni non autorizzate a meno che il cliente non abbia contribuito alla perdita con negligenza o violazione del PIN. Nessuna responsabilità del consumatore se la banca non ha implementato sistemi sicuri.",
+      "reportingProcedure": "Notificare immediatamente la banca, segnalare alla polizia, reclamo all'Australian Financial Complaints Authority (AFCA).",
+      "contactAuthority": "Australian Securities and Investments Commission (ASIC), Australian Financial Complaints Authority (AFCA), Scamwatch"
+    }
+  ]
+}
