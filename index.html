@@ -274,7 +274,7 @@
                         <option value="">-- Scegli un paese --</option>
                     </select>
                 </div>
-                <button class="search-button" onclick="searchCountry()">Cerca Informazioni</button>
+                <button class="search-button" id="search-button">Cerca Informazioni</button>
             </div>
         </div>
 
@@ -400,13 +400,18 @@
         }
 
         // Carica il database all'avvio della pagina
-        document.addEventListener('DOMContentLoaded', loadDatabase);
-
-        // Permetti la ricerca premendo Enter nella select
-        document.getElementById('country-select').addEventListener('change', function() {
-            if (this.value) {
-                searchCountry();
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDatabase();
+            
+            // Aggiungi event listener al pulsante di ricerca
+            document.getElementById('search-button').addEventListener('click', searchCountry);
+            
+            // Permetti la ricerca automatica quando cambia la selezione
+            document.getElementById('country-select').addEventListener('change', function() {
+                if (this.value) {
+                    searchCountry();
+                }
+            });
         });
     </script>
 </body>
