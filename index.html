@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Internazionale - Responsabilità Bancarie e Truffe Finanziarie</title>
+    <title>Database Internazionale delle Responsabilità Bancarie e Truffe Finanziarie</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -19,582 +19,418 @@
             min-height: 100vh;
             padding: 20px;
         }
-
+        
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-
+        
         header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             padding: 40px;
             text-align: center;
         }
-
+        
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-
+        
         .subtitle {
             font-size: 1.2em;
             opacity: 0.9;
-            margin-top: 10px;
         }
-
-        .intro {
-            background: #f8f9fa;
-            padding: 30px 40px;
-            border-bottom: 3px solid #667eea;
-        }
-
-        .intro h2 {
-            color: #1e3c72;
-            margin-bottom: 15px;
-        }
-
-        .intro p {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            color: #555;
-        }
-
-        .highlight {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .controls {
-            padding: 30px 40px;
-            background: #ffffff;
-            border-bottom: 2px solid #e9ecef;
-            display: flex;
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .search-box, .filter-box {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .section-title {
-            background: #e7f3ff;
-            border-left: 5px solid #2a5298;
-            padding: 20px 40px;
-            margin: 0;
-        }
-
-        .section-title h2 {
-            color: #1e3c72;
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #555;
-            font-size: 1.05em;
-            line-height: 1.6;
-        }
-
-        .airtable-container {
             padding: 40px;
             background: #f8f9fa;
         }
-
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
         .airtable-embed {
             width: 100%;
             height: 600px;
-            border: none;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
-
-        .table-container {
-            padding: 40px;
-            overflow-x: auto;
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
         }
-
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        th {
+        
+        th, td {
             padding: 15px;
             text-align: left;
-            font-weight: 600;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            border-bottom: 1px solid #ddd;
         }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #dee2e6;
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
         }
-
-        tbody tr {
-            transition: all 0.3s;
+        
+        tr:hover {
+            background-color: #f5f5f5;
         }
-
-        tbody tr:hover {
-            background: #f8f9fa;
-            transform: scale(1.01);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .protection-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .protection-alto, .protection-altissimo {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .protection-medio-alto {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .protection-medio-basso {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .protection-basso {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
+        
         footer {
             background: #1e3c72;
             color: white;
-            padding: 30px 40px;
             text-align: center;
+            padding: 30px;
+            margin-top: 40px;
         }
-
-        footer p {
-            margin: 5px 0;
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin: 10px;
         }
-
-        footer a {
-            color: #fff;
-            text-decoration: underline;
+        
+        .btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
         }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .controls {
-                flex-direction: column;
-            }
-
-            .search-box, .filter-box {
-                width: 100%;
-            }
-
-            th, td {
-                padding: 10px;
-                font-size: 0.9em;
-            }
-
-            .airtable-embed {
-                height: 500px;
-            }
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .stat-number {
-            font-size: 2.5em;
+        
+        .protection-high {
+            color: #4caf50;
             font-weight: bold;
-            color: #667eea;
         }
-
-        .stat-label {
-            color: #666;
-            margin-top: 5px;
+        
+        .protection-low {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🌍 Database Internazionale</h1>
-            <p class="subtitle">Responsabilità Bancarie e Truffe Finanziarie per Paese</p>
-            <p style="margin-top: 15px; font-size: 1.1em;">Copertura: <strong>45 paesi</strong> nel mondo</p>
+            <h1>🌍 Database Internazionale delle Responsabilità Bancarie</h1>
+            <p class="subtitle">Truffe Finanziarie e Sistemi di Protezione Globali</p>
         </header>
-
-        <div class="intro">
-            <h2>📊 Informazioni sul Database</h2>
-            <p>Questo database raccoglie informazioni sulla <strong>responsabilità delle banche</strong> in caso di truffe finanziarie e bonifici fraudolenti in <strong>45 paesi</strong> diversi.</p>
-            <p>Per ogni paese sono indicate:</p>
-            <ul style="margin-left: 30px; margin-top: 10px;">
-                <li>🏛️ Le autorità di regolamentazione bancaria</li>
-                <li>⚖️ Il livello di protezione del consumatore</li>
-                <li>📜 Le leggi e normative principali</li>
-                <li>💡 Note aggiuntive sulle tutele disponibili</li>
-            </ul>
-
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">21</div>
-                    <div class="stat-label">Paesi Alta/Altissima Protezione</div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">46</div>
+                <div class="stat-label">Paesi Monitorati</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">33</div>
+                <div class="stat-label">Alta Protezione</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">13</div>
+                <div class="stat-label">Bassa Protezione</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>📊 Panoramica del Progetto</h2>
+                <p>Questo database monitora <strong>46 paesi</strong> a livello globale, classificandoli in base al loro livello di protezione dei consumatori finanziari. Il sistema distingue tra:</p>
+                <ul style="margin: 20px 0 20px 40px;">
+                    <li><span class="protection-high">ALTA PROTEZIONE (33 paesi)</span>: Paesi con solide normative, autorità di vigilanza efficaci e sistemi di compensazione robusti</li>
+                    <li><span class="protection-low">BASSA PROTEZIONE (13 paesi)</span>: Paesi con normative più deboli o sistemi di protezione meno sviluppati</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>🛡️ Paesi con Alta Protezione (33 Paesi)</h2>
+                <div class="info-box">
+                    <p><strong>Questi 33 paesi offrono i più alti standard di protezione dei consumatori finanziari.</strong></p>
+                    <p>Include tutti i membri dell'Unione Europea, paesi dello Spazio Economico Europeo (SEE), e altre nazioni con solidi framework regolatori come Canada, Australia, Giappone, Singapore, Corea del Sud, Hong Kong, e Islanda.</p>
+                    <p><strong>Caratteristiche comuni:</strong></p>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Autorità di vigilanza finanziaria indipendenti e ben finanziate</li>
+                        <li>Schemi di compensazione e protezione degli investitori</li>
+                        <li>Normative stringenti contro frodi e manipolazioni di mercato</li>
+                        <li>Trasparenza e obblighi di disclosure rigorosi</li>
+                        <li>Accesso effettivo a meccanismi di ricorso e rimborso</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Database completo disponibile su Airtable:</strong></p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">24</div>
-                    <div class="stat-label">Paesi Bassa/Medio-Bassa Protezione</div>
+                
+                <iframe class="airtable-embed" 
+                    src="https://airtable.com/embed/appkWG9bJ3zKpNIwc/shrOF5d1xxQvMnxKF?viewControls=on" 
+                    frameborder="0" 
+                    onmousewheel="">
+                </iframe>
+                
+                <p style="margin-top: 20px; font-style: italic;">Il database Airtable include informazioni dettagliate su:</p>
+                <ul style="margin: 10px 0 10px 40px;">
+                    <li>Nome del paese</li>
+                    <li>Autorità di vigilanza finanziaria e link al sito ufficiale</li>
+                    <li>Livello di protezione</li>
+                    <li>Framework normativo</li>
+                    <li>Meccanismi di compensazione</li>
+                    <li>Note e aggiornamenti</li>
+                </ul>
+                
+                <div style="margin-top: 30px; padding: 20px; background: #f0f7ff; border-radius: 10px;">
+                    <h3 style="color: #1e3c72; margin-bottom: 15px;">🇪🇺 Paesi con Alta Protezione (Lista Completa - 33 Paesi)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
+                        <div>🇮🇹 <strong>Italia</strong> - CONSOB</div>
+                        <div>🇫🇷 <strong>Francia</strong> - AMF</div>
+                        <div>🇩🇪 <strong>Germania</strong> - BaFin</div>
+                        <div>🇪🇸 <strong>Spagna</strong> - CNMV</div>
+                        <div>🇳🇱 <strong>Olanda</strong> - AFM</div>
+                        <div>🇧🇪 <strong>Belgio</strong> - FSMA</div>
+                        <div>🇦🇹 <strong>Austria</strong> - FMA</div>
+                        <div>🇬🇷 <strong>Grecia</strong> - HCMC</div>
+                        <div>🇵🇱 <strong>Polonia</strong> - KNF</div>
+                        <div>🇸🇪 <strong>Svezia</strong> - FI</div>
+                        <div>🇳🇴 <strong>Norvegia</strong> - Finanstilsynet</div>
+                        <div>🇫🇮 <strong>Finlandia</strong> - FIN-FSA</div>
+                        <div>🇮🇪 <strong>Irlanda</strong> - Central Bank</div>
+                        <div>🇬🇧 <strong>Regno Unito</strong> - FCA</div>
+                        <div>🇨🇭 <strong>Svizzera</strong> - FINMA</div>
+                        <div>🇮🇸 <strong>Islanda</strong> - FME</div>
+                        <div>🇵🇹 <strong>Portogallo</strong> - CMVM</div>
+                        <div>🇩🇰 <strong>Danimarca</strong> - DFSA</div>
+                        <div>🇨🇿 <strong>Repubblica Ceca</strong> - CNB</div>
+                        <div>🇭🇺 <strong>Ungheria</strong> - MNB</div>
+                        <div>🇷🇴 <strong>Romania</strong> - ASF</div>
+                        <div>🇧🇬 <strong>Bulgaria</strong> - FSC</div>
+                        <div>🇭🇷 <strong>Croazia</strong> - HANFA</div>
+                        <div>🇸🇰 <strong>Slovacchia</strong> - NBS</div>
+                        <div>🇸🇮 <strong>Slovenia</strong> - ATVP</div>
+                        <div>🇱🇺 <strong>Lussemburgo</strong> - CSSF</div>
+                        <div>🇨🇦 <strong>Canada</strong> - CSA/IIROC</div>
+                        <div>🇦🇺 <strong>Australia</strong> - ASIC</div>
+                        <div>🇯🇵 <strong>Giappone</strong> - FSA</div>
+                        <div>🇸🇬 <strong>Singapore</strong> - MAS</div>
+                        <div>🇰🇷 <strong>Corea del Sud</strong> - FSC</div>
+                        <div>🇭🇰 <strong>Hong Kong</strong> - SFC</div>
+                        <div>🇱🇹 <strong>Lituania</strong> - Bank of Lithuania</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">45</div>
-                    <div class="stat-label">Totale Paesi Coperti</div>
+            </div>
+            
+            <div class="section">
+                <h2>⚠️ Paesi con Bassa Protezione (13 Paesi)</h2>
+                <div class="warning-box">
+                    <p><strong>Attenzione:</strong> Questi 13 paesi presentano livelli di protezione dei consumatori finanziari più bassi o framework normativi meno sviluppati.</p>
+                    <p>Gli investitori devono prestare particolare attenzione quando operano in questi mercati.</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Paese</th>
+                            <th>Autorità di Vigilanza</th>
+                            <th>Link Autorità</th>
+                            <th>Livello Protezione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🇺🇸 Stati Uniti</td>
+                            <td>SEC - Securities and Exchange Commission</td>
+                            <td><a href="https://www.sec.gov" target="_blank">www.sec.gov</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇨🇳 Cina</td>
+                            <td>CSRC - China Securities Regulatory Commission</td>
+                            <td><a href="http://www.csrc.gov.cn/csrc_en/" target="_blank">www.csrc.gov.cn</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇲🇽 Messico</td>
+                            <td>CNBV - Comisión Nacional Bancaria y de Valores</td>
+                            <td><a href="https://www.gob.mx/cnbv" target="_blank">www.gob.mx/cnbv</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇮🇩 Indonesia</td>
+                            <td>OJK - Otoritas Jasa Keuangan</td>
+                            <td><a href="https://www.ojk.go.id/en" target="_blank">www.ojk.go.id</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇲🇾 Malesia</td>
+                            <td>SC - Securities Commission Malaysia</td>
+                            <td><a href="https://www.sc.com.my" target="_blank">www.sc.com.my</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇹🇼 Taiwan</td>
+                            <td>FSC - Financial Supervisory Commission</td>
+                            <td><a href="https://www.fsc.gov.tw/en/" target="_blank">www.fsc.gov.tw</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇲🇬 Madagascar</td>
+                            <td>CSBF - Commission de Supervision Bancaire et Financière</td>
+                            <td><a href="https://www.csbf.mg" target="_blank">www.csbf.mg</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇷🇺 Russia</td>
+                            <td>Central Bank of Russia</td>
+                            <td><a href="https://www.cbr.ru/eng/" target="_blank">www.cbr.ru</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇹🇷 Turchia</td>
+                            <td>CMB - Capital Markets Board of Turkey</td>
+                            <td><a href="https://www.cmb.gov.tr/en" target="_blank">www.cmb.gov.tr</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇳🇿 Nuova Zelanda</td>
+                            <td>FMA - Financial Markets Authority</td>
+                            <td><a href="https://www.fma.govt.nz" target="_blank">www.fma.govt.nz</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇦🇪 Emirati Arabi</td>
+                            <td>SCA - Securities and Commodities Authority</td>
+                            <td><a href="https://www.sca.gov.ae/en" target="_blank">www.sca.gov.ae</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇮🇱 Israele</td>
+                            <td>ISA - Israel Securities Authority</td>
+                            <td><a href="https://www.isa.gov.il/en" target="_blank">www.isa.gov.il</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                        <tr>
+                            <td>🇪🇬 Egitto</td>
+                            <td>FRA - Financial Regulatory Authority</td>
+                            <td><a href="https://www.fra.gov.eg/en" target="_blank">www.fra.gov.eg</a></td>
+                            <td class="protection-low">BASSA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2>📖 Come Utilizzare Questo Database</h2>
+                <div class="info-box">
+                    <ol style="margin-left: 20px;">
+                        <li><strong>Consultare la classificazione</strong>: Verificare se il paese in cui si intende investire è classificato come ALTA o BASSA protezione</li>
+                        <li><strong>Contattare le autorità</strong>: Utilizzare i link diretti per accedere ai siti ufficiali delle autorità di vigilanza</li>
+                        <li><strong>Verificare i diritti</strong>: Informarsi sui meccanismi di protezione e compensazione disponibili</li>
+                        <li><strong>Segnalare frodi</strong>: Utilizzare i canali ufficiali delle autorità per segnalare attività sospette</li>
+                        <li><strong>Rimanere aggiornati</strong>: Il database viene aggiornato regolarmente con nuove informazioni</li>
+                    </ol>
                 </div>
             </div>
-
-            <div class="highlight">
-                <strong>⚠️ Nota importante:</strong> Le informazioni fornite hanno scopo puramente informativo e potrebbero non essere esaustive. Per situazioni specifiche, è sempre consigliabile consultare un avvocato specializzato nel paese di riferimento.
+            
+            <div class="section">
+                <h2>🔗 Risorse Utili</h2>
+                <div style="margin: 20px 0;">
+                    <a href="https://airtable.com/appkWG9bJ3zKpNIwc/shrOF5d1xxQvMnxKF" class="btn" target="_blank">📊 Visualizza Database Completo</a>
+                    <a href="https://www.consob.it" class="btn" target="_blank">🇮🇹 CONSOB Italia</a>
+                    <a href="https://www.esma.europa.eu" class="btn" target="_blank">🇪🇺 ESMA Europa</a>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>⚖️ Note Legali e Metodologia</h2>
+                <p style="margin-bottom: 15px;">La classificazione dei paesi si basa su diversi criteri oggettivi:</p>
+                <ul style="margin-left: 40px; margin-bottom: 20px;">
+                    <li>Esistenza e efficacia di autorità di vigilanza indipendenti</li>
+                    <li>Presenza di schemi di compensazione degli investitori</li>
+                    <li>Trasparenza e requisiti di disclosure</li>
+                    <li>Accesso a meccanismi di ricorso e rimborso</li>
+                    <li>Track record di enforcement e sanzioni</li>
+                    <li>Conformità con standard internazionali (IOSCO, FATF, ecc.)</li>
+                </ul>
+                <p><em>Ultimo aggiornamento: Dicembre 2025</em></p>
             </div>
         </div>
-
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Cerca per paese, autorità o legge...">
-            </div>
-            <div class="filter-box">
-                <select id="countryFilter">
-                    <option value="">🌐 Tutti i paesi (45)</option>
-                    <option value="Italia">Italia</option>
-                    <option value="Francia">Francia</option>
-                    <option value="Germania">Germania</option>
-                    <option value="Spagna">Spagna</option>
-                    <option value="Portogallo">Portogallo</option>
-                    <option value="Lussemburgo">Lussemburgo</option>
-                    <option value="Danimarca">Danimarca</option>
-                    <option value="Repubblica Ceca">Repubblica Ceca</option>
-                    <option value="Ungheria">Ungheria</option>
-                    <option value="Croazia">Croazia</option>
-                    <option value="Romania">Romania</option>
-                    <option value="Bulgaria">Bulgaria</option>
-                    <option value="Brasile">Brasile</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Giappone">Giappone</option>
-                    <option value="Corea del Sud">Corea del Sud</option>
-                    <option value="Singapore">Singapore</option>
-                    <option value="India">India</option>
-                    <option value="Sud Africa">Sud Africa</option>
-                    <option value="Argentina">Argentina</option>
-                    <option value="Regno Unito">Regno Unito (UK)</option>
-                    <option value="Stati Uniti">Stati Uniti (US)</option>
-                    <option value="Cina">Cina</option>
-                    <option value="Messico">Messico</option>
-                    <option value="Indonesia">Indonesia</option>
-                    <option value="Malesia">Malesia</option>
-                    <option value="Taiwan">Taiwan</option>
-                    <option value="Madagascar">Madagascar</option>
-                    <option value="Olanda">Olanda</option>
-                    <option value="Belgio">Belgio</option>
-                    <option value="Svizzera">Svizzera</option>
-                    <option value="Austria">Austria</option>
-                    <option value="Grecia">Grecia</option>
-                    <option value="Polonia">Polonia</option>
-                    <option value="Svezia">Svezia</option>
-                    <option value="Norvegia">Norvegia</option>
-                    <option value="Finlandia">Finlandia</option>
-                    <option value="Irlanda">Irlanda</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Turchia">Turchia</option>
-                    <option value="Nuova Zelanda">Nuova Zelanda</option>
-                    <option value="Emirati Arabi">Emirati Arabi</option>
-                    <option value="Israele">Israele</option>
-                    <option value="Egitto">Egitto</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- AIRTABLE SECTION - HIGH/VERY HIGH PROTECTION -->
-        <div class="section-title">
-            <h2>🛡️ Paesi ad ALTA/ALTISSIMA Protezione (21 paesi)</h2>
-            <p>Questi paesi offrono una forte protezione ai consumatori con normative avanzate, responsabilità bancaria estesa e meccanismi di rimborso efficaci in caso di truffe finanziarie. Le banche sono generalmente tenute a rimborsare i clienti vittime di frodi, salvo casi di grave negligenza.</p>
-        </div>
-
-        <div class="airtable-container">
-            <iframe class="airtable-embed" src="https://airtable.com/embed/apprmYrIcUst4ixrt/shrHs0mFxeHthTd7u" frameborder="0" onmousewheel="" width="100%" height="600"></iframe>
-        </div>
-
-        <!-- HTML TABLE SECTION - LOW/MEDIUM-LOW PROTECTION -->
-        <div class="section-title">
-            <h2>⚠️ Paesi a BASSA/MEDIO-BASSA Protezione (24 paesi)</h2>
-            <p>Questi paesi presentano una protezione dei consumatori limitata o in via di sviluppo. Le normative sulla responsabilità bancaria sono meno stringenti e il rimborso in caso di truffe dipende fortemente dalle circostanze specifiche. I consumatori potrebbero dover dimostrare di non aver contribuito alla frode per ottenere un rimborso.</p>
-        </div>
-
-        <div class="table-container">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>Paese</th>
-                        <th>Autorità di Regolamentazione</th>
-                        <th>Livello di Protezione</th>
-                        <th>Leggi/Normative Principali</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Regno Unito (UK)</td>
-                        <td>FCA, PRA</td>
-                        <td><span class="protection-badge protection-medio-basso">Medio-Basso</span></td>
-                        <td>Financial Conduct Authority, Contingent Reimbursement Model</td>
-                    </tr>
-                    <tr>
-                        <td>Stati Uniti (US)</td>
-                        <td>Federal Reserve, SEC, FDIC</td>
-                        <td><span class="protection-badge protection-medio-basso">Medio-Basso</span></td>
-                        <td>EFTA protection, limited liability</td>
-                    </tr>
-                    <tr>
-                        <td>Cina</td>
-                        <td>PBOC, CBIRC</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>People's Bank of China, limited consumer protection</td>
-                    </tr>
-                    <tr>
-                        <td>Messico</td>
-                        <td>CNBV, Banco de México</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Limited bank liability for fraud</td>
-                    </tr>
-                    <tr>
-                        <td>Indonesia</td>
-                        <td>Bank Indonesia, OJK</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>LPS deposit protection, limited fraud liability</td>
-                    </tr>
-                    <tr>
-                        <td>Malesia</td>
-                        <td>Bank Negara Malaysia</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>PIDM protection, case-dependent reimbursement</td>
-                    </tr>
-                    <tr>
-                        <td>Taiwan</td>
-                        <td>FSC</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>CDIC protection, rare reimbursement for authorized transfers</td>
-                    </tr>
-                    <tr>
-                        <td>Madagascar</td>
-                        <td>Banque Centrale de Madagascar</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Very limited protection</td>
-                    </tr>
-                    <tr>
-                        <td>Olanda</td>
-                        <td>De Nederlandsche Bank (DNB), AFM</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Financial Supervision Act (Wft)</td>
-                    </tr>
-                    <tr>
-                        <td>Belgio</td>
-                        <td>FSMA, Banca Nazionale del Belgio</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Act, MiFID II</td>
-                    </tr>
-                    <tr>
-                        <td>Svizzera</td>
-                        <td>FINMA</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Act, FinSA, FinIA</td>
-                    </tr>
-                    <tr>
-                        <td>Austria</td>
-                        <td>FMA</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Act (BWG), WAG</td>
-                    </tr>
-                    <tr>
-                        <td>Grecia</td>
-                        <td>Bank of Greece, HCMC</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Law 4261/2014</td>
-                    </tr>
-                    <tr>
-                        <td>Polonia</td>
-                        <td>KNF</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Law Act</td>
-                    </tr>
-                    <tr>
-                        <td>Svezia</td>
-                        <td>Finansinspektionen</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking and Financing Act</td>
-                    </tr>
-                    <tr>
-                        <td>Norvegia</td>
-                        <td>Finanstilsynet</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Financial Institutions Act</td>
-                    </tr>
-                    <tr>
-                        <td>Finlandia</td>
-                        <td>FIN-FSA</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Credit Institutions Act</td>
-                    </tr>
-                    <tr>
-                        <td>Irlanda</td>
-                        <td>Central Bank of Ireland</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Central Bank Acts, Consumer Protection Code</td>
-                    </tr>
-                    <tr>
-                        <td>Russia</td>
-                        <td>Central Bank of Russia</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Federal Law on Banks and Banking</td>
-                    </tr>
-                    <tr>
-                        <td>Turchia</td>
-                        <td>BDDK</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Law No. 5411</td>
-                    </tr>
-                    <tr>
-                        <td>Nuova Zelanda</td>
-                        <td>Reserve Bank of New Zealand, FMA</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Reserve Bank Act, FMCA</td>
-                    </tr>
-                    <tr>
-                        <td>Emirati Arabi</td>
-                        <td>Central Bank of UAE, DFSA</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Federal Law No. 14, DFSA Rules</td>
-                    </tr>
-                    <tr>
-                        <td>Israele</td>
-                        <td>Bank of Israel, ISA</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Law, Securities Law</td>
-                    </tr>
-                    <tr>
-                        <td>Egitto</td>
-                        <td>Central Bank of Egypt</td>
-                        <td><span class="protection-badge protection-basso">Basso</span></td>
-                        <td>Banking Law No. 194/2020</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+        
         <footer>
-            <p><strong>Database Internazionale - Responsabilità Bancarie e Truffe Finanziarie</strong></p>
-            <p>Ultimo aggiornamento: Dicembre 2025</p>
-            <p style="margin-top: 15px; font-size: 0.9em;">Creato da <a href="https://github.com/avvstancamarcello" target="_blank">Avv. Stanca Marcello</a></p>
-            <p style="font-size: 0.85em; margin-top: 10px;">Le informazioni contenute in questo database sono fornite a scopo informativo e non costituiscono consulenza legale.</p>
+            <p>&copy; 2025 Database Internazionale delle Responsabilità Bancarie</p>
+            <p>Progetto di monitoraggio e protezione dei consumatori finanziari</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">46 Paesi Monitorati | 33 Alta Protezione | 13 Bassa Protezione</p>
         </footer>
     </div>
-
-    <script>
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const countryFilter = document.getElementById('countryFilter');
-        const tableRows = document.querySelectorAll('#dataTable tbody tr');
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const selectedCountry = countryFilter.value.toLowerCase();
-
-            tableRows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                const countryCell = row.cells[0].textContent.toLowerCase();
-                
-                const matchesSearch = text.includes(searchTerm);
-                const matchesCountry = !selectedCountry || countryCell.includes(selectedCountry);
-
-                if (matchesSearch && matchesCountry) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        searchInput.addEventListener('input', filterTable);
-        countryFilter.addEventListener('change', filterTable);
-
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
