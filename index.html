@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Internazionale - Truffe Finanziarie e Responsabilità delle Banche</title>
+    <title>Database Finanziario Internazionale - Protezione del Consumatore</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -11,16 +11,15 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #333;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -29,252 +28,237 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        
+
         header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             padding: 40px;
             text-align: center;
         }
-        
-        header h1 {
+
+        h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
-        header p {
+
+        .subtitle {
             font-size: 1.2em;
             opacity: 0.9;
         }
-        
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: #f8f9fa;
+            padding: 10px;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
         .content {
             padding: 40px;
         }
-        
-        .intro {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            border-left: 5px solid #667eea;
+
+        .tab-content {
+            display: none;
         }
-        
-        .intro h2 {
-            color: #1e3c72;
-            margin-bottom: 15px;
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
         }
-        
-        .search-box {
-            margin-bottom: 30px;
-            position: relative;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        #searchInput {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 50px;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        #searchInput:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 10px 25px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .filter-btn:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-        
-        .filter-btn.active {
-            background: #667eea;
-            color: white;
-        }
-        
-        .countries-grid {
+
+        .country-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
+            margin-top: 30px;
         }
-        
+
         .country-card {
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
-            border: 2px solid transparent;
+            border-left: 5px solid #667eea;
         }
-        
+
         .country-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-color: #667eea;
         }
-        
-        .country-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .country-name {
-            font-size: 1.5em;
-            font-weight: bold;
+
+        .country-card h3 {
             color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
+
         .protection-badge {
-            padding: 5px 15px;
+            display: inline-block;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.7em;
             font-weight: bold;
             text-transform: uppercase;
         }
-        
+
         .protection-high {
-            background: #d4edda;
-            color: #155724;
+            background: #28a745;
+            color: white;
         }
-        
+
         .protection-medium {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .protection-low {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .country-info {
-            margin-bottom: 20px;
-        }
-        
-        .info-item {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: start;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            color: #666;
-            min-width: 120px;
-        }
-        
-        .info-value {
+            background: #ffc107;
             color: #333;
         }
-        
+
+        .protection-low {
+            background: #dc3545;
+            color: white;
+        }
+
+        .info-section {
+            margin: 15px 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .info-value {
+            color: #333;
+            line-height: 1.6;
+        }
+
         .info-value a {
             color: #667eea;
             text-decoration: none;
             word-break: break-all;
         }
-        
+
         .info-value a:hover {
             text-decoration: underline;
         }
-        
+
         .ai-instructions {
-            background: #e8f4f8;
-            padding: 15px;
+            background: #e7f3ff;
+            padding: 12px;
             border-radius: 8px;
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 0.9em;
-            border-left: 4px solid #17a2b8;
+            border-left: 3px solid #2196F3;
         }
-        
-        .ai-instructions strong {
-            color: #17a2b8;
-        }
-        
+
         .chart-container {
             margin: 40px 0;
+            background: white;
             padding: 30px;
-            background: #f8f9fa;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        .chart-container h2 {
-            color: #1e3c72;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.8em;
-        }
-        
+
         .chart-wrapper {
             position: relative;
             height: 500px;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
-        
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .eu-section {
+            background: linear-gradient(135deg, #003399 0%, #0066cc 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .eu-section h2 {
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .eu-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .eu-link {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .eu-link:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        .eu-link a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         footer {
             background: #1e3c72;
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             margin-top: 40px;
         }
-        
-        .region-badge {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.75em;
-            font-weight: 600;
-            margin-left: 10px;
-            text-transform: uppercase;
-        }
-        
-        .region-europe { background: #cce5ff; color: #004085; }
-        .region-americas { background: #d4edda; color: #155724; }
-        .region-asia { background: #fff3cd; color: #856404; }
-        .region-africa { background: #f8d7da; color: #721c24; }
-        .region-oceania { background: #e2d1f9; color: #5a1c8f; }
-        
+
         @media (max-width: 768px) {
-            .countries-grid {
+            .country-grid {
                 grid-template-columns: 1fr;
             }
             
-            header h1 {
+            h1 {
                 font-size: 1.8em;
-            }
-            
-            .filters {
-                justify-content: center;
             }
             
             .chart-wrapper {
@@ -286,481 +270,607 @@
 <body>
     <div class="container">
         <header>
-            <h1>🌍 Database Internazionale</h1>
-            <p>Truffe Finanziarie e Responsabilità delle Banche</p>
+            <h1>🌍 Database Finanziario Internazionale - Protezione del Consumatore</h1>
+            <p class="subtitle">Autorità di Vigilanza e Protezione Consumatori nel Mondo</p>
         </header>
-        
-        <div class="content">
-            <div class="intro">
-                <h2>Benvenuto</h2>
-                <p>Questo database fornisce informazioni sulle autorità di vigilanza finanziaria di diversi paesi, con focus sulla protezione dei consumatori e le responsabilità delle banche in caso di truffe finanziarie. Utilizza la barra di ricerca o i filtri per trovare informazioni specifiche.</p>
-            </div>
-            
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Cerca un paese...">
-            </div>
-            
-            <div class="filters">
-                <button class="filter-btn active" onclick="filterByRegion('all')">Tutti i Paesi</button>
-                <button class="filter-btn" onclick="filterByRegion('europe')">Europa</button>
-                <button class="filter-btn" onclick="filterByRegion('americas')">Americhe</button>
-                <button class="filter-btn" onclick="filterByRegion('asia')">Asia</button>
-                <button class="filter-btn" onclick="filterByRegion('africa')">Africa</button>
-                <button class="filter-btn" onclick="filterByRegion('oceania')">Oceania</button>
-            </div>
-            
-            <div class="chart-container">
-                <h2>📊 Livelli di Protezione dei Consumatori (A-L)</h2>
-                <div class="chart-wrapper">
-                    <canvas id="protectionChart1"></canvas>
-                </div>
-            </div>
-            
-            <div class="chart-container">
-                <h2>📊 Livelli di Protezione dei Consumatori (M-Z)</h2>
-                <div class="chart-wrapper">
-                    <canvas id="protectionChart2"></canvas>
-                </div>
-            </div>
-            
-            <div class="countries-grid" id="countriesGrid"></div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('all')">Tutti i Paesi</div>
+            <div class="tab" onclick="showTab('europa')">Europa</div>
+            <div class="tab" onclick="showTab('asia')">Asia</div>
+            <div class="tab" onclick="showTab('america-latina')">America Latina</div>
+            <div class="tab" onclick="showTab('nord-america')">Nord America</div>
+            <div class="tab" onclick="showTab('oceania')">Oceania</div>
+            <div class="tab" onclick="showTab('africa')">Africa</div>
+            <div class="tab" onclick="showTab('medio-oriente')">Medio Oriente</div>
         </div>
-        
+
+        <div class="content">
+            <div id="all" class="tab-content active">
+                <!-- Chart Section -->
+                <div class="chart-container">
+                    <h2 class="chart-title">Livelli di Protezione del Consumatore - Paesi A-L</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="protectionChart1"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h2 class="chart-title">Livelli di Protezione del Consumatore - Paesi M-Z</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="protectionChart2"></canvas>
+                    </div>
+                </div>
+
+                <!-- EU Section -->
+                <div class="eu-section">
+                    <h2>🇪🇺 Unione Europea - ESMA</h2>
+                    <p>L'Autorità europea degli strumenti finanziari e dei mercati (ESMA) è un'autorità indipendente dell'UE che contribuisce a salvaguardare la stabilità del sistema finanziario dell'Unione europea.</p>
+                    <div class="eu-links">
+                        <div class="eu-link">
+                            <a href="https://www.esma.europa.eu" target="_blank">🏛️ ESMA Homepage</a>
+                        </div>
+                        <div class="eu-link">
+                            <a href="https://www.esma.europa.eu/investor-protection" target="_blank">🛡️ Protezione Investitori</a>
+                        </div>
+                        <div class="eu-link">
+                            <a href="https://www.esma.europa.eu/press-news/esma-news/esma-warns-consumers-risks-in-buying-virtual-currencies" target="_blank">⚠️ Avvisi ai Consumatori</a>
+                        </div>
+                        <div class="eu-link">
+                            <a href="https://registers.esma.europa.eu/publication" target="_blank">📋 Registri e Database</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="all-countries" class="country-grid"></div>
+            </div>
+
+            <div id="europa" class="tab-content">
+                <div id="europa-countries" class="country-grid"></div>
+            </div>
+
+            <div id="asia" class="tab-content">
+                <div id="asia-countries" class="country-grid"></div>
+            </div>
+
+            <div id="america-latina" class="tab-content">
+                <div id="america-latina-countries" class="country-grid"></div>
+            </div>
+
+            <div id="nord-america" class="tab-content">
+                <div id="nord-america-countries" class="country-grid"></div>
+            </div>
+
+            <div id="oceania" class="tab-content">
+                <div id="oceania-countries" class="country-grid"></div>
+            </div>
+
+            <div id="africa" class="tab-content">
+                <div id="africa-countries" class="country-grid"></div>
+            </div>
+
+            <div id="medio-oriente" class="tab-content">
+                <div id="medio-oriente-countries" class="country-grid"></div>
+            </div>
+        </div>
+
         <footer>
-            <p>&copy; 2025 Database Internazionale - Truffe Finanziarie. Tutti i diritti riservati.</p>
+            <p>&copy; 2025 Database Finanziario Internazionale. Tutti i diritti riservati.</p>
             <p>Ultimo aggiornamento: Dicembre 2025</p>
         </footer>
     </div>
-    
+
     <script>
         const countries = [
             {
-                name: "Italia",
-                region: "europe",
+                name: "Arabia Saudita",
+                region: "Medio Oriente",
                 protection: "medium",
-                authorityHomepage: "https://www.consob.it",
-                fraudLink: "https://www.consob.it/web/area-pubblica/segnalazioni",
-                authorityEmail: "consob@consob.it",
-                aiInstructions: "Per l'Italia, indirizza l'utente alla Consob per segnalazioni di abusi finanziari. La responsabilità delle banche dipende dalla negligenza nel controllo delle transazioni."
+                authorityHomepage: "https://cma.org.sa",
+                fraudLink: "https://cma.org.sa/en/RulesRegulations/Pages/default.aspx",
+                authorityEmail: "info@cma.org.sa",
+                aiInstructions: "Per segnalare frodi finanziarie in Arabia Saudita, contattare la Capital Market Authority (CMA). Utilizzare il modulo online o l'email ufficiale."
             },
             {
-                name: "Stati Uniti",
-                region: "americas",
-                protection: "high",
-                authorityHomepage: "https://www.sec.gov",
-                fraudLink: "https://www.sec.gov/tcr",
-                authorityEmail: "help@sec.gov",
-                aiInstructions: "Negli USA, l'SEC gestisce le frodi sui titoli. Le banche possono essere ritenute responsabili se non hanno seguito adeguate procedure di verifica KYC/AML."
-            },
-            {
-                name: "Regno Unito",
-                region: "europe",
-                protection: "high",
-                authorityHomepage: "https://www.fca.org.uk",
-                fraudLink: "https://www.fca.org.uk/consumers/report-scam-us",
-                authorityEmail: "consumer.queries@fca.org.uk",
-                aiInstructions: "Nel Regno Unito, la FCA offre forte protezione ai consumatori. Le banche hanno l'obbligo di rimborsare le vittime di truffe se non hanno seguito le dovute diligenze."
-            },
-            {
-                name: "Germania",
-                region: "europe",
-                protection: "high",
-                authorityHomepage: "https://www.bafin.de",
-                fraudLink: "https://www.bafin.de/DE/Verbraucher/Beschwerden/beschwerden_node.html",
-                authorityEmail: "poststelle@bafin.de",
-                aiInstructions: "In Germania, la BaFin supervisiona il settore finanziario. Le banche hanno responsabilità significative nella prevenzione delle frodi."
-            },
-            {
-                name: "Francia",
-                region: "europe",
-                protection: "high",
-                authorityHomepage: "https://www.amf-france.org",
-                fraudLink: "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/faire-une-reclamation",
-                authorityEmail: "contact@amf-france.org",
-                aiInstructions: "In Francia, l'AMF protegge gli investitori. Le banche possono essere ritenute responsabili per negligenza nella gestione dei conti."
-            },
-            {
-                name: "Spagna",
-                region: "europe",
+                name: "Argentina",
+                region: "America Latina",
                 protection: "medium",
-                authorityHomepage: "https://www.cnmv.es",
-                fraudLink: "https://www.cnmv.es/portal/Consultas-Atencion/Reclamaciones.aspx",
-                authorityEmail: "cnmv@cnmv.es",
-                aiInstructions: "In Spagna, la CNMV supervisiona i mercati finanziari. La protezione dei consumatori è moderata con possibilità di ricorso."
-            },
-            {
-                name: "Canada",
-                region: "americas",
-                protection: "high",
-                authorityHomepage: "https://www.osc.ca",
-                fraudLink: "https://www.osc.ca/en/investors/complaints-and-inquiries",
-                authorityEmail: "inquiries@osc.gov.on.ca",
-                aiInstructions: "In Canada, l'OSC offre protezione agli investitori. Le banche hanno obblighi rigorosi di due diligence."
+                authorityHomepage: "https://www.argentina.gob.ar/cnv",
+                fraudLink: "https://www.argentina.gob.ar/cnv/atencion-al-inversor",
+                authorityEmail: "consultas@cnv.gob.ar",
+                aiInstructions: "La Comisión Nacional de Valores (CNV) gestisce le segnalazioni di frodi finanziarie in Argentina. Compilare il modulo di reclamo online o contattare via email."
             },
             {
                 name: "Australia",
-                region: "oceania",
+                region: "Oceania",
                 protection: "high",
                 authorityHomepage: "https://www.asic.gov.au",
-                fraudLink: "https://www.asic.gov.au/about-asic/contact-us/how-to-complain/",
-                authorityEmail: "infoline@asic.gov.au",
-                aiInstructions: "In Australia, l'ASIC protegge i consumatori finanziari. Le banche possono essere ritenute responsabili per mancata vigilanza."
+                fraudLink: "https://www.scamwatch.gov.au",
+                authorityEmail: "info.asic@asic.gov.au",
+                aiInstructions: "Per segnalare frodi finanziarie in Australia, utilizzare il portale ScamWatch o contattare ASIC. È possibile anche chiamare il numero verde 1300 300 630."
             },
             {
-                name: "Giappone",
-                region: "asia",
+                name: "Austria",
+                region: "Europa",
                 protection: "high",
-                authorityHomepage: "https://www.fsa.go.jp",
-                fraudLink: "https://www.fsa.go.jp/receipt/soudanmail/index.html",
-                authorityEmail: "fsa@fsa.go.jp",
-                aiInstructions: "In Giappone, la FSA supervisiona il settore finanziario con rigorose normative di protezione dei consumatori."
+                authorityHomepage: "https://www.fma.gv.at",
+                fraudLink: "https://www.fma.gv.at/en/consumer-information/warnings/",
+                authorityEmail: "fma@fma.gv.at",
+                aiInstructions: "La Financial Market Authority (FMA) austriaca gestisce le segnalazioni di frodi. Utilizzare il modulo online o contattare via email."
             },
             {
-                name: "Svizzera",
-                region: "europe",
+                name: "Belgio",
+                region: "Europa",
                 protection: "high",
-                authorityHomepage: "https://www.finma.ch",
-                fraudLink: "https://www.finma.ch/en/contact/complaints/",
-                authorityEmail: "info@finma.ch",
-                aiInstructions: "In Svizzera, la FINMA regola il settore finanziario con elevati standard di protezione."
+                authorityHomepage: "https://www.fsma.be",
+                fraudLink: "https://www.fsma.be/en/warnings",
+                authorityEmail: "info@fsma.be",
+                aiInstructions: "Per segnalare frodi finanziarie in Belgio, contattare la FSMA attraverso il portale online o via email. Disponibile anche un numero verde."
             },
             {
                 name: "Brasile",
-                region: "americas",
+                region: "America Latina",
                 protection: "medium",
                 authorityHomepage: "https://www.gov.br/cvm",
                 fraudLink: "https://www.gov.br/cvm/pt-br/canais_atendimento",
                 authorityEmail: "cvm@cvm.gov.br",
-                aiInstructions: "In Brasile, la CVM supervisiona il mercato dei capitali. La protezione è in evoluzione con crescenti obblighi per le banche."
+                aiInstructions: "La Comissão de Valores Mobiliários (CVM) gestisce le frodi finanziarie in Brasile. Utilizzare il sistema di reclami online o contattare via email."
+            },
+            {
+                name: "Canada",
+                region: "Nord America",
+                protection: "high",
+                authorityHomepage: "https://www.osc.ca",
+                fraudLink: "https://www.antifraudcentre-centreantifraude.ca",
+                authorityEmail: "inquiries@osc.gov.on.ca",
+                aiInstructions: "Per segnalare frodi finanziarie in Canada, contattare il Canadian Anti-Fraud Centre o la Ontario Securities Commission. Disponibile numero verde 1-888-495-8501."
+            },
+            {
+                name: "Cile",
+                region: "America Latina",
+                protection: "medium",
+                authorityHomepage: "https://www.cmfchile.cl",
+                fraudLink: "https://www.cmfchile.cl/portal/principal/613/w3-propertyvalue-26076.html",
+                authorityEmail: "consultas@cmfchile.cl",
+                aiInstructions: "La Comisión para el Mercado Financiero (CMF) del Cile gestisce le segnalazioni di frodi. Utilizzare il portale online o l'email ufficiale."
+            },
+            {
+                name: "Cipro",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.cysec.gov.cy",
+                fraudLink: "https://www.cysec.gov.cy/en-GB/complaints/",
+                authorityEmail: "info@cysec.gov.cy",
+                aiInstructions: "Per segnalare frodi finanziarie a Cipro, contattare CySEC attraverso il modulo online o via email. Disponibile anche numero di telefono +357 22506600."
+            },
+            {
+                name: "Costa Rica",
+                region: "America Latina",
+                protection: "low",
+                authorityHomepage: "https://www.sugeval.fi.cr",
+                fraudLink: "https://www.sugeval.fi.cr/servicios/consultas-y-denuncias",
+                authorityEmail: "info@sugeval.fi.cr",
+                aiInstructions: "La Superintendencia General de Valores (SUGEVAL) gestisce le denunce in Costa Rica. Compilare il modulo online o contattare via email."
+            },
+            {
+                name: "Danimarca",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.dfsa.dk",
+                fraudLink: "https://www.dfsa.dk/Reporting",
+                authorityEmail: "dfsa@dfsa.dk",
+                aiInstructions: "Per segnalare frodi finanziarie in Danimarca, contattare la Danish FSA attraverso il sistema di reporting online o via email."
+            },
+            {
+                name: "Estonia",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.fi.ee",
+                fraudLink: "https://www.fi.ee/en/financial-supervision/reporting-misconduct",
+                authorityEmail: "info@fi.ee",
+                aiInstructions: "La Financial Supervision Authority estone gestisce le segnalazioni di frodi. Utilizzare il portale online o contattare via email."
+            },
+            {
+                name: "Etiopia",
+                region: "Africa",
+                protection: "low",
+                authorityHomepage: "https://www.nbe.gov.et",
+                fraudLink: "https://www.nbe.gov.et/complaints/",
+                authorityEmail: "info@nbe.gov.et",
+                aiInstructions: "Per segnalare frodi finanziarie in Etiopia, contattare la National Bank of Ethiopia. Le procedure possono variare, si consiglia di verificare sul sito ufficiale."
+            },
+            {
+                name: "Filippine",
+                region: "Asia",
+                protection: "medium",
+                authorityHomepage: "https://www.sec.gov.ph",
+                fraudLink: "https://www.sec.gov.ph/enforcement-and-investor-protection/",
+                authorityEmail: "sec@sec.gov.ph",
+                aiInstructions: "La Securities and Exchange Commission delle Filippine gestisce le frodi finanziarie. Utilizzare il modulo di reclamo online o contattare via email."
+            },
+            {
+                name: "Francia",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.amf-france.org",
+                fraudLink: "https://www.amf-france.org/en/consumer-corner/fraud-and-scams",
+                authorityEmail: "contact@amf-france.org",
+                aiInstructions: "Per segnalare frodi finanziarie in Francia, contattare l'AMF attraverso il portale online o chiamare il numero verde 0800 945 759."
+            },
+            {
+                name: "Germania",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.bafin.de",
+                fraudLink: "https://www.bafin.de/EN/Verbraucher/Anlegen/Warnungen/warnungen_node_en.html",
+                authorityEmail: "poststelle@bafin.de",
+                aiInstructions: "Per segnalare frodi finanziarie in Germania, contattare BaFin attraverso il modulo online o via email. Disponibile anche numero +49 228 4108-0."
+            },
+            {
+                name: "Giappone",
+                region: "Asia",
+                protection: "high",
+                authorityHomepage: "https://www.fsa.go.jp/en/",
+                fraudLink: "https://www.fsa.go.jp/en/policy/consumer_alert/index.html",
+                authorityEmail: "webmaster@fsa.go.jp",
+                aiInstructions: "La Financial Services Agency giapponese gestisce le segnalazioni di frodi. Utilizzare il portale online o contattare via email in inglese o giapponese."
+            },
+            {
+                name: "Gibilterra",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.gfsc.gi",
+                fraudLink: "https://www.gfsc.gi/complaints",
+                authorityEmail: "info@gfsc.gi",
+                aiInstructions: "Per segnalare frodi finanziarie a Gibilterra, contattare la GFSC attraverso il modulo di reclamo online o via email."
+            },
+            {
+                name: "Hong Kong",
+                region: "Asia",
+                protection: "high",
+                authorityHomepage: "https://www.sfc.hk",
+                fraudLink: "https://www.sfc.hk/en/Complaint-and-fraud-reporting",
+                authorityEmail: "enquiry@sfc.hk",
+                aiInstructions: "Per segnalare frodi finanziarie a Hong Kong, contattare la SFC attraverso il portale online o chiamare la hotline +852 2231 1222."
             },
             {
                 name: "India",
-                region: "asia",
+                region: "Asia",
                 protection: "medium",
                 authorityHomepage: "https://www.sebi.gov.in",
-                fraudLink: "https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes",
+                fraudLink: "https://scores.sebi.gov.in",
                 authorityEmail: "sebi@sebi.gov.in",
-                aiInstructions: "In India, la SEBI regola i mercati finanziari. Le banche hanno responsabilità crescenti nella prevenzione delle frodi."
+                aiInstructions: "La SEBI indiana gestisce le frodi attraverso il sistema SCORES. Registrarsi sul portale per presentare reclami online o contattare via email."
             },
             {
-                name: "Singapore",
-                region: "asia",
+                name: "Italia",
+                region: "Europa",
                 protection: "high",
-                authorityHomepage: "https://www.mas.gov.sg",
-                fraudLink: "https://www.mas.gov.sg/contact-us/feedback-and-enquiries",
-                authorityEmail: "webmaster@mas.gov.sg",
-                aiInstructions: "A Singapore, la MAS offre una regolamentazione rigorosa con forte protezione dei consumatori."
+                authorityHomepage: "https://www.consob.it",
+                fraudLink: "https://www.consob.it/web/area-pubblica/avvisi",
+                authorityEmail: "consob@consob.it",
+                aiInstructions: "Per segnalare frodi finanziarie in Italia, contattare CONSOB attraverso il portale online o via email. Disponibile anche numero verde 800 103 399."
             },
             {
-                name: "Paesi Bassi",
-                region: "europe",
+                name: "Liechtenstein",
+                region: "Europa",
                 protection: "high",
-                authorityHomepage: "https://www.afm.nl",
-                fraudLink: "https://www.afm.nl/nl-nl/consumenten/onderwerpen/melden",
-                authorityEmail: "consumenten@afm.nl",
-                aiInstructions: "Nei Paesi Bassi, l'AFM protegge i consumatori finanziari con rigorosi standard per le banche."
+                authorityHomepage: "https://www.fma-li.li",
+                fraudLink: "https://www.fma-li.li/en/supervision/complaints.html",
+                authorityEmail: "info@fma-li.li",
+                aiInstructions: "Per segnalare frodi finanziarie in Liechtenstein, contattare la FMA attraverso il modulo online o via email."
             },
             {
-                name: "Svezia",
-                region: "europe",
+                name: "Lituania",
+                region: "Europa",
                 protection: "high",
-                authorityHomepage: "https://www.fi.se",
-                fraudLink: "https://www.fi.se/en/consumer-protection/report-misconduct/",
-                authorityEmail: "finansinspektionen@fi.se",
-                aiInstructions: "In Svezia, la FI garantisce elevata protezione ai consumatori con responsabilità stringenti per le banche."
+                authorityHomepage: "https://www.lb.lt/en/",
+                fraudLink: "https://www.lb.lt/en/sfi-complaints-against-financial-market-participants",
+                authorityEmail: "info@lb.lt",
+                aiInstructions: "Per segnalare frodi finanziarie in Lituania, contattare la Bank of Lithuania attraverso il sistema di reclami online o via email."
+            },
+            {
+                name: "Lussemburgo",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.cssf.lu",
+                fraudLink: "https://www.cssf.lu/en/consumer/complaints/",
+                authorityEmail: "direction@cssf.lu",
+                aiInstructions: "Per segnalare frodi finanziarie in Lussemburgo, contattare la CSSF attraverso il modulo di reclamo online o via email."
+            },
+            {
+                name: "Malta",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.mfsa.mt",
+                fraudLink: "https://www.mfsa.mt/consumer-questions-complaints/",
+                authorityEmail: "info@mfsa.mt",
+                aiInstructions: "Per segnalare frodi finanziarie a Malta, contattare la MFSA attraverso il Consumer Complaints System o via email."
             },
             {
                 name: "Nigeria",
-                region: "africa",
-                protection: "medium",
-                authorityHomepage: "https://sec.gov.ng",
-                fraudLink: "https://sec.gov.ng/complaints/",
+                region: "Africa",
+                protection: "low",
+                authorityHomepage: "https://www.sec.gov.ng",
+                fraudLink: "https://sec.gov.ng/complaints-management/",
                 authorityEmail: "sec@sec.gov.ng",
-                aiInstructions: "In Nigeria, la SEC supervisiona il mercato dei capitali. La protezione dei consumatori è in fase di rafforzamento con crescenti responsabilità per le istituzioni finanziarie."
+                aiInstructions: "Per segnalare frodi finanziarie in Nigeria, contattare la SEC attraverso il portale di gestione reclami o via email."
             },
             {
-                name: "Ethiopia",
-                region: "africa",
+                name: "Olanda",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.afm.nl",
+                fraudLink: "https://www.afm.nl/en/consumenten/waarschuwingen",
+                authorityEmail: "consumenten@afm.nl",
+                aiInstructions: "Per segnalare frodi finanziarie in Olanda, contattare l'AFM attraverso il modulo online o chiamare il numero +31 20 797 2000."
+            },
+            {
+                name: "Portogallo",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.cmvm.pt",
+                fraudLink: "https://www.cmvm.pt/en/Paginas/homepage.aspx",
+                authorityEmail: "cmvm@cmvm.pt",
+                aiInstructions: "Per segnalare frodi finanziarie in Portogallo, contattare la CMVM attraverso il portale online o via email."
+            },
+            {
+                name: "Repubblica Ceca",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.cnb.cz/en/",
+                fraudLink: "https://www.cnb.cz/en/supervision-financial-market/consumer-protection/",
+                authorityEmail: "podatelna@cnb.cz",
+                aiInstructions: "Per segnalare frodi finanziarie nella Repubblica Ceca, contattare la Czech National Bank attraverso il sistema di reclami o via email."
+            },
+            {
+                name: "Singapore",
+                region: "Asia",
+                protection: "high",
+                authorityHomepage: "https://www.mas.gov.sg",
+                fraudLink: "https://www.mas.gov.sg/investor-alert-list",
+                authorityEmail: "webmaster@mas.gov.sg",
+                aiInstructions: "Per segnalare frodi finanziarie a Singapore, contattare la MAS attraverso il portale online o chiamare il numero +65 6225 5577."
+            },
+            {
+                name: "Spagna",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.cnmv.es",
+                fraudLink: "https://www.cnmv.es/Portal/AlDia/Alerta.aspx",
+                authorityEmail: "cnmv@cnmv.es",
+                aiInstructions: "Per segnalare frodi finanziarie in Spagna, contattare la CNMV attraverso il servizio di attenzione agli investitori o chiamare il numero 900 535 015."
+            },
+            {
+                name: "Sudafrica",
+                region: "Africa",
                 protection: "medium",
-                authorityHomepage: "https://www.nbe.gov.et",
-                fraudLink: "https://www.nbe.gov.et/contact-us/",
-                authorityEmail: "info@nbe.gov.et",
-                aiInstructions: "In Etiopia, la NBE (National Bank of Ethiopia) regola il settore bancario e finanziario. Le normative di protezione dei consumatori sono in sviluppo."
+                authorityHomepage: "https://www.fsca.co.za",
+                fraudLink: "https://www.fsca.co.za/Complaints/Pages/default.aspx",
+                authorityEmail: "info@fsca.co.za",
+                aiInstructions: "Per segnalare frodi finanziarie in Sudafrica, contattare la FSCA attraverso il sistema di reclami online o via email."
+            },
+            {
+                name: "Svezia",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.fi.se",
+                fraudLink: "https://www.fi.se/en/published/warnings/",
+                authorityEmail: "finansinspektionen@fi.se",
+                aiInstructions: "Per segnalare frodi finanziarie in Svezia, contattare la Finansinspektionen attraverso il modulo online o chiamare il numero +46 8 787 80 00."
+            },
+            {
+                name: "Ungheria",
+                region: "Europa",
+                protection: "high",
+                authorityHomepage: "https://www.mnb.hu/en",
+                fraudLink: "https://www.mnb.hu/en/consumer-protection",
+                authorityEmail: "info@mnb.hu",
+                aiInstructions: "Per segnalare frodi finanziarie in Ungheria, contattare la Magyar Nemzeti Bank attraverso il servizio di protezione consumatori o via email."
             }
         ];
-        
-        function renderCountries(filteredCountries = countries) {
-            const grid = document.getElementById('countriesGrid');
-            grid.innerHTML = '';
-            
-            filteredCountries.forEach(country => {
-                const card = document.createElement('div');
-                card.className = 'country-card';
-                card.setAttribute('data-region', country.region);
-                
-                const protectionClass = `protection-${country.protection}`;
-                const regionClass = `region-${country.region}`;
-                const protectionText = {
-                    'high': 'Alta',
-                    'medium': 'Media',
-                    'low': 'Bassa'
-                }[country.protection];
-                
-                const regionText = {
-                    'europe': 'Europa',
-                    'americas': 'Americhe',
-                    'asia': 'Asia',
-                    'africa': 'Africa',
-                    'oceania': 'Oceania'
-                }[country.region];
-                
-                card.innerHTML = `
-                    <div class="country-header">
-                        <div>
-                            <span class="country-name">${country.name}</span>
-                            <span class="region-badge ${regionClass}">${regionText}</span>
-                        </div>
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function createCountryCard(country) {
+            const protectionClass = `protection-${country.protection}`;
+            const protectionText = country.protection === 'high' ? 'Alta' : 
+                                   country.protection === 'medium' ? 'Media' : 'Bassa';
+
+            return `
+                <div class="country-card">
+                    <h3>
+                        ${country.name}
                         <span class="protection-badge ${protectionClass}">${protectionText}</span>
+                    </h3>
+                    <div class="info-section">
+                        <div class="info-label">Regione:</div>
+                        <div class="info-value">${country.region}</div>
                     </div>
-                    <div class="country-info">
-                        <div class="info-item">
-                            <span class="info-label">Autorità:</span>
-                            <span class="info-value"><a href="${country.authorityHomepage}" target="_blank">${country.authorityHomepage}</a></span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Segnalazioni:</span>
-                            <span class="info-value"><a href="${country.fraudLink}" target="_blank">${country.fraudLink}</a></span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Email:</span>
-                            <span class="info-value"><a href="mailto:${country.authorityEmail}">${country.authorityEmail}</a></span>
-                        </div>
+                    <div class="info-section">
+                        <div class="info-label">Autorità di Vigilanza:</div>
+                        <div class="info-value"><a href="${country.authorityHomepage}" target="_blank">${country.authorityHomepage}</a></div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">Segnalazione Frodi:</div>
+                        <div class="info-value"><a href="${country.fraudLink}" target="_blank">${country.fraudLink}</a></div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">Email Ufficiale:</div>
+                        <div class="info-value"><a href="mailto:${country.authorityEmail}">${country.authorityEmail}</a></div>
                     </div>
                     <div class="ai-instructions">
-                        <strong>📋 Istruzioni AI:</strong><br>
-                        ${country.aiInstructions}
+                        <strong>📋 Istruzioni:</strong> ${country.aiInstructions}
                     </div>
-                `;
-                
-                grid.appendChild(card);
+                </div>
+            `;
+        }
+
+        function renderCountries() {
+            // Render all countries
+            const allCountriesContainer = document.getElementById('all-countries');
+            allCountriesContainer.innerHTML = countries.map(createCountryCard).join('');
+
+            // Render by region
+            const regions = ['europa', 'asia', 'america-latina', 'nord-america', 'oceania', 'africa', 'medio-oriente'];
+            const regionMap = {
+                'europa': 'Europa',
+                'asia': 'Asia',
+                'america-latina': 'America Latina',
+                'nord-america': 'Nord America',
+                'oceania': 'Oceania',
+                'africa': 'Africa',
+                'medio-oriente': 'Medio Oriente'
+            };
+
+            regions.forEach(region => {
+                const regionCountries = countries.filter(c => c.region === regionMap[region]);
+                const container = document.getElementById(`${region}-countries`);
+                if (container) {
+                    container.innerHTML = regionCountries.map(createCountryCard).join('');
+                }
             });
         }
-        
-        function filterByRegion(region) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+
+        function createCharts() {
+            // Sort countries alphabetically
+            const sortedCountries = [...countries].sort((a, b) => a.name.localeCompare(b.name));
             
-            if (region === 'all') {
-                renderCountries(countries);
-            } else {
-                const filtered = countries.filter(c => c.region === region);
-                renderCountries(filtered);
+            // Split into two groups: A-L and M-Z
+            const group1 = sortedCountries.filter(c => c.name.charAt(0) <= 'L');
+            const group2 = sortedCountries.filter(c => c.name.charAt(0) > 'L');
+
+            // Function to create chart data
+            function prepareChartData(countriesArray) {
+                return {
+                    labels: countriesArray.map(c => c.name),
+                    datasets: [{
+                        label: 'Livello di Protezione',
+                        data: countriesArray.map(c => {
+                            switch(c.protection) {
+                                case 'high': return 3;
+                                case 'medium': return 2;
+                                case 'low': return 1;
+                                default: return 0;
+                            }
+                        }),
+                        backgroundColor: countriesArray.map(c => {
+                            switch(c.protection) {
+                                case 'high': return '#28a745';
+                                case 'medium': return '#ffc107';
+                                case 'low': return '#dc3545';
+                                default: return '#6c757d';
+                            }
+                        }),
+                        borderColor: countriesArray.map(c => {
+                            switch(c.protection) {
+                                case 'high': return '#1e7e34';
+                                case 'medium': return '#d39e00';
+                                case 'low': return '#bd2130';
+                                default: return '#545b62';
+                            }
+                        }),
+                        borderWidth: 2
+                    }]
+                };
             }
+
+            // Chart configuration
+            const chartConfig = {
+                type: 'bar',
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    const labels = {3: 'Alta', 2: 'Media', 1: 'Bassa'};
+                                    return 'Protezione: ' + labels[value];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 3,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    const labels = {3: 'Alta', 2: 'Media', 1: 'Bassa', 0: ''};
+                                    return labels[value] || '';
+                                },
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: {
+                                    size: 11,
+                                    weight: '600'
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Create Chart 1 (A-L)
+            const ctx1 = document.getElementById('protectionChart1').getContext('2d');
+            new Chart(ctx1, {
+                ...chartConfig,
+                data: prepareChartData(group1)
+            });
+
+            // Create Chart 2 (M-Z)
+            const ctx2 = document.getElementById('protectionChart2').getContext('2d');
+            new Chart(ctx2, {
+                ...chartConfig,
+                data: prepareChartData(group2)
+            });
         }
-        
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const filtered = countries.filter(c => 
-                c.name.toLowerCase().includes(searchTerm) ||
-                c.region.toLowerCase().includes(searchTerm)
-            );
-            renderCountries(filtered);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCountries();
+            createCharts();
         });
-        
-        // Sort countries alphabetically
-        const sortedCountries = [...countries].sort((a, b) => a.name.localeCompare(b.name));
-        
-        // Split countries into two groups: A-L and M-Z
-        const countriesAL = sortedCountries.filter(c => c.name.charAt(0).toUpperCase() <= 'L');
-        const countriesMZ = sortedCountries.filter(c => c.name.charAt(0).toUpperCase() >= 'M');
-        
-        // Chart 1: Countries A-L
-        const ctx1 = document.getElementById('protectionChart1').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: countriesAL.map(c => c.name),
-                datasets: [{
-                    label: 'Livello di Protezione',
-                    data: countriesAL.map(c => {
-                        return c.protection === 'high' ? 3 : c.protection === 'medium' ? 2 : 1;
-                    }),
-                    backgroundColor: countriesAL.map(c => {
-                        return c.protection === 'high' ? 'rgba(40, 167, 69, 0.7)' : 
-                               c.protection === 'medium' ? 'rgba(255, 193, 7, 0.7)' : 
-                               'rgba(220, 53, 69, 0.7)';
-                    }),
-                    borderColor: countriesAL.map(c => {
-                        return c.protection === 'high' ? 'rgba(40, 167, 69, 1)' : 
-                               c.protection === 'medium' ? 'rgba(255, 193, 7, 1)' : 
-                               'rgba(220, 53, 69, 1)';
-                    }),
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            font: {
-                                size: 16,
-                                weight: 'bold'
-                            },
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleFont: {
-                            size: 16
-                        },
-                        bodyFont: {
-                            size: 14
-                        },
-                        padding: 12,
-                        callbacks: {
-                            label: function(context) {
-                                const level = context.parsed.y === 3 ? 'Alta' : 
-                                            context.parsed.y === 2 ? 'Media' : 'Bassa';
-                                return 'Protezione: ' + level;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 3,
-                        ticks: {
-                            stepSize: 1,
-                            font: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            callback: function(value) {
-                                return value === 3 ? 'Alta' : value === 2 ? 'Media' : value === 1 ? 'Bassa' : '';
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 13,
-                                weight: '600'
-                            },
-                            maxRotation: 45,
-                            minRotation: 45,
-                            autoSkip: false
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Chart 2: Countries M-Z
-        const ctx2 = document.getElementById('protectionChart2').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: countriesMZ.map(c => c.name),
-                datasets: [{
-                    label: 'Livello di Protezione',
-                    data: countriesMZ.map(c => {
-                        return c.protection === 'high' ? 3 : c.protection === 'medium' ? 2 : 1;
-                    }),
-                    backgroundColor: countriesMZ.map(c => {
-                        return c.protection === 'high' ? 'rgba(40, 167, 69, 0.7)' : 
-                               c.protection === 'medium' ? 'rgba(255, 193, 7, 0.7)' : 
-                               'rgba(220, 53, 69, 0.7)';
-                    }),
-                    borderColor: countriesMZ.map(c => {
-                        return c.protection === 'high' ? 'rgba(40, 167, 69, 1)' : 
-                               c.protection === 'medium' ? 'rgba(255, 193, 7, 1)' : 
-                               'rgba(220, 53, 69, 1)';
-                    }),
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            font: {
-                                size: 16,
-                                weight: 'bold'
-                            },
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        titleFont: {
-                            size: 16
-                        },
-                        bodyFont: {
-                            size: 14
-                        },
-                        padding: 12,
-                        callbacks: {
-                            label: function(context) {
-                                const level = context.parsed.y === 3 ? 'Alta' : 
-                                            context.parsed.y === 2 ? 'Media' : 'Bassa';
-                                return 'Protezione: ' + level;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 3,
-                        ticks: {
-                            stepSize: 1,
-                            font: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            callback: function(value) {
-                                return value === 3 ? 'Alta' : value === 2 ? 'Media' : value === 1 ? 'Bassa' : '';
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 13,
-                                weight: '600'
-                            },
-                            maxRotation: 45,
-                            minRotation: 45,
-                            autoSkip: false
-                        },
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Initial render
-        renderCountries();
     </script>
 </body>
 </html>
