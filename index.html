@@ -3,254 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Internazionale - Banche, Truffe e Responsabilità Finanziarie</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Database Internazionale - Responsabilità Banche e Truffe Finanziarie</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #333;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
         }
-        
+
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 30px;
             text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
-        
-        header h1 {
+
+        h1 {
             font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
-        header p {
+
+        .subtitle {
             font-size: 1.2em;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 300;
         }
-        
-        .tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #dee2e6;
-            padding: 0 20px;
+
+        .search-bar {
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
         }
-        
-        .tab-button {
-            padding: 15px 30px;
-            background: none;
-            border: none;
-            cursor: pointer;
+
+        .search-bar input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
             font-size: 16px;
-            font-weight: 600;
-            color: #666;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            outline: none;
             transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
         }
-        
-        .tab-button:hover {
-            color: #2a5298;
-            background: rgba(42, 82, 152, 0.1);
+
+        .search-bar input:focus {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
         }
-        
-        .tab-button.active {
-            color: #2a5298;
-            border-bottom-color: #2a5298;
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 20px;
         }
-        
-        .tab-content {
-            display: none;
-            padding: 30px;
-            animation: fadeIn 0.5s;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .charts-container {
+
+        .countries-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
             margin-bottom: 40px;
         }
-        
-        .chart-wrapper {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .chart-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #2a5298;
-            text-align: center;
-        }
-        
-        .country-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
+
         .country-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        
+
         .country-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .country-card h3 {
-            color: #2a5298;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            border-bottom: 2px solid #2a5298;
-            padding-bottom: 10px;
-        }
-        
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-            padding: 8px;
-            background: white;
-            border-radius: 5px;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            color: #555;
-        }
-        
-        .info-value {
-            color: #333;
-        }
-        
-        .protection-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-        
-        .protection-high {
-            background: #28a745;
-            color: white;
-        }
-        
-        .protection-medium {
-            background: #ffc107;
-            color: #333;
-        }
-        
-        .protection-low {
-            background: #dc3545;
-            color: white;
-        }
-        
-        .search-box {
-            margin-bottom: 30px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        .search-box input {
+
+        .country-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #dee2e6;
-            border-radius: 5px;
-            transition: border-color 0.3s ease;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: #2a5298;
+
+        .country-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        
-        footer {
-            background: #2a5298;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+
+        .country-flag {
+            font-size: 3em;
+            margin-right: 15px;
         }
-        
-        .stats-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
+
+        .country-info h2 {
+            font-size: 1.5em;
+            color: #2c3e50;
             margin-bottom: 5px;
         }
-        
-        .stat-label {
+
+        .country-info .region {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .info-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-content li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .btn-details {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
             font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-details:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 28px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .modal-title .country-flag {
+            font-size: 3.5em;
+        }
+
+        .modal-title-text h2 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .modal-title-text .region {
             opacity: 0.9;
+            font-size: 1.1em;
         }
 
-        .pie-charts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+        .modal-body {
+            padding: 30px;
         }
 
-        .pie-chart-wrapper {
+        .modal-section {
+            margin-bottom: 30px;
+            padding: 25px;
             background: #f8f9fa;
-            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-section-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+
+        .modal-info-row {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .modal-info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .modal-info-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-info-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1em;
+        }
+
+        .modal-info-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-info-content li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .modal-info-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .modal-info-content a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-info-content a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .email-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .email-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .email-item:hover {
+            background: #e8eaf6;
+        }
+
+        .email-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9em;
+        }
+
+        .email-address {
+            color: #667eea;
+            font-family: monospace;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin: 5px 0;
+        }
+
+        .link-button:hover {
+            background: #764ba2;
+            transform: translateX(5px);
+        }
+
+        /* Scrollbar Styles */
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .countries-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-title .country-flag {
+                font-size: 2.5em;
+            }
+
+            .modal-title-text h2 {
+                font-size: 1.5em;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-section {
+                padding: 15px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -258,400 +489,455 @@
     <div class="container">
         <header>
             <h1>🌍 Database Internazionale</h1>
-            <p>Banche, Truffe e Responsabilità Finanziarie</p>
+            <p class="subtitle">Responsabilità delle Banche e Autorità per Truffe Finanziarie</p>
         </header>
-        
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'all')">Panoramica</button>
-            <button class="tab-button" onclick="openTab(event, 'high')">Alta Protezione</button>
-            <button class="tab-button" onclick="openTab(event, 'medium')">Media Protezione</button>
-            <button class="tab-button" onclick="openTab(event, 'low')">Bassa Protezione</button>
-            <button class="tab-button" onclick="openTab(event, 'charts')">Grafici</button>
-        </div>
-        
-        <div id="all" class="tab-content active">
-            <div class="stats-overview">
-                <div class="stat-card">
-                    <div class="stat-number">40</div>
-                    <div class="stat-label">Paesi Totali</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Alta Protezione</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Media Protezione</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">10</div>
-                    <div class="stat-label">Bassa Protezione</div>
-                </div>
-            </div>
 
-            <div class="charts-container">
-                <div class="chart-wrapper">
-                    <div class="chart-title">Livelli di Protezione per Paese (A-L)</div>
-                    <canvas id="barChartAL" height="500"></canvas>
-                </div>
-                <div class="chart-wrapper">
-                    <div class="chart-title">Livelli di Protezione per Paese (M-Z)</div>
-                    <canvas id="barChartMZ" height="500"></canvas>
-                </div>
-            </div>
-            
-            <div class="search-box">
-                <input type="text" id="searchAll" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('all')">
-            </div>
-            <div class="country-grid" id="allCountries"></div>
-        </div>
-        
-        <div id="high" class="tab-content">
-            <h2 style="color: #28a745; margin-bottom: 20px;">🛡️ Paesi con Alta Protezione</h2>
-            <div class="search-box">
-                <input type="text" id="searchHigh" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('high')">
-            </div>
-            <div class="country-grid" id="highCountries"></div>
-        </div>
-        
-        <div id="medium" class="tab-content">
-            <h2 style="color: #ffc107; margin-bottom: 20px;">⚠️ Paesi con Media Protezione</h2>
-            <div class="search-box">
-                <input type="text" id="searchMedium" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('medium')">
-            </div>
-            <div class="country-grid" id="mediumCountries"></div>
-        </div>
-        
-        <div id="low" class="tab-content">
-            <h2 style="color: #dc3545; margin-bottom: 20px;">🚨 Paesi con Bassa Protezione</h2>
-            <div class="search-box">
-                <input type="text" id="searchLow" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('low')">
-            </div>
-            <div class="country-grid" id="lowCountries"></div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Cerca per paese, regione o autorità...">
+            <span class="search-icon">🔍</span>
         </div>
 
-        <div id="charts" class="tab-content">
-            <h2 style="color: #2a5298; margin-bottom: 20px;">📊 Analisi Statistica</h2>
-            <div class="pie-charts-container">
-                <div class="pie-chart-wrapper">
-                    <div class="chart-title">Distribuzione Livelli di Protezione</div>
-                    <canvas id="pieChart1"></canvas>
-                </div>
-                <div class="pie-chart-wrapper">
-                    <div class="chart-title">Distribuzione per Area Geografica</div>
-                    <canvas id="pieChart2"></canvas>
-                </div>
+        <div class="countries-grid" id="countriesGrid"></div>
+
+        <footer>
+            <p>© 2025 Database Internazionale - Aggiornato al 26 Dicembre 2025</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Informazioni per uso educativo e di riferimento</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">&times;</button>
+                <div class="modal-title" id="modalTitle"></div>
             </div>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
 
     <script>
-        const countries = [
-            // Alta Protezione (15)
-            { name: "Germania", protection: "Alta", banks: "Deutsche Bank, Commerzbank", fraudTypes: "Phishing, frodi online", liability: "Responsabilità banca dimostrata negligenza", region: "Europa" },
-            { name: "Francia", protection: "Alta", banks: "BNP Paribas, Société Générale", fraudTypes: "Truffe telefoniche, frodi carte", liability: "Protezione elevata consumatori", region: "Europa" },
-            { name: "Italia", protection: "Alta", banks: "UniCredit, Intesa Sanpaolo", fraudTypes: "Phishing, truffe online", liability: "Forte tutela risparmiatori", region: "Europa" },
-            { name: "Spagna", protection: "Alta", banks: "Santander, BBVA", fraudTypes: "Frodi digitali, phishing", liability: "Buona protezione legale", region: "Europa" },
-            { name: "Regno Unito", protection: "Alta", banks: "HSBC, Barclays", fraudTypes: "Frodi online, truffe investimenti", liability: "FCA - forte regolamentazione", region: "Europa" },
-            { name: "Paesi Bassi", protection: "Alta", banks: "ING, ABN AMRO", fraudTypes: "Phishing, frodi digitali", liability: "Elevata protezione consumatori", region: "Europa" },
-            { name: "Svizzera", protection: "Alta", banks: "UBS, Credit Suisse", fraudTypes: "Frodi investimenti, riciclaggio", liability: "Rigida supervisione FINMA", region: "Europa" },
-            { name: "Svezia", protection: "Alta", banks: "Swedbank, SEB", fraudTypes: "Frodi digitali", liability: "Alta protezione digitale", region: "Europa" },
-            { name: "Norvegia", protection: "Alta", banks: "DNB, Nordea", fraudTypes: "Phishing, truffe online", liability: "Forte regolamentazione", region: "Europa" },
-            { name: "Danimarca", protection: "Alta", banks: "Danske Bank, Jyske Bank", fraudTypes: "Frodi online", liability: "Elevata tutela consumatori", region: "Europa" },
-            { name: "Canada", protection: "Alta", banks: "RBC, TD Bank", fraudTypes: "Frodi identità, phishing", liability: "OSFI - forte supervisione", region: "America" },
-            { name: "Australia", protection: "Alta", banks: "Commonwealth Bank, Westpac", fraudTypes: "Truffe online, phishing", liability: "APRA - rigida regolamentazione", region: "Oceania" },
-            { name: "Giappone", protection: "Alta", banks: "Mitsubishi UFJ, Mizuho", fraudTypes: "Frodi digitali", liability: "FSA - forte controllo", region: "Asia" },
-            { name: "Singapore", protection: "Alta", banks: "DBS, OCBC", fraudTypes: "Frodi online, riciclaggio", liability: "MAS - rigida supervisione", region: "Asia" },
-            { name: "Nuova Zelanda", protection: "Alta", banks: "ANZ, ASB", fraudTypes: "Phishing, frodi carte", liability: "Buona protezione legale", region: "Oceania" },
-            
-            // Media Protezione (15)
-            { name: "Brasile", protection: "Media", banks: "Banco do Brasil, Itaú", fraudTypes: "Clonazione carte, phishing", liability: "Protezione moderata", region: "America" },
-            { name: "Argentina", protection: "Media", banks: "Banco Nación, Santander Rio", fraudTypes: "Truffe online, frodi digitali", liability: "Sistema in miglioramento", region: "America" },
-            { name: "Messico", protection: "Media", banks: "BBVA México, Banorte", fraudTypes: "Frodi carte, phishing", liability: "Protezione in crescita", region: "America" },
-            { name: "Cile", protection: "Media", banks: "Banco de Chile, BCI", fraudTypes: "Truffe telefoniche, phishing", liability: "Regolamentazione moderata", region: "America" },
-            { name: "India", protection: "Media", banks: "State Bank of India, HDFC", fraudTypes: "Frodi online massicce, phishing", liability: "RBI - controllo in crescita", region: "Asia" },
-            { name: "Cina", protection: "Media", banks: "ICBC, Bank of China", fraudTypes: "Frodi digitali, truffe online", liability: "Controllo statale forte ma variabile", region: "Asia" },
-            { name: "Corea del Sud", protection: "Media", banks: "KB Kookmin, Shinhan", fraudTypes: "Phishing, frodi digitali", liability: "Protezione in miglioramento", region: "Asia" },
-            { name: "Sudafrica", protection: "Media", banks: "Standard Bank, ABSA", fraudTypes: "Frodi carte, phishing", liability: "Protezione moderata", region: "Africa" },
-            { name: "Polonia", protection: "Media", banks: "PKO BP, Pekao", fraudTypes: "Phishing, truffe online", liability: "Sistema in sviluppo", region: "Europa" },
-            { name: "Turchia", protection: "Media", banks: "Ziraat Bank, İş Bankası", fraudTypes: "Frodi digitali, phishing", liability: "Regolamentazione in crescita", region: "Asia" },
-            { name: "Grecia", protection: "Media", banks: "National Bank, Alpha Bank", fraudTypes: "Truffe online, phishing", liability: "Sistema in ripresa", region: "Europa" },
-            { name: "Portogallo", protection: "Media", banks: "Caixa Geral, Millennium BCP", fraudTypes: "Phishing, frodi carte", liability: "Protezione moderata", region: "Europa" },
-            { name: "Emirati Arabi Uniti", protection: "Media", banks: "Emirates NBD, First Abu Dhabi Bank", fraudTypes: "Frodi investimenti, phishing", liability: "Regolamentazione in sviluppo", region: "Asia" },
-            { name: "Malesia", protection: "Media", banks: "Maybank, CIMB", fraudTypes: "Truffe online, phishing", liability: "Protezione moderata", region: "Asia" },
-            { name: "Thailandia", protection: "Media", banks: "Bangkok Bank, Siam Commercial", fraudTypes: "Frodi digitali, phishing", liability: "Sistema in miglioramento", region: "Asia" },
-            
-            // Bassa Protezione (10)
-            { name: "Russia", protection: "Bassa", banks: "Sberbank, VTB", fraudTypes: "Frodi massive, cyber-attacchi", liability: "Protezione limitata", region: "Europa" },
-            { name: "Nigeria", protection: "Bassa", banks: "First Bank, Zenith Bank", fraudTypes: "Truffe 419, frodi online", liability: "Scarsa regolamentazione", region: "Africa" },
-            { name: "Kenya", protection: "Bassa", banks: "KCB, Equity Bank", fraudTypes: "Frodi mobile money, phishing", liability: "Sistema in sviluppo", region: "Africa" },
-            { name: "Indonesia", protection: "Bassa", banks: "Bank Mandiri, BRI", fraudTypes: "Frodi online, phishing", liability: "Protezione limitata", region: "Asia" },
-            { name: "Filippine", protection: "Bassa", banks: "BDO, BPI", fraudTypes: "Truffe online, frodi carte", liability: "Regolamentazione debole", region: "Asia" },
-            { name: "Vietnam", protection: "Bassa", banks: "Vietcombank, BIDV", fraudTypes: "Phishing, frodi digitali", liability: "Sistema in fase iniziale", region: "Asia" },
-            { name: "Egitto", protection: "Bassa", banks: "National Bank of Egypt, Banque Misr", fraudTypes: "Frodi online, truffe", liability: "Protezione limitata", region: "Africa" },
-            { name: "Pakistan", protection: "Bassa", banks: "Habib Bank, MCB", fraudTypes: "Frodi massive, phishing", liability: "Scarsa tutela consumatori", region: "Asia" },
-            { name: "Bangladesh", protection: "Bassa", banks: "Sonali Bank, Janata Bank", fraudTypes: "Frodi online, cyber-rapine", liability: "Sistema vulnerabile", region: "Asia" },
-            { name: "USA", protection: "Bassa", banks: "JPMorgan Chase, Bank of America, Wells Fargo", fraudTypes: "Frodi creditizie, truffe ipotecarie, phishing", liability: "Autodifesa consumatore, protezione variabile per stato", region: "America" }
-        ];
+        const countriesData = {
+            usa: {
+                name: "Stati Uniti d'America",
+                flag: "🇺🇸",
+                region: "Nord America",
+                legalBasis: {
+                    title: "Quadro Normativo Federale",
+                    content: `Il sistema bancario statunitense è regolamentato da un complesso framework normativo federale e statale. Le principali leggi includono:
+                    <ul>
+                        <li>Bank Secrecy Act (BSA) - 31 USC 5311 et seq.</li>
+                        <li>Dodd-Frank Wall Street Reform and Consumer Protection Act (2010)</li>
+                        <li>Truth in Lending Act (TILA) - 15 USC 1601 et seq.</li>
+                        <li>Fair Credit Reporting Act (FCRA) - 15 USC 1681 et seq.</li>
+                        <li>Electronic Fund Transfer Act (EFTA) - 15 USC 1693 et seq.</li>
+                        <li>Gramm-Leach-Bliley Act (GLBA) - Privacy finanziaria</li>
+                        <li>USA PATRIOT Act - Misure anti-riciclaggio</li>
+                    </ul>`
+                },
+                bankResponsibility: {
+                    title: "Responsabilità delle Banche",
+                    content: `Le istituzioni finanziarie negli USA hanno responsabilità estese:
+                    <ul>
+                        <li><strong>Due Diligence KYC:</strong> Verifica approfondita dell'identità dei clienti secondo il Customer Identification Program (CIP)</li>
+                        <li><strong>Monitoraggio Transazioni:</strong> Sistema di rilevamento frodi 24/7 con algoritmi avanzati</li>
+                        <li><strong>Suspicious Activity Reports (SAR):</strong> Obbligo di segnalazione attività sospette al FinCEN</li>
+                        <li><strong>Currency Transaction Reports (CTR):</strong> Segnalazione transazioni superiori a $10,000</li>
+                        <li><strong>Protezione Consumatori:</strong> Rimborso frodi secondo Regulation E (per transazioni elettroniche)</li>
+                        <li><strong>Cybersecurity:</strong> Implementazione Cybersecurity Framework NIST</li>
+                        <li><strong>Compliance Anti-Riciclaggio:</strong> Programmi AML/CFT compliance</li>
+                    </ul>`
+                },
+                authorities: {
+                    title: "Autorità di Vigilanza",
+                    content: `
+                    <ul>
+                        <li><strong>Federal Reserve System (FED):</strong> Banca centrale USA - supervisione holding bancarie</li>
+                        <li><strong>Office of the Comptroller of the Currency (OCC):</strong> Supervisione banche nazionali</li>
+                        <li><strong>Federal Deposit Insurance Corporation (FDIC):</strong> Assicurazione depositi e supervisione banche statali</li>
+                        <li><strong>Consumer Financial Protection Bureau (CFPB):</strong> Protezione consumatori finanziari</li>
+                        <li><strong>Securities and Exchange Commission (SEC):</strong> Regolamentazione mercati finanziari</li>
+                        <li><strong>Financial Crimes Enforcement Network (FinCEN):</strong> Contrasto crimini finanziari</li>
+                        <li><strong>Federal Trade Commission (FTC):</strong> Protezione consumatori da frodi</li>
+                    </ul>`
+                },
+                complaintMechanisms: {
+                    title: "Meccanismi di Reclamo",
+                    content: `
+                    <ul>
+                        <li><strong>CFPB Complaint Portal:</strong> Sistema online centralizzato per reclami consumatori - risposta obbligatoria entro 15 giorni</li>
+                        <li><strong>Federal Reserve Consumer Help:</strong> Assistenza per reclami contro banche sotto supervisione FED</li>
+                        <li><strong>FDIC Consumer Response Center:</strong> Gestione reclami banche assicurate FDIC</li>
+                        <li><strong>OCC Customer Assistance Group:</strong> Supporto per problemi con banche nazionali</li>
+                        <li><strong>State Banking Departments:</strong> Autorità bancarie statali per banche locali</li>
+                        <li><strong>Better Business Bureau (BBB):</strong> Mediazione controversie consumatori-aziende</li>
+                    </ul>`
+                },
+                fraudReporting: {
+                    title: "Segnalazione Truffe e Frodi",
+                    links: [
+                        { label: "FBI Internet Crime Complaint Center (IC3)", url: "https://www.ic3.gov" },
+                        { label: "Federal Trade Commission - ReportFraud.ftc.gov", url: "https://reportfraud.ftc.gov" },
+                        { label: "CFPB Submit a Complaint", url: "https://www.consumerfinance.gov/complaint" },
+                        { label: "FinCEN - Financial Crimes Report", url: "https://www.fincen.gov" },
+                        { label: "USA.gov - Report Scams and Fraud", url: "https://www.usa.gov/stop-scams-frauds" }
+                    ]
+                },
+                authorityEmails: {
+                    title: "Contatti Email Autorità",
+                    emails: [
+                        { label: "CFPB", address: "info@consumerfinance.gov" },
+                        { label: "Federal Reserve", address: "ConsumerHelp@federalreserve.gov" },
+                        { label: "FDIC", address: "ConsumerResponse@fdic.gov" },
+                        { label: "OCC", address: "customer.assistance@occ.treas.gov" },
+                        { label: "FinCEN", address: "FRC@fincen.gov" },
+                        { label: "FTC", address: "antitrust@ftc.gov" },
+                        { label: "SEC", address: "help@sec.gov" }
+                    ]
+                }
+            },
+            germany: {
+                name: "Germania",
+                flag: "🇩🇪",
+                region: "Europa Occidentale",
+                legalBasis: {
+                    title: "Quadro Normativo Tedesco ed Europeo",
+                    content: `Il sistema bancario tedesco opera secondo normative nazionali ed europee:
+                    <ul>
+                        <li>Kreditwesengesetz (KWG) - Legge Bancaria Tedesca</li>
+                        <li>Geldwäschegesetz (GwG) - Legge Anti-Riciclaggio</li>
+                        <li>Zahlungsdiensteaufsichtsgesetz (ZAG) - Legge Servizi di Pagamento</li>
+                        <li>Payment Services Directive 2 (PSD2) - Direttiva UE</li>
+                        <li>Markets in Financial Instruments Directive (MiFID II)</li>
+                        <li>General Data Protection Regulation (GDPR/DSGVO)</li>
+                        <li>Capital Requirements Regulation (CRR) e Directive (CRD IV)</li>
+                        <li>Verbraucherkreditgesetz (VerbrKrG) - Legge Credito al Consumo</li>
+                    </ul>`
+                },
+                bankResponsibility: {
+                    title: "Responsabilità delle Banche",
+                    content: `Le banche tedesche hanno obblighi rigorosi:
+                    <ul>
+                        <li><strong>Sorgfaltspflichten (Doveri di Diligenza):</strong> Verifica approfondita identità clienti secondo §154 GwG</li>
+                        <li><strong>Verdachtsmeldungen:</strong> Obbligo segnalazione operazioni sospette alla FIU Germania</li>
+                        <li><strong>Aufzeichnungspflichten:</strong> Conservazione documenti per 5 anni minimo</li>
+                        <li><strong>Beratungspflicht:</strong> Obbligo consulenza adeguata ai clienti secondo MiFID II</li>
+                        <li><strong>Haftung bei Zahlungsbetrug:</strong> Responsabilità per frodi nei pagamenti - rimborso immediato secondo PSD2</li>
+                        <li><strong>Strong Customer Authentication (SCA):</strong> Autenticazione forte obbligatoria per transazioni online</li>
+                        <li><strong>Datenschutz:</strong> Protezione dati secondo GDPR - sanzioni fino a 20 milioni euro</li>
+                        <li><strong>Verbraucherschutz:</strong> Protezione consumatori secondo BGB §§ 488-498</li>
+                    </ul>`
+                },
+                authorities: {
+                    title: "Autorità di Vigilanza",
+                    content: `
+                    <ul>
+                        <li><strong>Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin):</strong> Autorità federale supervisione finanziaria - supervisione integrata banche, assicurazioni, mercati</li>
+                        <li><strong>Deutsche Bundesbank:</strong> Banca centrale tedesca - vigilanza prudenziale in collaborazione con BaFin</li>
+                        <li><strong>European Central Bank (ECB/EZB):</strong> Supervisione diretta banche significative nell'area euro</li>
+                        <li><strong>Financial Intelligence Unit (FIU):</strong> Unità di intelligence finanziaria presso lo Zoll - ricezione SAR</li>
+                        <li><strong>Bundeskartellamt:</strong> Autorità antitrust tedesca</li>
+                        <li><strong>Landesdatenschutzbehörden:</strong> Autorità protezione dati dei Länder</li>
+                        <li><strong>Verbraucherzentrale:</strong> Associazioni consumatori con poteri di azione collettiva</li>
+                    </ul>`
+                },
+                complaintMechanisms: {
+                    title: "Meccanismi di Reclamo",
+                    content: `
+                    <ul>
+                        <li><strong>BaFin Verbraucher-Beschwerdeportal:</strong> Portale online reclami consumatori - risposta BaFin entro 3 mesi</li>
+                        <li><strong>Ombudsmann der privaten Banken:</strong> Mediatore indipendente settore bancario privato - procedura gratuita</li>
+                        <li><strong>Bundesverband Öffentlicher Banken Deutschlands - Ombudsstelle:</strong> Per banche pubbliche</li>
+                        <li><strong>Verbraucherzentrale Bundesverband (vzbv):</strong> Consulenza e supporto legale consumatori</li>
+                        <li><strong>Schlichtungsstelle:</strong> Organismi di conciliazione settoriali certificati</li>
+                        <li><strong>European Consumer Centre Germany:</strong> Assistenza per controversie transfrontaliere UE</li>
+                    </ul>`
+                },
+                fraudReporting: {
+                    title: "Segnalazione Truffe e Frodi",
+                    links: [
+                        { label: "BKA - Bundeskriminalamt Cybercrime", url: "https://www.bka.de/DE/KontaktAufnehmen/kontaktaufnehmen_node.html" },
+                        { label: "Polizei - Online Strafanzeige", url: "https://www.polizei.de/Polizei/DE/Service/Onlinewachen/onlinewachen_node.html" },
+                        { label: "BaFin Verbraucherbeschwerden", url: "https://www.bafin.de/DE/Verbraucher/Beschwerden/beschwerden_node.html" },
+                        { label: "Verbraucherzentrale - Phishing Melden", url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/phishingradar" },
+                        { label: "Watchlist Internet", url: "https://www.watchlist-internet.at" }
+                    ]
+                },
+                authorityEmails: {
+                    title: "Contatti Email Autorità",
+                    emails: [
+                        { label: "BaFin Verbraucher", address: "verbraucher@bafin.de" },
+                        { label: "BaFin Geldwäsche", address: "geldwaesche@bafin.de" },
+                        { label: "Deutsche Bundesbank", address: "www@bundesbank.de" },
+                        { label: "FIU Deutschland", address: "fiu@zoll.bund.de" },
+                        { label: "Ombudsmann Banken", address: "ombudsmann@bankenombudsmann.de" },
+                        { label: "Verbraucherzentrale", address: "kontakt@vzbv.de" },
+                        { label: "BKA Cybercrime", address: "hinweise@bka.bund.de" }
+                    ]
+                }
+            },
+            italy: {
+                name: "Italia",
+                flag: "🇮🇹",
+                region: "Europa Meridionale",
+                legalBasis: {
+                    title: "Quadro Normativo Italiano ed Europeo",
+                    content: `Il sistema bancario italiano è regolamentato da normative nazionali ed europee integrate:
+                    <ul>
+                        <li>Testo Unico Bancario (TUB) - D.Lgs. 385/1993</li>
+                        <li>Testo Unico della Finanza (TUF) - D.Lgs. 58/1998</li>
+                        <li>Decreto Legislativo 231/2007 - Antiriciclaggio (recepimento IV Direttiva UE)</li>
+                        <li>D.Lgs. 11/2010 - Recepimento PSD (Payment Services Directive)</li>
+                        <li>D.Lgs. 218/2017 - Recepimento PSD2</li>
+                        <li>Regolamento GDPR UE 679/2016 - Privacy</li>
+                        <li>Codice del Consumo - D.Lgs. 206/2005</li>
+                        <li>CRR/CRD IV - Normativa prudenziale europea</li>
+                        <li>MiFID II - Mercati strumenti finanziari</li>
+                    </ul>`
+                },
+                bankResponsibility: {
+                    title: "Responsabilità delle Banche",
+                    content: `Le banche italiane hanno responsabilità estese secondo la normativa:
+                    <ul>
+                        <li><strong>Adeguata Verifica della Clientela:</strong> Obblighi KYC secondo art. 17-30 D.Lgs. 231/2007 - identificazione e verifica titolare effettivo</li>
+                        <li><strong>Segnalazioni Operazioni Sospette (SOS):</strong> Obbligo immediato segnalazione a UIF secondo art. 35-41 D.Lgs. 231/2007</li>
+                        <li><strong>Conservazione Documenti:</strong> 10 anni dalla cessazione rapporto (art. 36)</li>
+                        <li><strong>Trasparenza:</strong> Obblighi informativi precontrattuali e in corso di rapporto secondo TUB</li>
+                        <li><strong>Responsabilità per Frodi nei Pagamenti:</strong> Rimborso immediato secondo PSD2 - termine 13 mesi per contestazione</li>
+                        <li><strong>Strong Customer Authentication:</strong> Autenticazione forte obbligatoria dal 31/12/2020</li>
+                        <li><strong>Tutela Privacy:</strong> Trattamento dati secondo GDPR - sanzioni fino a 20 milioni euro o 4% fatturato</li>
+                        <li><strong>Correttezza e Buona Fede:</strong> Art. 1337-1375 Codice Civile - responsabilità precontrattuale e contrattuale</li>
+                        <li><strong>Dovere di Informazione:</strong> Secondo art. 21 TUF - informazioni complete su prodotti finanziari</li>
+                    </ul>`
+                },
+                authorities: {
+                    title: "Autorità di Vigilanza",
+                    content: `
+                    <ul>
+                        <li><strong>Banca d'Italia:</strong> Autorità di vigilanza bancaria - supervisione prudenziale e stabilità finanziaria - Via Nazionale 91, Roma</li>
+                        <li><strong>CONSOB:</strong> Commissione Nazionale per le Società e la Borsa - vigilanza mercati finanziari - Via G.B. Martini 3, Roma</li>
+                        <li><strong>IVASS:</strong> Istituto per la Vigilanza sulle Assicurazioni - Via del Quirinale 21, Roma</li>
+                        <li><strong>Banca Centrale Europea (BCE):</strong> Supervisione diretta banche significative nel meccanismo SSM</li>
+                        <li><strong>Unità di Informazione Finanziaria (UIF):</strong> Presso Banca d'Italia - riceve e analizza SOS - Via Nazionale 91, Roma</li>
+                        <li><strong>Guardia di Finanza - Nucleo Speciale Polizia Valutaria:</strong> Contrasto crimini finanziari e riciclaggio</li>
+                        <li><strong>AGCM:</strong> Autorità Garante della Concorrenza e del Mercato - tutela concorrenza</li>
+                        <li><strong>Garante Privacy:</strong> Autorità protezione dati personali - Piazza Venezia 11, Roma</li>
+                        <li><strong>Arbitro Bancario Finanziario (ABF):</strong> Sistema ADR Banca d'Italia per controversie</li>
+                    </ul>`
+                },
+                complaintMechanisms: {
+                    title: "Meccanismi di Reclamo",
+                    content: `
+                    <ul>
+                        <li><strong>Reclamo all'Intermediario:</strong> Primo livello - risposta obbligatoria entro 60 giorni (art. 127 TUB e 190 TUF)</li>
+                        <li><strong>Arbitro Bancario Finanziario (ABF):</strong> Sistema ADR gratuito Banca d'Italia - decisioni vincolanti fino a 200.000 euro - ricorso online su sito Banca d'Italia</li>
+                        <li><strong>ACF - Arbitro per le Controversie Finanziarie:</strong> Presso CONSOB per controversie investimenti - Via G.B. Martini 3, Roma</li>
+                        <li><strong>Esposto a Banca d'Italia:</strong> Segnalazione comportamenti scorretti - esame e richiamo intermediario</li>
+                        <li><strong>Esposto a CONSOB:</strong> Per irregolarità intermediari finanziari</li>
+                        <li><strong>Associazioni Consumatori:</strong> Supporto legale e class action - Adiconsum, Codacons, Altroconsumo, ecc.</li>
+                        <li><strong>Conciliatore Bancario Finanziario:</strong> Conciliazione volontaria preventiva</li>
+                        <li><strong>Mediazione Civile:</strong> Obbligatoria prima di azione giudiziaria secondo D.Lgs. 28/2010</li>
+                        <li><strong>Azione Giudiziaria:</strong> Tribunale competente - giudice di pace fino a 5.000 euro</li>
+                    </ul>`
+                },
+                fraudReporting: {
+                    title: "Segnalazione Truffe e Frodi",
+                    links: [
+                        { label: "Polizia Postale - Commissariato Online", url: "https://www.commissariatodips.it" },
+                        { label: "Guardia di Finanza - Segnalazione Illeciti", url: "https://www.gdf.gov.it/it/segnala-un-illecito" },
+                        { label: "Banca d'Italia - Esposti", url: "https://www.bancaditalia.it/compiti/vigilanza/intermediari/esposti-segnalazioni/" },
+                        { label: "CONSOB - Esposti e Segnalazioni", url: "https://www.consob.it/web/area-pubblica/esposti" },
+                        { label: "UIF - Segnalazioni Operazioni Sospette", url: "https://uif.bancaditalia.it" },
+                        { label: "Garante Privacy - Reclami", url: "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/1547109" }
+                    ]
+                },
+                authorityEmails: {
+                    title: "Contatti Email Autorità",
+                    emails: [
+                        { label: "Banca d'Italia - Esposti", address: "esposti.vigilanza@bancaditalia.it" },
+                        { label: "UIF Banca d'Italia", address: "uif.bancaditalia@bancaditalia.it" },
+                        { label: "CONSOB", address: "consob@consob.it" },
+                        { label: "ABF", address: "abf.segreteria@bancaditalia.it" },
+                        { label: "Garante Privacy", address: "garante@gpdp.it" },
+                        { label: "Polizia Postale", address: "info@commissariatodips.it" },
+                        { label: "AGCM", address: "ag.com@agcm.it" },
+                        { label: "IVASS", address: "ivass@ivass.it" }
+                    ]
+                }
+            }
+        };
 
-        // Split countries for bar charts
-        const countriesAL = countries.filter(c => c.name[0] >= 'A' && c.name[0] <= 'L').sort((a, b) => a.name.localeCompare(b.name));
-        const countriesMZ = countries.filter(c => c.name[0] >= 'M' && c.name[0] <= 'Z').sort((a, b) => a.name.localeCompare(b.name));
+        // Render country cards
+        function renderCountries(filter = '') {
+            const grid = document.getElementById('countriesGrid');
+            grid.innerHTML = '';
 
-        function getProtectionValue(protection) {
-            if (protection === "Alta") return 3;
-            if (protection === "Media") return 2;
-            return 1;
+            Object.entries(countriesData).forEach(([key, country]) => {
+                const searchText = `${country.name} ${country.region}`.toLowerCase();
+                if (filter && !searchText.includes(filter.toLowerCase())) {
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'country-card';
+                card.innerHTML = `
+                    <div class="country-header">
+                        <div class="country-flag">${country.flag}</div>
+                        <div class="country-info">
+                            <h2>${country.name}</h2>
+                            <div class="region">${country.region}</div>
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">Base Normativa</div>
+                        <div class="info-content">
+                            Framework completo di leggi bancarie, anti-riciclaggio e protezione consumatori
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">Autorità Principali</div>
+                        <div class="info-content">
+                            ${country.authorities.content.split('</li>').slice(0, 2).join('</li>') + '</li></ul>'}
+                        </div>
+                    </div>
+                    <button class="btn-details" onclick="openModal('${key}')">
+                        📋 Vedi Dettagli Completi
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function getProtectionColor(protection) {
-            if (protection === "Alta") return '#28a745';
-            if (protection === "Media") return '#ffc107';
-            return '#dc3545';
-        }
+        // Open modal
+        function openModal(countryKey) {
+            const country = countriesData[countryKey];
+            const overlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
 
-        // Create bar chart A-L
-        const ctxAL = document.getElementById('barChartAL').getContext('2d');
-        new Chart(ctxAL, {
-            type: 'bar',
-            data: {
-                labels: countriesAL.map(c => c.name),
-                datasets: [{
-                    label: 'Livello di Protezione',
-                    data: countriesAL.map(c => getProtectionValue(c.protection)),
-                    backgroundColor: countriesAL.map(c => getProtectionColor(c.protection)),
-                    borderColor: countriesAL.map(c => getProtectionColor(c.protection)),
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 3,
-                        ticks: {
-                            stepSize: 1,
-                            callback: function(value) {
-                                if (value === 3) return 'Alta';
-                                if (value === 2) return 'Media';
-                                if (value === 1) return 'Bassa';
-                                return '';
-                            }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            maxRotation: 45,
-                            minRotation: 45
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
+            // Set title
+            modalTitle.innerHTML = `
+                <div class="country-flag">${country.flag}</div>
+                <div class="modal-title-text">
+                    <h2>${country.name}</h2>
+                    <div class="region">${country.region}</div>
+                </div>
+            `;
 
-        // Create bar chart M-Z
-        const ctxMZ = document.getElementById('barChartMZ').getContext('2d');
-        new Chart(ctxMZ, {
-            type: 'bar',
-            data: {
-                labels: countriesMZ.map(c => c.name),
-                datasets: [{
-                    label: 'Livello di Protezione',
-                    data: countriesMZ.map(c => getProtectionValue(c.protection)),
-                    backgroundColor: countriesMZ.map(c => getProtectionColor(c.protection)),
-                    borderColor: countriesMZ.map(c => getProtectionColor(c.protection)),
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 3,
-                        ticks: {
-                            stepSize: 1,
-                            callback: function(value) {
-                                if (value === 3) return 'Alta';
-                                if (value === 2) return 'Media';
-                                if (value === 1) return 'Bassa';
-                                return '';
-                            }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            maxRotation: 45,
-                            minRotation: 45
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
+            // Set body
+            let bodyHTML = '';
 
-        // Pie charts for the Charts tab
-        const ctx1 = document.getElementById('pieChart1').getContext('2d');
-        new Chart(ctx1, {
-            type: 'pie',
-            data: {
-                labels: ['Alta Protezione', 'Media Protezione', 'Bassa Protezione'],
-                datasets: [{
-                    data: [15, 15, 10],
-                    backgroundColor: ['#28a745', '#ffc107', '#dc3545']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-
-        const ctx2 = document.getElementById('pieChart2').getContext('2d');
-        const regionCounts = countries.reduce((acc, country) => {
-            acc[country.region] = (acc[country.region] || 0) + 1;
-            return acc;
-        }, {});
-
-        new Chart(ctx2, {
-            type: 'pie',
-            data: {
-                labels: Object.keys(regionCounts),
-                datasets: [{
-                    data: Object.values(regionCounts),
-                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-
-        function createCountryCard(country) {
-            const protectionClass = country.protection === "Alta" ? "protection-high" : 
-                                   country.protection === "Media" ? "protection-medium" : "protection-low";
-            
-            return `
-                <div class="country-card">
-                    <h3>${country.name}</h3>
-                    <div class="info-row">
-                        <span class="info-label">Protezione:</span>
-                        <span class="protection-badge ${protectionClass}">${country.protection}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Regione:</span>
-                        <span class="info-value">${country.region}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Banche principali:</span>
-                        <span class="info-value">${country.banks}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Tipi di frode:</span>
-                        <span class="info-value">${country.fraudTypes}</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Responsabilità:</span>
-                        <span class="info-value">${country.liability}</span>
+            // Legal Basis Section
+            bodyHTML += `
+                <div class="modal-section">
+                    <div class="modal-section-title">${country.legalBasis.title}</div>
+                    <div class="modal-info-row">
+                        <div class="modal-info-content">${country.legalBasis.content}</div>
                     </div>
                 </div>
             `;
+
+            // Bank Responsibility Section
+            bodyHTML += `
+                <div class="modal-section">
+                    <div class="modal-section-title">${country.bankResponsibility.title}</div>
+                    <div class="modal-info-row">
+                        <div class="modal-info-content">${country.bankResponsibility.content}</div>
+                    </div>
+                </div>
+            `;
+
+            // Authorities Section
+            bodyHTML += `
+                <div class="modal-section">
+                    <div class="modal-section-title">${country.authorities.title}</div>
+                    <div class="modal-info-row">
+                        <div class="modal-info-content">${country.authorities.content}</div>
+                    </div>
+                </div>
+            `;
+
+            // Complaint Mechanisms Section
+            bodyHTML += `
+                <div class="modal-section">
+                    <div class="modal-section-title">${country.complaintMechanisms.title}</div>
+                    <div class="modal-info-row">
+                        <div class="modal-info-content">${country.complaintMechanisms.content}</div>
+                    </div>
+                </div>
+            `;
+
+            // Fraud Reporting Section
+            bodyHTML += `
+                <div class="modal-section">
+                    <div class="modal-section-title">${country.fraudReporting.title}</div>
+                    <div class="modal-info-row">
+                        <div class="modal-info-content">
+                            ${country.fraudReporting.links.map(link => 
+                                `<a href="${link.url}" target="_blank" class="link-button">🔗 ${link.label}</a><br>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Authority Emails Section
+            bodyHTML += `
+                <div class="modal-section">
+                    <div class="modal-section-title">${country.authorityEmails.title}</div>
+                    <div class="modal-info-row">
+                        <div class="email-list">
+                            ${country.authorityEmails.emails.map(email => `
+                                <div class="email-item">
+                                    <span class="email-label">${email.label}:</span>
+                                    <a href="mailto:${email.address}" class="email-address">${email.address}</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modalBody.innerHTML = bodyHTML;
+
+            // Show modal with animation
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('active'), 10);
         }
 
-        function displayCountries(filterLevel = 'all') {
-            let filtered = countries;
-            let containerId = 'allCountries';
-            
-            if (filterLevel === 'high') {
-                filtered = countries.filter(c => c.protection === "Alta");
-                containerId = 'highCountries';
-            } else if (filterLevel === 'medium') {
-                filtered = countries.filter(c => c.protection === "Media");
-                containerId = 'mediumCountries';
-            } else if (filterLevel === 'low') {
-                filtered = countries.filter(c => c.protection === "Bassa");
-                containerId = 'lowCountries';
-            }
-            
-            document.getElementById(containerId).innerHTML = filtered
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map(createCountryCard)
-                .join('');
+        // Close modal
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 300);
         }
 
-        function filterCountries(level) {
-            const searchId = level === 'all' ? 'searchAll' : 
-                           level === 'high' ? 'searchHigh' :
-                           level === 'medium' ? 'searchMedium' : 'searchLow';
-            
-            const searchTerm = document.getElementById(searchId).value.toLowerCase();
-            
-            let filtered = countries;
-            if (level === 'high') filtered = countries.filter(c => c.protection === "Alta");
-            else if (level === 'medium') filtered = countries.filter(c => c.protection === "Media");
-            else if (level === 'low') filtered = countries.filter(c => c.protection === "Bassa");
-            
-            if (searchTerm) {
-                filtered = filtered.filter(c => 
-                    c.name.toLowerCase().includes(searchTerm) ||
-                    c.banks.toLowerCase().includes(searchTerm) ||
-                    c.fraudTypes.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            const containerId = level === 'all' ? 'allCountries' :
-                              level === 'high' ? 'highCountries' :
-                              level === 'medium' ? 'mediumCountries' : 'lowCountries';
-            
-            document.getElementById(containerId).innerHTML = filtered
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map(createCountryCard)
-                .join('');
-        }
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderCountries(e.target.value);
+        });
 
-        function openTab(evt, tabName) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-            
-            const tabButtons = document.getElementsByClassName("tab-button");
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove("active");
-            }
-            
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-            
-            if (tabName === 'all') displayCountries('all');
-            else if (tabName === 'high') displayCountries('high');
-            else if (tabName === 'medium') displayCountries('medium');
-            else if (tabName === 'low') displayCountries('low');
-        }
+        document.getElementById('modalClose').addEventListener('click', closeModal);
 
-        // Initialize on page load
-        displayCountries('all');
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Prevent modal content click from closing
+        document.getElementById('modalContent').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Initial render
+        renderCountries();
     </script>
 </body>
 </html>
