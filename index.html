@@ -3,814 +3,655 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Internazionale - Truffe Finanziarie e Autorità di Vigilanza</title>
+    <title>Database Internazionale - Banche, Truffe e Responsabilità Finanziarie</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             overflow: hidden;
         }
-
+        
         header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 40px;
+            padding: 30px;
             text-align: center;
         }
-
-        h1 {
+        
+        header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-
-        .subtitle {
+        
+        header p {
             font-size: 1.2em;
             opacity: 0.9;
         }
-
+        
         .tabs {
             display: flex;
             background: #f8f9fa;
-            border-bottom: 3px solid #dee2e6;
-            overflow-x: auto;
-        }
-
-        .tab {
-            padding: 20px 30px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #495057;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .tab:hover {
-            background: #e9ecef;
-        }
-
-        .tab.active {
-            background: white;
-            color: #2a5298;
-            border-bottom: 3px solid #2a5298;
-            margin-bottom: -3px;
-        }
-
-        .search-container {
-            padding: 30px 40px;
-            background: #f8f9fa;
             border-bottom: 2px solid #dee2e6;
+            padding: 0 20px;
         }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            font-size: 1.1em;
-            transition: all 0.3s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #2a5298;
-            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
-        }
-
-        .clear-search {
+        
+        .tab-button {
             padding: 15px 30px;
-            background: #6c757d;
-            color: white;
+            background: none;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
         }
-
-        .clear-search:hover {
-            background: #5a6268;
-            transform: translateY(-2px);
+        
+        .tab-button:hover {
+            color: #2a5298;
+            background: rgba(42, 82, 152, 0.1);
         }
-
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
-            color: #6c757d;
-            display: none;
+        
+        .tab-button.active {
+            color: #2a5298;
+            border-bottom-color: #2a5298;
         }
-
-        .content {
-            padding: 40px;
-        }
-
+        
         .tab-content {
             display: none;
-        }
-
-        .tab-content.active {
-            display: block;
+            padding: 30px;
             animation: fadeIn 0.5s;
         }
-
+        
+        .tab-content.active {
+            display: block;
+        }
+        
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+        
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .chart-wrapper {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2a5298;
+            text-align: center;
+        }
+        
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
         .country-card {
-            background: white;
-            border: 2px solid #dee2e6;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-            transition: all 0.3s;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .country-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
         }
-
-        .country-card.highlight {
-            border-color: #2a5298;
-            background: #f0f4ff;
+        
+        .country-card h3 {
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #2a5298;
+            padding-bottom: 10px;
         }
-
-        .country-header {
+        
+        .info-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .country-name {
-            font-size: 2em;
-            color: #1e3c72;
-            font-weight: bold;
-        }
-
-        .protection-badge {
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 0.9em;
-            text-transform: uppercase;
-        }
-
-        .protection-high {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .protection-medium {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .protection-low {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .info-section {
-            margin: 20px 0;
-        }
-
-        .info-label {
-            font-weight: bold;
-            color: #495057;
-            margin-bottom: 8px;
-            font-size: 1.1em;
-        }
-
-        .info-value {
-            color: #212529;
-            line-height: 1.6;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .info-value a {
-            color: #2a5298;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .info-value a:hover {
-            text-decoration: underline;
-        }
-
-        .ai-instructions {
-            background: #e7f3ff;
-            border-left: 4px solid #2a5298;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .ai-instructions ol {
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-
-        .ai-instructions li {
-            margin: 8px 0;
-            line-height: 1.6;
-        }
-
-        .charts-section {
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 3px solid #dee2e6;
-        }
-
-        .chart-container {
+            margin: 10px 0;
+            padding: 8px;
             background: white;
-            border-radius: 15px;
-            padding: 30px;
+            border-radius: 5px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .info-value {
+            color: #333;
+        }
+        
+        .protection-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .protection-high {
+            background: #28a745;
+            color: white;
+        }
+        
+        .protection-medium {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .protection-low {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .search-box {
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
-
-        .chart-title {
-            font-size: 1.5em;
-            color: #1e3c72;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: bold;
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
         }
-
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+        
         footer {
-            background: #1e3c72;
+            background: #2a5298;
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             margin-top: 40px;
         }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
+        .pie-charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
 
-            .tab {
-                padding: 15px 20px;
-                font-size: 1em;
-            }
-
-            .country-name {
-                font-size: 1.5em;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            .search-box {
-                flex-direction: column;
-            }
+        .pie-chart-wrapper {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🌍 Database Internazionale Truffe Finanziarie</h1>
-            <p class="subtitle">Autorità di Vigilanza e Procedure di Segnalazione per Paese</p>
+            <h1>🌍 Database Internazionale</h1>
+            <p>Banche, Truffe e Responsabilità Finanziarie</p>
         </header>
-
+        
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('all')">Tutti i Paesi</button>
-            <button class="tab" onclick="switchTab('europa')">Europa</button>
-            <button class="tab" onclick="switchTab('america-latina')">America Latina</button>
-            <button class="tab" onclick="switchTab('nord-america')">Nord America</button>
-            <button class="tab" onclick="switchTab('asia')">Asia</button>
-            <button class="tab" onclick="switchTab('medio-oriente')">Medio Oriente</button>
-            <button class="tab" onclick="switchTab('charts')">📊 Statistiche</button>
+            <button class="tab-button active" onclick="openTab(event, 'all')">Panoramica</button>
+            <button class="tab-button" onclick="openTab(event, 'high')">Alta Protezione</button>
+            <button class="tab-button" onclick="openTab(event, 'medium')">Media Protezione</button>
+            <button class="tab-button" onclick="openTab(event, 'low')">Bassa Protezione</button>
+            <button class="tab-button" onclick="openTab(event, 'charts')">Grafici</button>
         </div>
+        
+        <div id="all" class="tab-content active">
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <div class="stat-number">40</div>
+                    <div class="stat-label">Paesi Totali</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Alta Protezione</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Media Protezione</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Bassa Protezione</div>
+                </div>
+            </div>
 
-        <div class="search-container">
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <div class="chart-title">Livelli di Protezione per Paese (A-L)</div>
+                    <canvas id="barChartAL" height="500"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <div class="chart-title">Livelli di Protezione per Paese (M-Z)</div>
+                    <canvas id="barChartMZ" height="500"></canvas>
+                </div>
+            </div>
+            
             <div class="search-box">
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="countrySearch" 
-                    placeholder="🔍 Cerca un paese..."
-                    oninput="filterCountries()"
-                >
-                <button class="clear-search" onclick="clearSearch()">Cancella</button>
+                <input type="text" id="searchAll" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('all')">
             </div>
+            <div class="country-grid" id="allCountries"></div>
+        </div>
+        
+        <div id="high" class="tab-content">
+            <h2 style="color: #28a745; margin-bottom: 20px;">🛡️ Paesi con Alta Protezione</h2>
+            <div class="search-box">
+                <input type="text" id="searchHigh" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('high')">
+            </div>
+            <div class="country-grid" id="highCountries"></div>
+        </div>
+        
+        <div id="medium" class="tab-content">
+            <h2 style="color: #ffc107; margin-bottom: 20px;">⚠️ Paesi con Media Protezione</h2>
+            <div class="search-box">
+                <input type="text" id="searchMedium" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('medium')">
+            </div>
+            <div class="country-grid" id="mediumCountries"></div>
+        </div>
+        
+        <div id="low" class="tab-content">
+            <h2 style="color: #dc3545; margin-bottom: 20px;">🚨 Paesi con Bassa Protezione</h2>
+            <div class="search-box">
+                <input type="text" id="searchLow" placeholder="🔍 Cerca un paese..." onkeyup="filterCountries('low')">
+            </div>
+            <div class="country-grid" id="lowCountries"></div>
         </div>
 
-        <div class="content">
-            <div id="no-results" class="no-results">
-                ❌ Nessun paese trovato
-            </div>
-
-            <div id="all" class="tab-content active">
-                <!-- Countries will be inserted here by JavaScript -->
-            </div>
-
-            <div id="europa" class="tab-content"></div>
-            <div id="america-latina" class="tab-content"></div>
-            <div id="nord-america" class="tab-content"></div>
-            <div id="asia" class="tab-content"></div>
-            <div id="medio-oriente" class="tab-content"></div>
-
-            <div id="charts" class="tab-content">
-                <div class="charts-section">
-                    <div class="chart-container">
-                        <h3 class="chart-title">Distribuzione Paesi per Regione</h3>
-                        <canvas id="regionChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <h3 class="chart-title">Livelli di Protezione</h3>
-                        <canvas id="protectionChart"></canvas>
-                    </div>
+        <div id="charts" class="tab-content">
+            <h2 style="color: #2a5298; margin-bottom: 20px;">📊 Analisi Statistica</h2>
+            <div class="pie-charts-container">
+                <div class="pie-chart-wrapper">
+                    <div class="chart-title">Distribuzione Livelli di Protezione</div>
+                    <canvas id="pieChart1"></canvas>
+                </div>
+                <div class="pie-chart-wrapper">
+                    <div class="chart-title">Distribuzione per Area Geografica</div>
+                    <canvas id="pieChart2"></canvas>
                 </div>
             </div>
         </div>
-
-        <footer>
-            <p>&copy; 2025 Database Internazionale Truffe Finanziarie | Avv. Stanca Marcello</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Ultimo aggiornamento: Dicembre 2025</p>
-        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const countries = [
-            {
-                name: "Italia",
-                region: "europa",
-                protection: "high",
-                authorityName: "CONSOB - Commissione Nazionale per le Società e la Borsa",
-                authorityHomepage: "https://www.consob.it",
-                fraudLink: "https://www.consob.it/web/area-pubblica/segnalazioni",
-                authorityEmail: "consob@consob.it",
-                aiInstructions: [
-                    "Visita il sito CONSOB alla pagina segnalazioni",
-                    "Compila il modulo online con tutti i dettagli della truffa",
-                    "Allega documentazione: screenshot, email, contratti",
-                    "Indica l'importo coinvolto e le modalità di pagamento",
-                    "Riceverai un numero di protocollo per il follow-up"
-                ]
-            },
-            {
-                name: "Regno Unito",
-                region: "europa",
-                protection: "high",
-                authorityName: "FCA - Financial Conduct Authority",
-                authorityHomepage: "https://www.fca.org.uk",
-                fraudLink: "https://www.fca.org.uk/consumers/report-scam-unauthorised-firm",
-                authorityEmail: "consumer.queries@fca.org.uk",
-                aiInstructions: [
-                    "Accedi al portale FCA per segnalazioni",
-                    "Seleziona 'Report a scam' dal menu",
-                    "Fornisci dettagli completi dell'operatore non autorizzato",
-                    "Carica prove documentali",
-                    "La FCA investigherà e potrebbe aggiungere l'entità alla lista di avviso"
-                ]
-            },
-            {
-                name: "Germania",
-                region: "europa",
-                protection: "high",
-                authorityName: "BaFin - Bundesanstalt für Finanzdienstleistungsaufsicht",
-                authorityHomepage: "https://www.bafin.de",
-                fraudLink: "https://www.bafin.de/EN/Verbraucher/BeschwerdenAnzeigen/beschwerdenAnzeigen_node_en.html",
-                authorityEmail: "poststelle@bafin.de",
-                aiInstructions: [
-                    "Visita la sezione reclami del sito BaFin",
-                    "Compila il modulo di denuncia in tedesco o inglese",
-                    "Descrivi la natura della truffa finanziaria",
-                    "Allega tutta la documentazione pertinente",
-                    "BaFin esaminerà e potrebbe avviare un'indagine"
-                ]
-            },
-            {
-                name: "Francia",
-                region: "europa",
-                protection: "high",
-                authorityName: "AMF - Autorité des Marchés Financiers",
-                authorityHomepage: "https://www.amf-france.org",
-                fraudLink: "https://www.amf-france.org/en/complaints",
-                authorityEmail: "direction.relations-epargnants@amf-france.org",
-                aiInstructions: [
-                    "Accedi al portale reclami AMF",
-                    "Registrati e crea un account se necessario",
-                    "Compila il modulo online dettagliato",
-                    "Carica documenti di supporto (massimo 5 MB)",
-                    "Monitora lo stato della tua segnalazione tramite il portale"
-                ]
-            },
-            {
-                name: "Spagna",
-                region: "europa",
-                protection: "high",
-                authorityName: "CNMV - Comisión Nacional del Mercado de Valores",
-                authorityHomepage: "https://www.cnmv.es",
-                fraudLink: "https://www.cnmv.es/portal/Consultas-Quejas/Quejas.aspx",
-                authorityEmail: "informacion@cnmv.es",
-                aiInstructions: [
-                    "Visita la sezione reclami CNMV",
-                    "Compila il modulo di denuncia online",
-                    "Fornisci dettagli dell'entità sospetta",
-                    "Allega prove documentali",
-                    "CNMV può pubblicare avvisi pubblici su entità non autorizzate"
-                ]
-            },
-            {
-                name: "Svizzera",
-                region: "europa",
-                protection: "high",
-                authorityName: "FINMA - Swiss Financial Market Supervisory Authority",
-                authorityHomepage: "https://www.finma.ch",
-                fraudLink: "https://www.finma.ch/en/contact/",
-                authorityEmail: "info@finma.ch",
-                aiInstructions: [
-                    "Contatta FINMA tramite il modulo online",
-                    "Descrivi la sospetta attività fraudolenta",
-                    "Fornisci tutti i dettagli dell'entità coinvolta",
-                    "FINMA mantiene una lista pubblica di avvisi",
-                    "Considera anche di contattare la polizia locale"
-                ]
-            },
-            {
-                name: "Paesi Bassi",
-                region: "europa",
-                protection: "high",
-                authorityName: "AFM - Autoriteit Financiële Markten",
-                authorityHomepage: "https://www.afm.nl",
-                fraudLink: "https://www.afm.nl/en/consumenten/contact",
-                authorityEmail: "consumenten@afm.nl",
-                aiInstructions: [
-                    "Accedi alla sezione consumatori AFM",
-                    "Usa il modulo di contatto per segnalare la truffa",
-                    "Fornisci informazioni dettagliate sull'azienda sospetta",
-                    "AFM può aggiungere l'entità alla lista di avviso",
-                    "Potresti anche dover contattare la polizia olandese"
-                ]
-            },
-            {
-                name: "Brasile",
-                region: "america-latina",
-                protection: "medium",
-                authorityName: "CVM - Comissão de Valores Mobiliários",
-                authorityHomepage: "https://www.gov.br/cvm",
-                fraudLink: "https://www.gov.br/cvm/pt-br/canais_atendimento/atendimento-ao-cidadao",
-                authorityEmail: "spe@cvm.gov.br",
-                aiInstructions: [
-                    "Accedi al portale CVM nella sezione servizio cittadini",
-                    "Presenta un reclamo formale online",
-                    "Descrivi la natura della frode finanziaria",
-                    "Allega documenti comprovanti",
-                    "Puoi anche contattare il Procon locale per supporto"
-                ]
-            },
-            {
-                name: "Argentina",
-                region: "america-latina",
-                protection: "medium",
-                authorityName: "CNV - Comisión Nacional de Valores",
-                authorityHomepage: "https://www.argentina.gob.ar/cnv",
-                fraudLink: "https://www.argentina.gob.ar/cnv/denuncias",
-                authorityEmail: "consultas@cnv.gob.ar",
-                aiInstructions: [
-                    "Visita la sezione denunce del sito CNV",
-                    "Compila il modulo di denuncia online",
-                    "Fornisci tutti i dettagli della truffa",
-                    "Allega documentazione di supporto",
-                    "La CNV può investigare e sanzionare entità non autorizzate"
-                ]
-            },
-            {
-                name: "Stati Uniti (USA)",
-                region: "nord-america",
-                protection: "high",
-                authorityName: "SEC - Securities and Exchange Commission, FINRA, CFTC",
-                authorityHomepage: "https://www.sec.gov",
-                fraudLink: "https://www.sec.gov/tcr",
-                authorityEmail: "help@sec.gov",
-                aiInstructions: [
-                    "Accedi al portale SEC per segnalare frodi tramite il sistema TCR (Tips, Complaints and Referrals)",
-                    "Compila il modulo online fornendo tutti i dettagli della truffa finanziaria",
-                    "Allega documenti rilevanti: contratti, email, screenshot, estratti conto",
-                    "Puoi anche contattare FINRA (www.finra.org) per frodi legate a broker",
-                    "Per frodi su commodities e futures, contatta CFTC (www.cftc.gov)",
-                    "Considera di sporgere denuncia anche presso l'FBI Internet Crime Complaint Center (IC3)"
-                ]
-            },
-            {
-                name: "Cina (China)",
-                region: "asia",
-                protection: "medium",
-                authorityName: "CSRC - China Securities Regulatory Commission",
-                authorityHomepage: "https://www.csrc.gov.cn/csrc_en/",
-                fraudLink: "https://www.csrc.gov.cn/csrc_en/c101954/c1341995/content.shtml",
-                authorityEmail: "webmaster@csrc.gov.cn",
-                aiInstructions: [
-                    "Visita il sito web ufficiale della CSRC nella versione inglese",
-                    "Accedi alla sezione 'Public Complaints' o contatta via email",
-                    "Presenta una denuncia formale descrivendo la truffa finanziaria",
-                    "Fornisci documentazione completa in inglese o cinese",
-                    "La CSRC regolamenta i mercati mobiliari in Cina e può investigare operatori non autorizzati",
-                    "Per assistenza locale, contatta anche le autorità di pubblica sicurezza cinesi"
-                ]
-            },
-            {
-                name: "Russia",
-                region: "europa",
-                protection: "medium",
-                authorityName: "CBR - Central Bank of Russia (Banca Centrale Russa)",
-                authorityHomepage: "https://www.cbr.ru/eng/",
-                fraudLink: "https://www.cbr.ru/eng/reception_central/",
-                authorityEmail: "info@cbr.ru",
-                aiInstructions: [
-                    "Accedi al sito della Banca Centrale Russa nella sezione inglese",
-                    "Utilizza il modulo di contatto per segnalazioni pubbliche",
-                    "Descrivi dettagliatamente la frode finanziaria subita",
-                    "Allega tutta la documentazione disponibile",
-                    "La CBR supervisiona le istituzioni finanziarie in Russia",
-                    "Considera anche di contattare il servizio di polizia economica russo (ФинПол)"
-                ]
-            },
-            {
-                name: "Messico (Mexico)",
-                region: "america-latina",
-                protection: "medium",
-                authorityName: "CNBV - Comisión Nacional Bancaria y de Valores",
-                authorityHomepage: "https://www.gob.mx/cnbv",
-                fraudLink: "https://www.gob.mx/cnbv/acciones-y-programas/orientacion-y-quejas",
-                authorityEmail: "contacto@cnbv.gob.mx",
-                aiInstructions: [
-                    "Visita il portale CNBV nella sezione orientamento e reclami",
-                    "Compila il modulo di denuncia online con tutti i dettagli",
-                    "Fornisci informazioni sull'entità sospetta e l'importo coinvolto",
-                    "Allega prove documentali: contratti, comunicazioni, ricevute",
-                    "CNBV può investigare e sanzionare istituzioni non autorizzate",
-                    "Puoi anche contattare CONDUSEF (Commissione per la difesa degli utenti finanziari)"
-                ]
-            },
-            {
-                name: "Emirati Arabi Uniti (UAE)",
-                region: "medio-oriente",
-                protection: "high",
-                authorityName: "SCA - Securities and Commodities Authority",
-                authorityHomepage: "https://www.sca.gov.ae/en/",
-                fraudLink: "https://www.sca.gov.ae/en/services/complaints-management.aspx",
-                authorityEmail: "info@sca.gov.ae",
-                aiInstructions: [
-                    "Accedi al sito SCA nella sezione gestione reclami",
-                    "Registrati sul portale online se necessario",
-                    "Presenta un reclamo formale compilando il modulo dettagliato",
-                    "Allega tutta la documentazione rilevante in inglese o arabo",
-                    "SCA regolamenta i mercati finanziari negli Emirati Arabi Uniti",
-                    "Per Dubai, puoi anche contattare DFSA (Dubai Financial Services Authority)",
-                    "Per Abu Dhabi, considera ADGM (Abu Dhabi Global Market)"
-                ]
-            }
+            // Alta Protezione (15)
+            { name: "Germania", protection: "Alta", banks: "Deutsche Bank, Commerzbank", fraudTypes: "Phishing, frodi online", liability: "Responsabilità banca dimostrata negligenza", region: "Europa" },
+            { name: "Francia", protection: "Alta", banks: "BNP Paribas, Société Générale", fraudTypes: "Truffe telefoniche, frodi carte", liability: "Protezione elevata consumatori", region: "Europa" },
+            { name: "Italia", protection: "Alta", banks: "UniCredit, Intesa Sanpaolo", fraudTypes: "Phishing, truffe online", liability: "Forte tutela risparmiatori", region: "Europa" },
+            { name: "Spagna", protection: "Alta", banks: "Santander, BBVA", fraudTypes: "Frodi digitali, phishing", liability: "Buona protezione legale", region: "Europa" },
+            { name: "Regno Unito", protection: "Alta", banks: "HSBC, Barclays", fraudTypes: "Frodi online, truffe investimenti", liability: "FCA - forte regolamentazione", region: "Europa" },
+            { name: "Paesi Bassi", protection: "Alta", banks: "ING, ABN AMRO", fraudTypes: "Phishing, frodi digitali", liability: "Elevata protezione consumatori", region: "Europa" },
+            { name: "Svizzera", protection: "Alta", banks: "UBS, Credit Suisse", fraudTypes: "Frodi investimenti, riciclaggio", liability: "Rigida supervisione FINMA", region: "Europa" },
+            { name: "Svezia", protection: "Alta", banks: "Swedbank, SEB", fraudTypes: "Frodi digitali", liability: "Alta protezione digitale", region: "Europa" },
+            { name: "Norvegia", protection: "Alta", banks: "DNB, Nordea", fraudTypes: "Phishing, truffe online", liability: "Forte regolamentazione", region: "Europa" },
+            { name: "Danimarca", protection: "Alta", banks: "Danske Bank, Jyske Bank", fraudTypes: "Frodi online", liability: "Elevata tutela consumatori", region: "Europa" },
+            { name: "Canada", protection: "Alta", banks: "RBC, TD Bank", fraudTypes: "Frodi identità, phishing", liability: "OSFI - forte supervisione", region: "America" },
+            { name: "Australia", protection: "Alta", banks: "Commonwealth Bank, Westpac", fraudTypes: "Truffe online, phishing", liability: "APRA - rigida regolamentazione", region: "Oceania" },
+            { name: "Giappone", protection: "Alta", banks: "Mitsubishi UFJ, Mizuho", fraudTypes: "Frodi digitali", liability: "FSA - forte controllo", region: "Asia" },
+            { name: "Singapore", protection: "Alta", banks: "DBS, OCBC", fraudTypes: "Frodi online, riciclaggio", liability: "MAS - rigida supervisione", region: "Asia" },
+            { name: "Nuova Zelanda", protection: "Alta", banks: "ANZ, ASB", fraudTypes: "Phishing, frodi carte", liability: "Buona protezione legale", region: "Oceania" },
+            
+            // Media Protezione (15)
+            { name: "Brasile", protection: "Media", banks: "Banco do Brasil, Itaú", fraudTypes: "Clonazione carte, phishing", liability: "Protezione moderata", region: "America" },
+            { name: "Argentina", protection: "Media", banks: "Banco Nación, Santander Rio", fraudTypes: "Truffe online, frodi digitali", liability: "Sistema in miglioramento", region: "America" },
+            { name: "Messico", protection: "Media", banks: "BBVA México, Banorte", fraudTypes: "Frodi carte, phishing", liability: "Protezione in crescita", region: "America" },
+            { name: "Cile", protection: "Media", banks: "Banco de Chile, BCI", fraudTypes: "Truffe telefoniche, phishing", liability: "Regolamentazione moderata", region: "America" },
+            { name: "India", protection: "Media", banks: "State Bank of India, HDFC", fraudTypes: "Frodi online massicce, phishing", liability: "RBI - controllo in crescita", region: "Asia" },
+            { name: "Cina", protection: "Media", banks: "ICBC, Bank of China", fraudTypes: "Frodi digitali, truffe online", liability: "Controllo statale forte ma variabile", region: "Asia" },
+            { name: "Corea del Sud", protection: "Media", banks: "KB Kookmin, Shinhan", fraudTypes: "Phishing, frodi digitali", liability: "Protezione in miglioramento", region: "Asia" },
+            { name: "Sudafrica", protection: "Media", banks: "Standard Bank, ABSA", fraudTypes: "Frodi carte, phishing", liability: "Protezione moderata", region: "Africa" },
+            { name: "Polonia", protection: "Media", banks: "PKO BP, Pekao", fraudTypes: "Phishing, truffe online", liability: "Sistema in sviluppo", region: "Europa" },
+            { name: "Turchia", protection: "Media", banks: "Ziraat Bank, İş Bankası", fraudTypes: "Frodi digitali, phishing", liability: "Regolamentazione in crescita", region: "Asia" },
+            { name: "Grecia", protection: "Media", banks: "National Bank, Alpha Bank", fraudTypes: "Truffe online, phishing", liability: "Sistema in ripresa", region: "Europa" },
+            { name: "Portogallo", protection: "Media", banks: "Caixa Geral, Millennium BCP", fraudTypes: "Phishing, frodi carte", liability: "Protezione moderata", region: "Europa" },
+            { name: "Emirati Arabi Uniti", protection: "Media", banks: "Emirates NBD, First Abu Dhabi Bank", fraudTypes: "Frodi investimenti, phishing", liability: "Regolamentazione in sviluppo", region: "Asia" },
+            { name: "Malesia", protection: "Media", banks: "Maybank, CIMB", fraudTypes: "Truffe online, phishing", liability: "Protezione moderata", region: "Asia" },
+            { name: "Thailandia", protection: "Media", banks: "Bangkok Bank, Siam Commercial", fraudTypes: "Frodi digitali, phishing", liability: "Sistema in miglioramento", region: "Asia" },
+            
+            // Bassa Protezione (10)
+            { name: "Russia", protection: "Bassa", banks: "Sberbank, VTB", fraudTypes: "Frodi massive, cyber-attacchi", liability: "Protezione limitata", region: "Europa" },
+            { name: "Nigeria", protection: "Bassa", banks: "First Bank, Zenith Bank", fraudTypes: "Truffe 419, frodi online", liability: "Scarsa regolamentazione", region: "Africa" },
+            { name: "Kenya", protection: "Bassa", banks: "KCB, Equity Bank", fraudTypes: "Frodi mobile money, phishing", liability: "Sistema in sviluppo", region: "Africa" },
+            { name: "Indonesia", protection: "Bassa", banks: "Bank Mandiri, BRI", fraudTypes: "Frodi online, phishing", liability: "Protezione limitata", region: "Asia" },
+            { name: "Filippine", protection: "Bassa", banks: "BDO, BPI", fraudTypes: "Truffe online, frodi carte", liability: "Regolamentazione debole", region: "Asia" },
+            { name: "Vietnam", protection: "Bassa", banks: "Vietcombank, BIDV", fraudTypes: "Phishing, frodi digitali", liability: "Sistema in fase iniziale", region: "Asia" },
+            { name: "Egitto", protection: "Bassa", banks: "National Bank of Egypt, Banque Misr", fraudTypes: "Frodi online, truffe", liability: "Protezione limitata", region: "Africa" },
+            { name: "Pakistan", protection: "Bassa", banks: "Habib Bank, MCB", fraudTypes: "Frodi massive, phishing", liability: "Scarsa tutela consumatori", region: "Asia" },
+            { name: "Bangladesh", protection: "Bassa", banks: "Sonali Bank, Janata Bank", fraudTypes: "Frodi online, cyber-rapine", liability: "Sistema vulnerabile", region: "Asia" },
+            { name: "USA", protection: "Bassa", banks: "JPMorgan Chase, Bank of America, Wells Fargo", fraudTypes: "Frodi creditizie, truffe ipotecarie, phishing", liability: "Autodifesa consumatore, protezione variabile per stato", region: "America" }
         ];
 
-        let currentRegion = 'all';
-        let searchTerm = '';
+        // Split countries for bar charts
+        const countriesAL = countries.filter(c => c.name[0] >= 'A' && c.name[0] <= 'L').sort((a, b) => a.name.localeCompare(b.name));
+        const countriesMZ = countries.filter(c => c.name[0] >= 'M' && c.name[0] <= 'Z').sort((a, b) => a.name.localeCompare(b.name));
+
+        function getProtectionValue(protection) {
+            if (protection === "Alta") return 3;
+            if (protection === "Media") return 2;
+            return 1;
+        }
+
+        function getProtectionColor(protection) {
+            if (protection === "Alta") return '#28a745';
+            if (protection === "Media") return '#ffc107';
+            return '#dc3545';
+        }
+
+        // Create bar chart A-L
+        const ctxAL = document.getElementById('barChartAL').getContext('2d');
+        new Chart(ctxAL, {
+            type: 'bar',
+            data: {
+                labels: countriesAL.map(c => c.name),
+                datasets: [{
+                    label: 'Livello di Protezione',
+                    data: countriesAL.map(c => getProtectionValue(c.protection)),
+                    backgroundColor: countriesAL.map(c => getProtectionColor(c.protection)),
+                    borderColor: countriesAL.map(c => getProtectionColor(c.protection)),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 3,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function(value) {
+                                if (value === 3) return 'Alta';
+                                if (value === 2) return 'Media';
+                                if (value === 1) return 'Bassa';
+                                return '';
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Create bar chart M-Z
+        const ctxMZ = document.getElementById('barChartMZ').getContext('2d');
+        new Chart(ctxMZ, {
+            type: 'bar',
+            data: {
+                labels: countriesMZ.map(c => c.name),
+                datasets: [{
+                    label: 'Livello di Protezione',
+                    data: countriesMZ.map(c => getProtectionValue(c.protection)),
+                    backgroundColor: countriesMZ.map(c => getProtectionColor(c.protection)),
+                    borderColor: countriesMZ.map(c => getProtectionColor(c.protection)),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 3,
+                        ticks: {
+                            stepSize: 1,
+                            callback: function(value) {
+                                if (value === 3) return 'Alta';
+                                if (value === 2) return 'Media';
+                                if (value === 1) return 'Bassa';
+                                return '';
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Pie charts for the Charts tab
+        const ctx1 = document.getElementById('pieChart1').getContext('2d');
+        new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Alta Protezione', 'Media Protezione', 'Bassa Protezione'],
+                datasets: [{
+                    data: [15, 15, 10],
+                    backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('pieChart2').getContext('2d');
+        const regionCounts = countries.reduce((acc, country) => {
+            acc[country.region] = (acc[country.region] || 0) + 1;
+            return acc;
+        }, {});
+
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(regionCounts),
+                datasets: [{
+                    data: Object.values(regionCounts),
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
 
         function createCountryCard(country) {
-            const protectionClass = `protection-${country.protection}`;
-            const protectionText = {
-                'high': 'Alta Protezione',
-                'medium': 'Media Protezione',
-                'low': 'Bassa Protezione'
-            }[country.protection];
-
-            const instructions = country.aiInstructions.map(instruction => 
-                `<li>${instruction}</li>`
-            ).join('');
-
+            const protectionClass = country.protection === "Alta" ? "protection-high" : 
+                                   country.protection === "Media" ? "protection-medium" : "protection-low";
+            
             return `
-                <div class="country-card" data-country="${country.name.toLowerCase()}" data-region="${country.region}">
-                    <div class="country-header">
-                        <h2 class="country-name">${country.name}</h2>
-                        <span class="protection-badge ${protectionClass}">${protectionText}</span>
+                <div class="country-card">
+                    <h3>${country.name}</h3>
+                    <div class="info-row">
+                        <span class="info-label">Protezione:</span>
+                        <span class="protection-badge ${protectionClass}">${country.protection}</span>
                     </div>
-                    
-                    <div class="info-section">
-                        <div class="info-label">🏛️ Autorità di Vigilanza:</div>
-                        <div class="info-value">${country.authorityName}</div>
+                    <div class="info-row">
+                        <span class="info-label">Regione:</span>
+                        <span class="info-value">${country.region}</span>
                     </div>
-
-                    <div class="info-section">
-                        <div class="info-label">🌐 Sito Ufficiale:</div>
-                        <div class="info-value"><a href="${country.authorityHomepage}" target="_blank">${country.authorityHomepage}</a></div>
+                    <div class="info-row">
+                        <span class="info-label">Banche principali:</span>
+                        <span class="info-value">${country.banks}</span>
                     </div>
-
-                    <div class="info-section">
-                        <div class="info-label">⚠️ Pagina Segnalazione Truffe:</div>
-                        <div class="info-value"><a href="${country.fraudLink}" target="_blank">${country.fraudLink}</a></div>
+                    <div class="info-row">
+                        <span class="info-label">Tipi di frode:</span>
+                        <span class="info-value">${country.fraudTypes}</span>
                     </div>
-
-                    <div class="info-section">
-                        <div class="info-label">📧 Email di Contatto:</div>
-                        <div class="info-value"><a href="mailto:${country.authorityEmail}">${country.authorityEmail}</a></div>
-                    </div>
-
-                    <div class="ai-instructions">
-                        <div class="info-label">🤖 Procedura di Segnalazione:</div>
-                        <ol>${instructions}</ol>
+                    <div class="info-row">
+                        <span class="info-label">Responsabilità:</span>
+                        <span class="info-value">${country.liability}</span>
                     </div>
                 </div>
             `;
         }
 
-        function renderCountries() {
-            const regions = ['all', 'europa', 'america-latina', 'nord-america', 'asia', 'medio-oriente'];
+        function displayCountries(filterLevel = 'all') {
+            let filtered = countries;
+            let containerId = 'allCountries';
             
-            regions.forEach(region => {
-                const container = document.getElementById(region);
-                if (container && region !== 'charts') {
-                    let filteredCountries = countries;
-                    
-                    if (region !== 'all') {
-                        filteredCountries = countries.filter(c => c.region === region);
-                    }
-
-                    container.innerHTML = filteredCountries.map(createCountryCard).join('');
-                }
-            });
-        }
-
-        function filterCountries() {
-            searchTerm = document.getElementById('countrySearch').value.toLowerCase();
-            const allCards = document.querySelectorAll('.country-card');
-            let hasResults = false;
-
-            allCards.forEach(card => {
-                const countryName = card.getAttribute('data-country');
-                const cardRegion = card.getAttribute('data-region');
-                const matchesSearch = countryName.includes(searchTerm);
-                const matchesRegion = currentRegion === 'all' || cardRegion === currentRegion;
-
-                if (matchesSearch && matchesRegion) {
-                    card.style.display = 'block';
-                    if (searchTerm.length > 0) {
-                        card.classList.add('highlight');
-                    } else {
-                        card.classList.remove('highlight');
-                    }
-                    hasResults = true;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            document.getElementById('no-results').style.display = hasResults ? 'none' : 'block';
-        }
-
-        function clearSearch() {
-            document.getElementById('countrySearch').value = '';
-            searchTerm = '';
-            filterCountries();
-        }
-
-        function switchTab(tabName) {
-            // Update active tab button
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Update active content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName).classList.add('active');
-
-            currentRegion = tabName;
-            filterCountries();
-
-            // Render charts if charts tab is selected
-            if (tabName === 'charts') {
-                renderCharts();
+            if (filterLevel === 'high') {
+                filtered = countries.filter(c => c.protection === "Alta");
+                containerId = 'highCountries';
+            } else if (filterLevel === 'medium') {
+                filtered = countries.filter(c => c.protection === "Media");
+                containerId = 'mediumCountries';
+            } else if (filterLevel === 'low') {
+                filtered = countries.filter(c => c.protection === "Bassa");
+                containerId = 'lowCountries';
             }
+            
+            document.getElementById(containerId).innerHTML = filtered
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(createCountryCard)
+                .join('');
         }
 
-        function renderCharts() {
-            // Region distribution
-            const regionCounts = {
-                'Europa': countries.filter(c => c.region === 'europa').length,
-                'America Latina': countries.filter(c => c.region === 'america-latina').length,
-                'Nord America': countries.filter(c => c.region === 'nord-america').length,
-                'Asia': countries.filter(c => c.region === 'asia').length,
-                'Medio Oriente': countries.filter(c => c.region === 'medio-oriente').length
-            };
-
-            const regionCtx = document.getElementById('regionChart');
-            if (regionCtx) {
-                new Chart(regionCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: Object.keys(regionCounts),
-                        datasets: [{
-                            data: Object.values(regionCounts),
-                            backgroundColor: [
-                                '#667eea',
-                                '#764ba2',
-                                '#f093fb',
-                                '#4facfe',
-                                '#43e97b'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
-                    }
-                });
+        function filterCountries(level) {
+            const searchId = level === 'all' ? 'searchAll' : 
+                           level === 'high' ? 'searchHigh' :
+                           level === 'medium' ? 'searchMedium' : 'searchLow';
+            
+            const searchTerm = document.getElementById(searchId).value.toLowerCase();
+            
+            let filtered = countries;
+            if (level === 'high') filtered = countries.filter(c => c.protection === "Alta");
+            else if (level === 'medium') filtered = countries.filter(c => c.protection === "Media");
+            else if (level === 'low') filtered = countries.filter(c => c.protection === "Bassa");
+            
+            if (searchTerm) {
+                filtered = filtered.filter(c => 
+                    c.name.toLowerCase().includes(searchTerm) ||
+                    c.banks.toLowerCase().includes(searchTerm) ||
+                    c.fraudTypes.toLowerCase().includes(searchTerm)
+                );
             }
-
-            // Protection levels
-            const protectionCounts = {
-                'Alta Protezione': countries.filter(c => c.protection === 'high').length,
-                'Media Protezione': countries.filter(c => c.protection === 'medium').length,
-                'Bassa Protezione': countries.filter(c => c.protection === 'low').length
-            };
-
-            const protectionCtx = document.getElementById('protectionChart');
-            if (protectionCtx) {
-                new Chart(protectionCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: Object.keys(protectionCounts),
-                        datasets: [{
-                            label: 'Numero di Paesi',
-                            data: Object.values(protectionCounts),
-                            backgroundColor: [
-                                '#d4edda',
-                                '#fff3cd',
-                                '#f8d7da'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            }
+            
+            const containerId = level === 'all' ? 'allCountries' :
+                              level === 'high' ? 'highCountries' :
+                              level === 'medium' ? 'mediumCountries' : 'lowCountries';
+            
+            document.getElementById(containerId).innerHTML = filtered
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(createCountryCard)
+                .join('');
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            renderCountries();
-        });
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            if (tabName === 'all') displayCountries('all');
+            else if (tabName === 'high') displayCountries('high');
+            else if (tabName === 'medium') displayCountries('medium');
+            else if (tabName === 'low') displayCountries('low');
+        }
+
+        // Initialize on page load
+        displayCountries('all');
     </script>
 </body>
 </html>
