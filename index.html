@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
             padding: 20px;
             color: #333;
@@ -22,922 +22,840 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
         header {
-            text-align: center;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
-            margin-bottom: 40px;
-            padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            padding: 40px;
+            text-align: center;
         }
 
-        h1 {
+        header h1 {
             font-size: 2.5em;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .subtitle {
+        header p {
             font-size: 1.2em;
-            opacity: 0.95;
-            font-weight: 300;
+            opacity: 0.9;
         }
 
-        .search-bar {
-            max-width: 600px;
-            margin: 30px auto;
-            position: relative;
+        .language-selector {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .search-bar input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            outline: none;
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .search-bar input:focus {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.2);
             transform: translateY(-2px);
         }
 
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #667eea;
-            font-size: 20px;
+        .lang-btn.active {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
+
+        .controls {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #2c3e50;
+            box-shadow: 0 0 10px rgba(44,62,80,0.2);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border: 2px solid #2c3e50;
+            background: white;
+            color: #2c3e50;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #2c3e50;
+            color: white;
         }
 
         .countries-grid {
+            padding: 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+            gap: 30px;
         }
 
         .country-card {
             background: white;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
         }
 
         .country-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .country-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .country-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .country-flag {
-            font-size: 3em;
-            margin-right: 15px;
-        }
-
-        .country-info h2 {
-            font-size: 1.5em;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        .country-info .region {
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
-
-        .info-section {
-            margin-bottom: 20px;
-        }
-
-        .info-label {
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .info-content {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-
-        .info-content ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .info-content li {
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .info-content li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-        }
-
-        .btn-details {
-            width: 100%;
-            padding: 12px 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        }
-
-        .btn-details:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 900px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            transform: scale(0.7);
-            transition: transform 0.3s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px 20px 0 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 28px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            line-height: 1;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .modal-title {
+            padding: 25px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .modal-title .country-flag {
-            font-size: 3.5em;
+        .country-flag {
+            font-size: 3em;
         }
 
-        .modal-title-text h2 {
-            font-size: 2em;
+        .country-info h2 {
+            font-size: 1.8em;
             margin-bottom: 5px;
         }
 
-        .modal-title-text .region {
+        .country-region {
             opacity: 0.9;
-            font-size: 1.1em;
-        }
-
-        .modal-body {
-            padding: 30px;
-        }
-
-        .modal-section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-
-        .modal-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .modal-section-title {
-            font-size: 1.3em;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-section-title::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #667eea;
-            border-radius: 50%;
-        }
-
-        .modal-info-row {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e1e8ed;
-        }
-
-        .modal-info-row:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .modal-info-label {
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 8px;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .modal-info-content {
-            color: #555;
-            line-height: 1.8;
             font-size: 1em;
         }
 
-        .modal-info-content ul {
-            list-style: none;
-            padding-left: 0;
+        .country-content {
+            padding: 25px;
         }
 
-        .modal-info-content li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
-        .modal-info-content li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
         }
 
-        .modal-info-content a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .modal-info-content a:hover {
-            color: #764ba2;
-            text-decoration: underline;
+        .section-content {
+            color: #555;
+            line-height: 1.8;
         }
 
-        .email-list {
+        .section-content ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+        }
+
+        .link-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .email-item {
-            background: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .email-item:hover {
-            background: #e8eaf6;
-        }
-
-        .email-label {
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 0.9em;
-        }
-
-        .email-address {
-            color: #667eea;
-            font-family: monospace;
-        }
-
-        .link-button {
+        .link-item {
             display: inline-block;
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
+            color: #667eea;
             text-decoration: none;
+            padding: 8px 12px;
+            background: #f0f4ff;
             border-radius: 6px;
             transition: all 0.3s ease;
-            font-weight: 500;
-            margin: 5px 0;
         }
 
-        .link-button:hover {
-            background: #764ba2;
+        .link-item:hover {
+            background: #667eea;
+            color: white;
             transform: translateX(5px);
         }
 
-        /* Scrollbar Styles */
-        .modal-content::-webkit-scrollbar {
-            width: 10px;
+        .email-link {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 500;
         }
 
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb {
-            background: #667eea;
-            border-radius: 10px;
-        }
-
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: #764ba2;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .countries-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                width: 95%;
-                max-height: 95vh;
-            }
-
-            .modal-header {
-                padding: 20px;
-            }
-
-            .modal-title .country-flag {
-                font-size: 2.5em;
-            }
-
-            .modal-title-text h2 {
-                font-size: 1.5em;
-            }
-
-            .modal-body {
-                padding: 20px;
-            }
-
-            .modal-section {
-                padding: 15px;
-            }
+        .email-link:hover {
+            text-decoration: underline;
         }
 
         footer {
-            text-align: center;
+            background: #2c3e50;
             color: white;
-            margin-top: 40px;
-            padding: 20px;
-            opacity: 0.9;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+            font-size: 1.3em;
+        }
+
+        @media (max-width: 768px) {
+            .countries-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .controls {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🌍 Database Internazionale</h1>
-            <p class="subtitle">Responsabilità delle Banche e Autorità per Truffe Finanziarie</p>
+            <h1 id="mainTitle">🌍 Database Internazionale - Responsabilità Banche e Truffe Finanziarie</h1>
+            <p id="mainSubtitle">Quadro normativo, autorità di vigilanza e meccanismi di tutela per paese</p>
+            
+            <div class="language-selector">
+                <button class="lang-btn" data-lang="it">🇮🇹 IT</button>
+                <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="de">🇩🇪 DE</button>
+                <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+            </div>
         </header>
 
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Cerca per paese, regione o autorità...">
-            <span class="search-icon">🔍</span>
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cerca per paese, autorità, normativa...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-region="all" id="filterAll">Tutti i Paesi</button>
+                <button class="filter-btn" data-region="Southern Europe" id="filterSouthern">Europa Meridionale</button>
+                <button class="filter-btn" data-region="Western Europe" id="filterWestern">Europa Occidentale</button>
+                <button class="filter-btn" data-region="Northern Europe" id="filterNorthern">Europa Settentrionale</button>
+                <button class="filter-btn" data-region="North America" id="filterNorthAmerica">Nord America</button>
+            </div>
         </div>
 
         <div class="countries-grid" id="countriesGrid"></div>
 
         <footer>
-            <p>© 2025 Database Internazionale - Aggiornato al 26 Dicembre 2025</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Informazioni per uso educativo e di riferimento</p>
+            <p id="footerText">© 2025 Database Internazionale Responsabilità Bancarie | <span id="footerPurpose">Informazioni a scopo educativo e di ricerca</span></p>
         </footer>
     </div>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content" id="modalContent">
-            <div class="modal-header">
-                <button class="modal-close" id="modalClose">&times;</button>
-                <div class="modal-title" id="modalTitle"></div>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
-
     <script>
-        const countriesData = {
-            usa: {
-                name: "Stati Uniti d'America",
-                flag: "🇺🇸",
-                region: "Nord America",
-                legalBasis: {
-                    title: "Quadro Normativo Federale",
-                    content: `Il sistema bancario statunitense è regolamentato da un complesso framework normativo federale e statale. Le principali leggi includono:
-                    <ul>
-                        <li>Bank Secrecy Act (BSA) - 31 USC 5311 et seq.</li>
-                        <li>Dodd-Frank Wall Street Reform and Consumer Protection Act (2010)</li>
-                        <li>Truth in Lending Act (TILA) - 15 USC 1601 et seq.</li>
-                        <li>Fair Credit Reporting Act (FCRA) - 15 USC 1681 et seq.</li>
-                        <li>Electronic Fund Transfer Act (EFTA) - 15 USC 1693 et seq.</li>
-                        <li>Gramm-Leach-Bliley Act (GLBA) - Privacy finanziaria</li>
-                        <li>USA PATRIOT Act - Misure anti-riciclaggio</li>
-                    </ul>`
-                },
-                bankResponsibility: {
-                    title: "Responsabilità delle Banche",
-                    content: `Le istituzioni finanziarie negli USA hanno responsabilità estese:
-                    <ul>
-                        <li><strong>Due Diligence KYC:</strong> Verifica approfondita dell'identità dei clienti secondo il Customer Identification Program (CIP)</li>
-                        <li><strong>Monitoraggio Transazioni:</strong> Sistema di rilevamento frodi 24/7 con algoritmi avanzati</li>
-                        <li><strong>Suspicious Activity Reports (SAR):</strong> Obbligo di segnalazione attività sospette al FinCEN</li>
-                        <li><strong>Currency Transaction Reports (CTR):</strong> Segnalazione transazioni superiori a $10,000</li>
-                        <li><strong>Protezione Consumatori:</strong> Rimborso frodi secondo Regulation E (per transazioni elettroniche)</li>
-                        <li><strong>Cybersecurity:</strong> Implementazione Cybersecurity Framework NIST</li>
-                        <li><strong>Compliance Anti-Riciclaggio:</strong> Programmi AML/CFT compliance</li>
-                    </ul>`
-                },
-                authorities: {
-                    title: "Autorità di Vigilanza",
-                    content: `
-                    <ul>
-                        <li><strong>Federal Reserve System (FED):</strong> Banca centrale USA - supervisione holding bancarie</li>
-                        <li><strong>Office of the Comptroller of the Currency (OCC):</strong> Supervisione banche nazionali</li>
-                        <li><strong>Federal Deposit Insurance Corporation (FDIC):</strong> Assicurazione depositi e supervisione banche statali</li>
-                        <li><strong>Consumer Financial Protection Bureau (CFPB):</strong> Protezione consumatori finanziari</li>
-                        <li><strong>Securities and Exchange Commission (SEC):</strong> Regolamentazione mercati finanziari</li>
-                        <li><strong>Financial Crimes Enforcement Network (FinCEN):</strong> Contrasto crimini finanziari</li>
-                        <li><strong>Federal Trade Commission (FTC):</strong> Protezione consumatori da frodi</li>
-                    </ul>`
-                },
-                complaintMechanisms: {
-                    title: "Meccanismi di Reclamo",
-                    content: `
-                    <ul>
-                        <li><strong>CFPB Complaint Portal:</strong> Sistema online centralizzato per reclami consumatori - risposta obbligatoria entro 15 giorni</li>
-                        <li><strong>Federal Reserve Consumer Help:</strong> Assistenza per reclami contro banche sotto supervisione FED</li>
-                        <li><strong>FDIC Consumer Response Center:</strong> Gestione reclami banche assicurate FDIC</li>
-                        <li><strong>OCC Customer Assistance Group:</strong> Supporto per problemi con banche nazionali</li>
-                        <li><strong>State Banking Departments:</strong> Autorità bancarie statali per banche locali</li>
-                        <li><strong>Better Business Bureau (BBB):</strong> Mediazione controversie consumatori-aziende</li>
-                    </ul>`
-                },
-                fraudReporting: {
-                    title: "Segnalazione Truffe e Frodi",
-                    links: [
-                        { label: "FBI Internet Crime Complaint Center (IC3)", url: "https://www.ic3.gov" },
-                        { label: "Federal Trade Commission - ReportFraud.ftc.gov", url: "https://reportfraud.ftc.gov" },
-                        { label: "CFPB Submit a Complaint", url: "https://www.consumerfinance.gov/complaint" },
-                        { label: "FinCEN - Financial Crimes Report", url: "https://www.fincen.gov" },
-                        { label: "USA.gov - Report Scams and Fraud", url: "https://www.usa.gov/stop-scams-frauds" }
-                    ]
-                },
-                authorityEmails: {
-                    title: "Contatti Email Autorità",
-                    emails: [
-                        { label: "CFPB", address: "info@consumerfinance.gov" },
-                        { label: "Federal Reserve", address: "ConsumerHelp@federalreserve.gov" },
-                        { label: "FDIC", address: "ConsumerResponse@fdic.gov" },
-                        { label: "OCC", address: "customer.assistance@occ.treas.gov" },
-                        { label: "FinCEN", address: "FRC@fincen.gov" },
-                        { label: "FTC", address: "antitrust@ftc.gov" },
-                        { label: "SEC", address: "help@sec.gov" }
-                    ]
+        // Translation data
+        const translations = {
+            it: {
+                mainTitle: "🌍 Database Internazionale - Responsabilità Banche e Truffe Finanziarie",
+                mainSubtitle: "Quadro normativo, autorità di vigilanza e meccanismi di tutela per paese",
+                searchPlaceholder: "Cerca per paese, autorità, normativa...",
+                filterAll: "Tutti i Paesi",
+                filterSouthern: "Europa Meridionale",
+                filterWestern: "Europa Occidentale",
+                filterNorthern: "Europa Settentrionale",
+                filterNorthAmerica: "Nord America",
+                footerText: "© 2025 Database Internazionale Responsabilità Bancarie",
+                footerPurpose: "Informazioni a scopo educativo e di ricerca",
+                noResults: "Nessun paese trovato con i criteri di ricerca.",
+                sectionTitles: {
+                    legal: "📜 Quadro Normativo",
+                    responsibilities: "🏦 Responsabilità delle Banche",
+                    authorities: "👥 Autorità di Vigilanza",
+                    complaints: "⚖️ Meccanismi di Reclamo",
+                    reporting: "🚨 Segnalazione Frodi",
+                    contacts: "📧 Contatti Autorità"
                 }
             },
-            germany: {
-                name: "Germania",
-                flag: "🇩🇪",
-                region: "Europa Occidentale",
-                legalBasis: {
-                    title: "Quadro Normativo Tedesco ed Europeo",
-                    content: `Il sistema bancario tedesco opera secondo normative nazionali ed europee:
-                    <ul>
-                        <li>Kreditwesengesetz (KWG) - Legge Bancaria Tedesca</li>
-                        <li>Geldwäschegesetz (GwG) - Legge Anti-Riciclaggio</li>
-                        <li>Zahlungsdiensteaufsichtsgesetz (ZAG) - Legge Servizi di Pagamento</li>
-                        <li>Payment Services Directive 2 (PSD2) - Direttiva UE</li>
-                        <li>Markets in Financial Instruments Directive (MiFID II)</li>
-                        <li>General Data Protection Regulation (GDPR/DSGVO)</li>
-                        <li>Capital Requirements Regulation (CRR) e Directive (CRD IV)</li>
-                        <li>Verbraucherkreditgesetz (VerbrKrG) - Legge Credito al Consumo</li>
-                    </ul>`
-                },
-                bankResponsibility: {
-                    title: "Responsabilità delle Banche",
-                    content: `Le banche tedesche hanno obblighi rigorosi:
-                    <ul>
-                        <li><strong>Sorgfaltspflichten (Doveri di Diligenza):</strong> Verifica approfondita identità clienti secondo §154 GwG</li>
-                        <li><strong>Verdachtsmeldungen:</strong> Obbligo segnalazione operazioni sospette alla FIU Germania</li>
-                        <li><strong>Aufzeichnungspflichten:</strong> Conservazione documenti per 5 anni minimo</li>
-                        <li><strong>Beratungspflicht:</strong> Obbligo consulenza adeguata ai clienti secondo MiFID II</li>
-                        <li><strong>Haftung bei Zahlungsbetrug:</strong> Responsabilità per frodi nei pagamenti - rimborso immediato secondo PSD2</li>
-                        <li><strong>Strong Customer Authentication (SCA):</strong> Autenticazione forte obbligatoria per transazioni online</li>
-                        <li><strong>Datenschutz:</strong> Protezione dati secondo GDPR - sanzioni fino a 20 milioni euro</li>
-                        <li><strong>Verbraucherschutz:</strong> Protezione consumatori secondo BGB §§ 488-498</li>
-                    </ul>`
-                },
-                authorities: {
-                    title: "Autorità di Vigilanza",
-                    content: `
-                    <ul>
-                        <li><strong>Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin):</strong> Autorità federale supervisione finanziaria - supervisione integrata banche, assicurazioni, mercati</li>
-                        <li><strong>Deutsche Bundesbank:</strong> Banca centrale tedesca - vigilanza prudenziale in collaborazione con BaFin</li>
-                        <li><strong>European Central Bank (ECB/EZB):</strong> Supervisione diretta banche significative nell'area euro</li>
-                        <li><strong>Financial Intelligence Unit (FIU):</strong> Unità di intelligence finanziaria presso lo Zoll - ricezione SAR</li>
-                        <li><strong>Bundeskartellamt:</strong> Autorità antitrust tedesca</li>
-                        <li><strong>Landesdatenschutzbehörden:</strong> Autorità protezione dati dei Länder</li>
-                        <li><strong>Verbraucherzentrale:</strong> Associazioni consumatori con poteri di azione collettiva</li>
-                    </ul>`
-                },
-                complaintMechanisms: {
-                    title: "Meccanismi di Reclamo",
-                    content: `
-                    <ul>
-                        <li><strong>BaFin Verbraucher-Beschwerdeportal:</strong> Portale online reclami consumatori - risposta BaFin entro 3 mesi</li>
-                        <li><strong>Ombudsmann der privaten Banken:</strong> Mediatore indipendente settore bancario privato - procedura gratuita</li>
-                        <li><strong>Bundesverband Öffentlicher Banken Deutschlands - Ombudsstelle:</strong> Per banche pubbliche</li>
-                        <li><strong>Verbraucherzentrale Bundesverband (vzbv):</strong> Consulenza e supporto legale consumatori</li>
-                        <li><strong>Schlichtungsstelle:</strong> Organismi di conciliazione settoriali certificati</li>
-                        <li><strong>European Consumer Centre Germany:</strong> Assistenza per controversie transfrontaliere UE</li>
-                    </ul>`
-                },
-                fraudReporting: {
-                    title: "Segnalazione Truffe e Frodi",
-                    links: [
-                        { label: "BKA - Bundeskriminalamt Cybercrime", url: "https://www.bka.de/DE/KontaktAufnehmen/kontaktaufnehmen_node.html" },
-                        { label: "Polizei - Online Strafanzeige", url: "https://www.polizei.de/Polizei/DE/Service/Onlinewachen/onlinewachen_node.html" },
-                        { label: "BaFin Verbraucherbeschwerden", url: "https://www.bafin.de/DE/Verbraucher/Beschwerden/beschwerden_node.html" },
-                        { label: "Verbraucherzentrale - Phishing Melden", url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/phishingradar" },
-                        { label: "Watchlist Internet", url: "https://www.watchlist-internet.at" }
-                    ]
-                },
-                authorityEmails: {
-                    title: "Contatti Email Autorità",
-                    emails: [
-                        { label: "BaFin Verbraucher", address: "verbraucher@bafin.de" },
-                        { label: "BaFin Geldwäsche", address: "geldwaesche@bafin.de" },
-                        { label: "Deutsche Bundesbank", address: "www@bundesbank.de" },
-                        { label: "FIU Deutschland", address: "fiu@zoll.bund.de" },
-                        { label: "Ombudsmann Banken", address: "ombudsmann@bankenombudsmann.de" },
-                        { label: "Verbraucherzentrale", address: "kontakt@vzbv.de" },
-                        { label: "BKA Cybercrime", address: "hinweise@bka.bund.de" }
-                    ]
+            en: {
+                mainTitle: "🌍 International Database - Bank Responsibilities and Financial Fraud",
+                mainSubtitle: "Legal framework, supervisory authorities and protection mechanisms by country",
+                searchPlaceholder: "Search by country, authority, regulation...",
+                filterAll: "All Countries",
+                filterSouthern: "Southern Europe",
+                filterWestern: "Western Europe",
+                filterNorthern: "Northern Europe",
+                filterNorthAmerica: "North America",
+                footerText: "© 2025 International Banking Responsibilities Database",
+                footerPurpose: "Information for educational and research purposes",
+                noResults: "No countries found matching your search criteria.",
+                sectionTitles: {
+                    legal: "📜 Legal Framework",
+                    responsibilities: "🏦 Bank Responsibilities",
+                    authorities: "👥 Supervisory Authorities",
+                    complaints: "⚖️ Complaint Mechanisms",
+                    reporting: "🚨 Fraud Reporting",
+                    contacts: "📧 Authority Contacts"
                 }
             },
-            italy: {
-                name: "Italia",
-                flag: "🇮🇹",
-                region: "Europa Meridionale",
-                legalBasis: {
-                    title: "Quadro Normativo Italiano ed Europeo",
-                    content: `Il sistema bancario italiano è regolamentato da normative nazionali ed europee integrate:
-                    <ul>
-                        <li>Testo Unico Bancario (TUB) - D.Lgs. 385/1993</li>
-                        <li>Testo Unico della Finanza (TUF) - D.Lgs. 58/1998</li>
-                        <li>Decreto Legislativo 231/2007 - Antiriciclaggio (recepimento IV Direttiva UE)</li>
-                        <li>D.Lgs. 11/2010 - Recepimento PSD (Payment Services Directive)</li>
-                        <li>D.Lgs. 218/2017 - Recepimento PSD2</li>
-                        <li>Regolamento GDPR UE 679/2016 - Privacy</li>
-                        <li>Codice del Consumo - D.Lgs. 206/2005</li>
-                        <li>CRR/CRD IV - Normativa prudenziale europea</li>
-                        <li>MiFID II - Mercati strumenti finanziari</li>
-                    </ul>`
-                },
-                bankResponsibility: {
-                    title: "Responsabilità delle Banche",
-                    content: `Le banche italiane hanno responsabilità estese secondo la normativa:
-                    <ul>
-                        <li><strong>Adeguata Verifica della Clientela:</strong> Obblighi KYC secondo art. 17-30 D.Lgs. 231/2007 - identificazione e verifica titolare effettivo</li>
-                        <li><strong>Segnalazioni Operazioni Sospette (SOS):</strong> Obbligo immediato segnalazione a UIF secondo art. 35-41 D.Lgs. 231/2007</li>
-                        <li><strong>Conservazione Documenti:</strong> 10 anni dalla cessazione rapporto (art. 36)</li>
-                        <li><strong>Trasparenza:</strong> Obblighi informativi precontrattuali e in corso di rapporto secondo TUB</li>
-                        <li><strong>Responsabilità per Frodi nei Pagamenti:</strong> Rimborso immediato secondo PSD2 - termine 13 mesi per contestazione</li>
-                        <li><strong>Strong Customer Authentication:</strong> Autenticazione forte obbligatoria dal 31/12/2020</li>
-                        <li><strong>Tutela Privacy:</strong> Trattamento dati secondo GDPR - sanzioni fino a 20 milioni euro o 4% fatturato</li>
-                        <li><strong>Correttezza e Buona Fede:</strong> Art. 1337-1375 Codice Civile - responsabilità precontrattuale e contrattuale</li>
-                        <li><strong>Dovere di Informazione:</strong> Secondo art. 21 TUF - informazioni complete su prodotti finanziari</li>
-                    </ul>`
-                },
-                authorities: {
-                    title: "Autorità di Vigilanza",
-                    content: `
-                    <ul>
-                        <li><strong>Banca d'Italia:</strong> Autorità di vigilanza bancaria - supervisione prudenziale e stabilità finanziaria - Via Nazionale 91, Roma</li>
-                        <li><strong>CONSOB:</strong> Commissione Nazionale per le Società e la Borsa - vigilanza mercati finanziari - Via G.B. Martini 3, Roma</li>
-                        <li><strong>IVASS:</strong> Istituto per la Vigilanza sulle Assicurazioni - Via del Quirinale 21, Roma</li>
-                        <li><strong>Banca Centrale Europea (BCE):</strong> Supervisione diretta banche significative nel meccanismo SSM</li>
-                        <li><strong>Unità di Informazione Finanziaria (UIF):</strong> Presso Banca d'Italia - riceve e analizza SOS - Via Nazionale 91, Roma</li>
-                        <li><strong>Guardia di Finanza - Nucleo Speciale Polizia Valutaria:</strong> Contrasto crimini finanziari e riciclaggio</li>
-                        <li><strong>AGCM:</strong> Autorità Garante della Concorrenza e del Mercato - tutela concorrenza</li>
-                        <li><strong>Garante Privacy:</strong> Autorità protezione dati personali - Piazza Venezia 11, Roma</li>
-                        <li><strong>Arbitro Bancario Finanziario (ABF):</strong> Sistema ADR Banca d'Italia per controversie</li>
-                    </ul>`
-                },
-                complaintMechanisms: {
-                    title: "Meccanismi di Reclamo",
-                    content: `
-                    <ul>
-                        <li><strong>Reclamo all'Intermediario:</strong> Primo livello - risposta obbligatoria entro 60 giorni (art. 127 TUB e 190 TUF)</li>
-                        <li><strong>Arbitro Bancario Finanziario (ABF):</strong> Sistema ADR gratuito Banca d'Italia - decisioni vincolanti fino a 200.000 euro - ricorso online su sito Banca d'Italia</li>
-                        <li><strong>ACF - Arbitro per le Controversie Finanziarie:</strong> Presso CONSOB per controversie investimenti - Via G.B. Martini 3, Roma</li>
-                        <li><strong>Esposto a Banca d'Italia:</strong> Segnalazione comportamenti scorretti - esame e richiamo intermediario</li>
-                        <li><strong>Esposto a CONSOB:</strong> Per irregolarità intermediari finanziari</li>
-                        <li><strong>Associazioni Consumatori:</strong> Supporto legale e class action - Adiconsum, Codacons, Altroconsumo, ecc.</li>
-                        <li><strong>Conciliatore Bancario Finanziario:</strong> Conciliazione volontaria preventiva</li>
-                        <li><strong>Mediazione Civile:</strong> Obbligatoria prima di azione giudiziaria secondo D.Lgs. 28/2010</li>
-                        <li><strong>Azione Giudiziaria:</strong> Tribunale competente - giudice di pace fino a 5.000 euro</li>
-                    </ul>`
-                },
-                fraudReporting: {
-                    title: "Segnalazione Truffe e Frodi",
-                    links: [
-                        { label: "Polizia Postale - Commissariato Online", url: "https://www.commissariatodips.it" },
-                        { label: "Guardia di Finanza - Segnalazione Illeciti", url: "https://www.gdf.gov.it/it/segnala-un-illecito" },
-                        { label: "Banca d'Italia - Esposti", url: "https://www.bancaditalia.it/compiti/vigilanza/intermediari/esposti-segnalazioni/" },
-                        { label: "CONSOB - Esposti e Segnalazioni", url: "https://www.consob.it/web/area-pubblica/esposti" },
-                        { label: "UIF - Segnalazioni Operazioni Sospette", url: "https://uif.bancaditalia.it" },
-                        { label: "Garante Privacy - Reclami", url: "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/1547109" }
-                    ]
-                },
-                authorityEmails: {
-                    title: "Contatti Email Autorità",
-                    emails: [
-                        { label: "Banca d'Italia - Esposti", address: "esposti.vigilanza@bancaditalia.it" },
-                        { label: "UIF Banca d'Italia", address: "uif.bancaditalia@bancaditalia.it" },
-                        { label: "CONSOB", address: "consob@consob.it" },
-                        { label: "ABF", address: "abf.segreteria@bancaditalia.it" },
-                        { label: "Garante Privacy", address: "garante@gpdp.it" },
-                        { label: "Polizia Postale", address: "info@commissariatodips.it" },
-                        { label: "AGCM", address: "ag.com@agcm.it" },
-                        { label: "IVASS", address: "ivass@ivass.it" }
-                    ]
+            de: {
+                mainTitle: "🌍 Internationale Datenbank - Bankverantwortung und Finanzbetrug",
+                mainSubtitle: "Rechtsrahmen, Aufsichtsbehörden und Schutzmechanismen nach Ländern",
+                searchPlaceholder: "Suche nach Land, Behörde, Regulierung...",
+                filterAll: "Alle Länder",
+                filterSouthern: "Südeuropa",
+                filterWestern: "Westeuropa",
+                filterNorthern: "Nordeuropa",
+                filterNorthAmerica: "Nordamerika",
+                footerText: "© 2025 Internationale Datenbank für Bankverantwortung",
+                footerPurpose: "Informationen zu Bildungs- und Forschungszwecken",
+                noResults: "Keine Länder gefunden, die Ihren Suchkriterien entsprechen.",
+                sectionTitles: {
+                    legal: "📜 Rechtsrahmen",
+                    responsibilities: "🏦 Bankverantwortung",
+                    authorities: "👥 Aufsichtsbehörden",
+                    complaints: "⚖️ Beschwerdemechanismen",
+                    reporting: "🚨 Betrugsmeldung",
+                    contacts: "📧 Behördenkontakte"
+                }
+            },
+            es: {
+                mainTitle: "🌍 Base de Datos Internacional - Responsabilidades Bancarias y Fraude Financiero",
+                mainSubtitle: "Marco legal, autoridades supervisoras y mecanismos de protección por país",
+                searchPlaceholder: "Buscar por país, autoridad, regulación...",
+                filterAll: "Todos los Países",
+                filterSouthern: "Europa Meridional",
+                filterWestern: "Europa Occidental",
+                filterNorthern: "Europa Septentrional",
+                filterNorthAmerica: "América del Norte",
+                footerText: "© 2025 Base de Datos Internacional de Responsabilidades Bancarias",
+                footerPurpose: "Información con fines educativos e investigación",
+                noResults: "No se encontraron países que coincidan con sus criterios de búsqueda.",
+                sectionTitles: {
+                    legal: "📜 Marco Legal",
+                    responsibilities: "🏦 Responsabilidades Bancarias",
+                    authorities: "👥 Autoridades Supervisoras",
+                    complaints: "⚖️ Mecanismos de Reclamación",
+                    reporting: "🚨 Reporte de Fraudes",
+                    contacts: "📧 Contactos de Autoridades"
                 }
             }
         };
 
-        // Render country cards
-        function renderCountries(filter = '') {
-            const grid = document.getElementById('countriesGrid');
-            grid.innerHTML = '';
-
-            Object.entries(countriesData).forEach(([key, country]) => {
-                const searchText = `${country.name} ${country.region}`.toLowerCase();
-                if (filter && !searchText.includes(filter.toLowerCase())) {
-                    return;
+        // Country data with multilingual support
+        const countriesData = [
+            {
+                name: {
+                    it: "Italia",
+                    en: "Italy",
+                    de: "Italien",
+                    es: "Italia"
+                },
+                flag: "🇮🇹",
+                region: "Southern Europe",
+                data: {
+                    it: {
+                        legal: "TUB (D.Lgs. 385/1993), TUF (D.Lgs. 58/1998), Codice del Consumo (D.Lgs. 206/2005), GDPR (Reg. UE 679/2016), Direttiva PSD2, MiFID II",
+                        responsibilities: "Dovere di diligenza, trasparenza contrattuale, Know Your Customer (KYC), Anti-Money Laundering (AML), tutela del risparmio, informativa precontrattuale adeguata",
+                        authorities: "Banca d'Italia, CONSOB, IVASS, Guardia di Finanza, UIF (Unità di Informazione Finanziaria), Garante Privacy",
+                        complaints: "ABF (Arbitro Bancario Finanziario - gratuito), Conciliatore Bancario, Camera di Conciliazione presso Consob, Ombudsman assicurativo IVASS",
+                        reporting: [
+                            { name: "Polizia Postale", url: "https://www.commissariatodips.it" },
+                            { name: "Guardia di Finanza", url: "https://www.gdf.gov.it" },
+                            { name: "CONSOB Segnalazioni", url: "https://www.consob.it/web/area-pubblica/segnalazioni" }
+                        ],
+                        contacts: "Banca d'Italia: servizio.tutela.clientela@bancaditalia.it | CONSOB: consob@consob.it | UIF: uif@bancaditalia.it"
+                    },
+                    en: {
+                        legal: "TUB (Legislative Decree 385/1993), TUF (Legislative Decree 58/1998), Consumer Code (Legislative Decree 206/2005), GDPR (EU Reg. 679/2016), PSD2 Directive, MiFID II",
+                        responsibilities: "Duty of diligence, contractual transparency, Know Your Customer (KYC), Anti-Money Laundering (AML), savings protection, adequate pre-contractual information",
+                        authorities: "Bank of Italy, CONSOB, IVASS, Financial Police, FIU (Financial Intelligence Unit), Privacy Authority",
+                        complaints: "ABF (Banking and Financial Arbitrator - free), Banking Conciliator, Consob Conciliation Chamber, IVASS Insurance Ombudsman",
+                        reporting: [
+                            { name: "Postal Police", url: "https://www.commissariatodips.it" },
+                            { name: "Financial Police", url: "https://www.gdf.gov.it" },
+                            { name: "CONSOB Reports", url: "https://www.consob.it/web/area-pubblica/segnalazioni" }
+                        ],
+                        contacts: "Bank of Italy: servizio.tutela.clientela@bancaditalia.it | CONSOB: consob@consob.it | FIU: uif@bancaditalia.it"
+                    },
+                    de: {
+                        legal: "TUB (Gesetzesdekret 385/1993), TUF (Gesetzesdekret 58/1998), Verbraucherschutzgesetz (Gesetzesdekret 206/2005), DSGVO (EU-Verordnung 679/2016), PSD2-Richtlinie, MiFID II",
+                        responsibilities: "Sorgfaltspflicht, vertragliche Transparenz, Know Your Customer (KYC), Geldwäschebekämpfung (AML), Sparerschutz, angemessene vorvertragliche Informationen",
+                        authorities: "Bank von Italien, CONSOB, IVASS, Finanzpolizei, FIU (Zentralstelle für Finanztransaktionsuntersuchungen), Datenschutzbehörde",
+                        complaints: "ABF (Bank- und Finanzschlichter - kostenlos), Bankschlichter, Consob-Schlichtungsstelle, IVASS-Versicherungsombudsmann",
+                        reporting: [
+                            { name: "Postpolizei", url: "https://www.commissariatodips.it" },
+                            { name: "Finanzpolizei", url: "https://www.gdf.gov.it" },
+                            { name: "CONSOB-Meldungen", url: "https://www.consob.it/web/area-pubblica/segnalazioni" }
+                        ],
+                        contacts: "Bank von Italien: servizio.tutela.clientela@bancaditalia.it | CONSOB: consob@consob.it | FIU: uif@bancaditalia.it"
+                    },
+                    es: {
+                        legal: "TUB (Decreto Legislativo 385/1993), TUF (Decreto Legislativo 58/1998), Código del Consumidor (Decreto Legislativo 206/2005), RGPD (Reglamento UE 679/2016), Directiva PSD2, MiFID II",
+                        responsibilities: "Deber de diligencia, transparencia contractual, Conozca a su Cliente (KYC), Prevención de Lavado de Dinero (AML), protección del ahorro, información precontractual adecuada",
+                        authorities: "Banco de Italia, CONSOB, IVASS, Policía Financiera, UIF (Unidad de Información Financiera), Autoridad de Protección de Datos",
+                        complaints: "ABF (Árbitro Bancario y Financiero - gratuito), Conciliador Bancario, Cámara de Conciliación Consob, Defensor del Asegurado IVASS",
+                        reporting: [
+                            { name: "Policía Postal", url: "https://www.commissariatodips.it" },
+                            { name: "Policía Financiera", url: "https://www.gdf.gov.it" },
+                            { name: "Informes CONSOB", url: "https://www.consob.it/web/area-pubblica/segnalazioni" }
+                        ],
+                        contacts: "Banco de Italia: servizio.tutela.clientela@bancaditalia.it | CONSOB: consob@consob.it | UIF: uif@bancaditalia.it"
+                    }
                 }
+            },
+            {
+                name: {
+                    it: "Francia",
+                    en: "France",
+                    de: "Frankreich",
+                    es: "Francia"
+                },
+                flag: "🇫🇷",
+                region: "Western Europe",
+                data: {
+                    it: {
+                        legal: "Code monétaire et financier, Loi Sapin II (anticorruzione), RGPD (GDPR francese), MiFID II, Direttiva PSD2 (servizi di pagamento)",
+                        responsibilities: "Dovere di consulenza e informazione, trasparenza tariffaria, protezione depositi fino a 100.000€, KYC rigoroso, prevenzione riciclaggio, tutela investitori retail",
+                        authorities: "AMF (Autorité des Marchés Financiers), ACPR (Autorité de Contrôle Prudentiel), Banque de France, TRACFIN (antiriciclaggio), DGCCRF (tutela consumatori)",
+                        complaints: "Médiateur bancaire (obbligatorio per ogni banca), AMF Médiation (controversie investimenti), ACPR Réclamations (reclami supervisione)",
+                        reporting: [
+                            { name: "Pharos (segnalazione online)", url: "https://www.internet-signalement.gouv.fr" },
+                            { name: "DGCCRF Signal Conso", url: "https://signal.conso.gouv.fr" },
+                            { name: "AMF Alertes (truffe investimenti)", url: "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne" }
+                        ],
+                        contacts: "AMF: info@amf-france.org | ACPR: contact@acpr.banque-france.fr | TRACFIN: tracfin@finances.gouv.fr"
+                    },
+                    en: {
+                        legal: "Monetary and Financial Code, Sapin II Law (anti-corruption), GDPR (French implementation), MiFID II, PSD2 Directive (payment services)",
+                        responsibilities: "Duty of advice and information, tariff transparency, deposit protection up to €100,000, rigorous KYC, money laundering prevention, retail investor protection",
+                        authorities: "AMF (Financial Markets Authority), ACPR (Prudential Supervisory Authority), Bank of France, TRACFIN (anti-money laundering), DGCCRF (consumer protection)",
+                        complaints: "Banking Mediator (mandatory for each bank), AMF Mediation (investment disputes), ACPR Complaints (supervisory complaints)",
+                        reporting: [
+                            { name: "Pharos (online reporting)", url: "https://www.internet-signalement.gouv.fr" },
+                            { name: "DGCCRF Signal Conso", url: "https://signal.conso.gouv.fr" },
+                            { name: "AMF Alerts (investment scams)", url: "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne" }
+                        ],
+                        contacts: "AMF: info@amf-france.org | ACPR: contact@acpr.banque-france.fr | TRACFIN: tracfin@finances.gouv.fr"
+                    },
+                    de: {
+                        legal: "Währungs- und Finanzgesetzbuch, Sapin-II-Gesetz (Korruptionsbekämpfung), DSGVO (französische Umsetzung), MiFID II, PSD2-Richtlinie (Zahlungsdienste)",
+                        responsibilities: "Beratungs- und Informationspflicht, Tariftransparenz, Einlagenschutz bis 100.000€, strenge KYC-Anforderungen, Geldwäscheprävention, Schutz von Privatanlegern",
+                        authorities: "AMF (Finanzmarktaufsicht), ACPR (Aufsichtsbehörde für Banken und Versicherungen), Bank von Frankreich, TRACFIN (Geldwäschebekämpfung), DGCCRF (Verbraucherschutz)",
+                        complaints: "Bankschlichter (für jede Bank verpflichtend), AMF-Mediation (Anlagestreitigkeiten), ACPR-Beschwerden (Aufsichtsbeschwerden)",
+                        reporting: [
+                            { name: "Pharos (Online-Meldung)", url: "https://www.internet-signalement.gouv.fr" },
+                            { name: "DGCCRF Signal Conso", url: "https://signal.conso.gouv.fr" },
+                            { name: "AMF-Warnungen (Anlagebetrug)", url: "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne" }
+                        ],
+                        contacts: "AMF: info@amf-france.org | ACPR: contact@acpr.banque-france.fr | TRACFIN: tracfin@finances.gouv.fr"
+                    },
+                    es: {
+                        legal: "Código Monetario y Financiero, Ley Sapin II (anticorrupción), RGPD (implementación francesa), MiFID II, Directiva PSD2 (servicios de pago)",
+                        responsibilities: "Deber de asesoramiento e información, transparencia tarifaria, protección de depósitos hasta 100.000€, KYC riguroso, prevención de lavado de dinero, protección inversores minoristas",
+                        authorities: "AMF (Autoridad de Mercados Financieros), ACPR (Autoridad de Control Prudencial), Banco de Francia, TRACFIN (antilavado), DGCCRF (protección consumidores)",
+                        complaints: "Mediador Bancario (obligatorio para cada banco), Mediación AMF (disputas de inversión), Reclamaciones ACPR (quejas supervisión)",
+                        reporting: [
+                            { name: "Pharos (reporte online)", url: "https://www.internet-signalement.gouv.fr" },
+                            { name: "DGCCRF Signal Conso", url: "https://signal.conso.gouv.fr" },
+                            { name: "Alertas AMF (estafas inversión)", url: "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne" }
+                        ],
+                        contacts: "AMF: info@amf-france.org | ACPR: contact@acpr.banque-france.fr | TRACFIN: tracfin@finances.gouv.fr"
+                    }
+                }
+            },
+            {
+                name: {
+                    it: "Spagna",
+                    en: "Spain",
+                    de: "Spanien",
+                    es: "España"
+                },
+                flag: "🇪🇸",
+                region: "Southern Europe",
+                data: {
+                    it: {
+                        legal: "Ley del Mercado de Valores, Ley de Servicios de Pago, RGPD spagnolo, MiFID II, normativa antiriciclaggio, Ley de Protección de Consumidores",
+                        responsibilities: "Test di adeguatezza investimenti, informativa chiara su rischi, protezione depositi fino a 100.000€, prevenzione frodi, dovere di consulenza imparziale",
+                        authorities: "CNMV (Comisión Nacional del Mercado de Valores), Banco de España, SEPBLAC (antiriciclaggio), AEPD (protezione dati), supervisori regionali",
+                        complaints: "Servicio de Reclamaciones Banco de España (gratuito), CNMV Oficina del Inversor, mediazione bancaria obbligatoria",
+                        reporting: [
+                            { name: "Policía Nacional (truffe online)", url: "https://www.policia.es/denuncia.php" },
+                            { name: "Guardia Civil", url: "https://www.guardiacivil.es/es/servicios/denuncias/index.html" },
+                            { name: "CNMV Advertencias (truffe investimenti)", url: "https://www.cnmv.es/portal/Advertencias/Advertencias.aspx" }
+                        ],
+                        contacts: "Banco de España: reclamaciones@bde.es | CNMV: cnmv@cnmv.es | SEPBLAC: sepblac@sepblac.es"
+                    },
+                    en: {
+                        legal: "Securities Market Law, Payment Services Law, Spanish GDPR, MiFID II, anti-money laundering regulations, Consumer Protection Law",
+                        responsibilities: "Investment suitability test, clear risk disclosure, deposit protection up to €100,000, fraud prevention, duty of impartial advice",
+                        authorities: "CNMV (National Securities Market Commission), Bank of Spain, SEPBLAC (anti-money laundering), AEPD (data protection), regional supervisors",
+                        complaints: "Bank of Spain Complaints Service (free), CNMV Investor Office, mandatory banking mediation",
+                        reporting: [
+                            { name: "National Police (online fraud)", url: "https://www.policia.es/denuncia.php" },
+                            { name: "Civil Guard", url: "https://www.guardiacivil.es/es/servicios/denuncias/index.html" },
+                            { name: "CNMV Warnings (investment scams)", url: "https://www.cnmv.es/portal/Advertencias/Advertencias.aspx" }
+                        ],
+                        contacts: "Bank of Spain: reclamaciones@bde.es | CNMV: cnmv@cnmv.es | SEPBLAC: sepblac@sepblac.es"
+                    },
+                    de: {
+                        legal: "Wertpapiermarktgesetz, Zahlungsdienstleistungsgesetz, Spanische DSGVO, MiFID II, Geldwäschevorschriften, Verbraucherschutzgesetz",
+                        responsibilities: "Anlageeignungstest, klare Risikoaufklärung, Einlagensicherung bis 100.000€, Betrugsprävention, unparteiische Beratungspflicht",
+                        authorities: "CNMV (Nationale Wertpapiermarktkommission), Bank von Spanien, SEPBLAC (Geldwäschebekämpfung), AEPD (Datenschutz), regionale Aufsichtsbehörden",
+                        complaints: "Beschwerdestelle der Bank von Spanien (kostenlos), CNMV-Anlegerbüro, verpflichtende Bankmediation",
+                        reporting: [
+                            { name: "Nationalpolizei (Online-Betrug)", url: "https://www.policia.es/denuncia.php" },
+                            { name: "Guardia Civil", url: "https://www.guardiacivil.es/es/servicios/denuncias/index.html" },
+                            { name: "CNMV-Warnungen (Anlagebetrug)", url: "https://www.cnmv.es/portal/Advertencias/Advertencias.aspx" }
+                        ],
+                        contacts: "Bank von Spanien: reclamaciones@bde.es | CNMV: cnmv@cnmv.es | SEPBLAC: sepblac@sepblac.es"
+                    },
+                    es: {
+                        legal: "Ley del Mercado de Valores, Ley de Servicios de Pago, RGPD español, MiFID II, normativa antiblanqueo, Ley de Protección de Consumidores",
+                        responsibilities: "Test de idoneidad de inversiones, información clara sobre riesgos, protección de depósitos hasta 100.000€, prevención de fraudes, deber de asesoramiento imparcial",
+                        authorities: "CNMV (Comisión Nacional del Mercado de Valores), Banco de España, SEPBLAC (antiblanqueo), AEPD (protección datos), supervisores autonómicos",
+                        complaints: "Servicio de Reclamaciones Banco de España (gratuito), CNMV Oficina del Inversor, mediación bancaria obligatoria",
+                        reporting: [
+                            { name: "Policía Nacional (fraudes online)", url: "https://www.policia.es/denuncia.php" },
+                            { name: "Guardia Civil", url: "https://www.guardiacivil.es/es/servicios/denuncias/index.html" },
+                            { name: "CNMV Advertencias (fraudes inversión)", url: "https://www.cnmv.es/portal/Advertencias/Advertencias.aspx" }
+                        ],
+                        contacts: "Banco de España: reclamaciones@bde.es | CNMV: cnmv@cnmv.es | SEPBLAC: sepblac@sepblac.es"
+                    }
+                }
+            },
+            {
+                name: {
+                    it: "Regno Unito",
+                    en: "United Kingdom",
+                    de: "Vereinigtes Königreich",
+                    es: "Reino Unido"
+                },
+                flag: "🇬🇧",
+                region: "Northern Europe",
+                data: {
+                    it: {
+                        legal: "Financial Services and Markets Act 2000, Money Laundering Regulations 2017, UK GDPR, Consumer Credit Act, Financial Services Act 2012, Senior Managers Regime",
+                        responsibilities: "Trattamento equo dei clienti (TCF), protezione depositi fino a £85.000 (FSCS), valutazione appropriatezza prodotti, prevenzione frodi sofisticate, gestione reclami efficace",
+                        authorities: "FCA (Financial Conduct Authority), PRA (Prudential Regulation Authority), Bank of England, NCA (National Crime Agency), FOS (Financial Ombudsman Service)",
+                        complaints: "Financial Ombudsman Service (completamente gratuito, massima autorità), FCA Complaints Scheme, servizi di mediazione bancaria interni",
+                        reporting: [
+                            { name: "Action Fraud (centro nazionale)", url: "https://www.actionfraud.police.uk" },
+                            { name: "FCA ScamSmart", url: "https://www.fca.org.uk/scamsmart" },
+                            { name: "National Cyber Security Centre", url: "https://www.ncsc.gov.uk/section/about-ncsc/report-scam-email" }
+                        ],
+                        contacts: "FCA: consumer.queries@fca.org.uk | FOS: complaint.info@financial-ombudsman.org.uk | Action Fraud: report@actionfraud.police.uk"
+                    },
+                    en: {
+                        legal: "Financial Services and Markets Act 2000, Money Laundering Regulations 2017, UK GDPR, Consumer Credit Act, Financial Services Act 2012, Senior Managers Regime",
+                        responsibilities: "Treating Customers Fairly (TCF), deposit protection up to £85,000 (FSCS), product appropriateness assessment, sophisticated fraud prevention, effective complaints handling",
+                        authorities: "FCA (Financial Conduct Authority), PRA (Prudential Regulation Authority), Bank of England, NCA (National Crime Agency), FOS (Financial Ombudsman Service)",
+                        complaints: "Financial Ombudsman Service (completely free, ultimate authority), FCA Complaints Scheme, internal banking mediation services",
+                        reporting: [
+                            { name: "Action Fraud (national center)", url: "https://www.actionfraud.police.uk" },
+                            { name: "FCA ScamSmart", url: "https://www.fca.org.uk/scamsmart" },
+                            { name: "National Cyber Security Centre", url: "https://www.ncsc.gov.uk/section/about-ncsc/report-scam-email" }
+                        ],
+                        contacts: "FCA: consumer.queries@fca.org.uk | FOS: complaint.info@financial-ombudsman.org.uk | Action Fraud: report@actionfraud.police.uk"
+                    },
+                    de: {
+                        legal: "Finanzdienstleistungs- und Marktgesetz 2000, Geldwäschevorschriften 2017, UK-DSGVO, Verbraucherkreditgesetz, Finanzdienstleistungsgesetz 2012, Senior-Manager-Regime",
+                        responsibilities: "Faire Kundenbehandlung (TCF), Einlagensicherung bis £85.000 (FSCS), Produkteignungsbewertung, Prävention ausgefeilter Betrügereien, effektive Beschwerdebearbeitung",
+                        authorities: "FCA (Finanzaufsichtsbehörde), PRA (Aufsichtsbehörde für Banken), Bank of England, NCA (Nationale Kriminalitätsbehörde), FOS (Finanzombudsmann)",
+                        complaints: "Financial Ombudsman Service (völlig kostenlos, höchste Instanz), FCA-Beschwerdeverfahren, interne Bankschlichtungsdienste",
+                        reporting: [
+                            { name: "Action Fraud (nationales Zentrum)", url: "https://www.actionfraud.police.uk" },
+                            { name: "FCA ScamSmart", url: "https://www.fca.org.uk/scamsmart" },
+                            { name: "Nationales Cybersicherheitszentrum", url: "https://www.ncsc.gov.uk/section/about-ncsc/report-scam-email" }
+                        ],
+                        contacts: "FCA: consumer.queries@fca.org.uk | FOS: complaint.info@financial-ombudsman.org.uk | Action Fraud: report@actionfraud.police.uk"
+                    },
+                    es: {
+                        legal: "Ley de Servicios y Mercados Financieros 2000, Reglamento contra el Lavado de Dinero 2017, RGPD del Reino Unido, Ley de Crédito al Consumo, Ley de Servicios Financieros 2012, Régimen de Directivos Senior",
+                        responsibilities: "Trato justo a clientes (TCF), protección depósitos hasta £85.000 (FSCS), evaluación idoneidad productos, prevención fraudes sofisticados, gestión eficaz de quejas",
+                        authorities: "FCA (Autoridad de Conducta Financiera), PRA (Autoridad de Regulación Prudencial), Banco de Inglaterra, NCA (Agencia Nacional del Crimen), FOS (Servicio del Defensor Financiero)",
+                        complaints: "Financial Ombudsman Service (completamente gratuito, máxima autoridad), Esquema de Quejas FCA, servicios internos de mediación bancaria",
+                        reporting: [
+                            { name: "Action Fraud (centro nacional)", url: "https://www.actionfraud.police.uk" },
+                            { name: "FCA ScamSmart", url: "https://www.fca.org.uk/scamsmart" },
+                            { name: "Centro Nacional de Ciberseguridad", url: "https://www.ncsc.gov.uk/section/about-ncsc/report-scam-email" }
+                        ],
+                        contacts: "FCA: consumer.queries@fca.org.uk | FOS: complaint.info@financial-ombudsman.org.uk | Action Fraud: report@actionfraud.police.uk"
+                    }
+                }
+            },
+            {
+                name: {
+                    it: "Canada",
+                    en: "Canada",
+                    de: "Kanada",
+                    es: "Canadá"
+                },
+                flag: "🇨🇦",
+                region: "North America",
+                data: {
+                    it: {
+                        legal: "Bank Act (legge federale banche), Proceeds of Crime (Money Laundering) and Terrorist Financing Act, PIPEDA (protezione dati), Securities Acts provinciali, Consumer Protection Acts",
+                        responsibilities: "Protezione depositi fino a CAD 100.000 (CDIC), trasparenza commissioni, valutazione idoneità cliente, standard KYC rigorosi, reporting transazioni sospette (FINTRAC)",
+                        authorities: "OSFI (Office of Superintendent of Financial Institutions), FINTRAC (antiriciclaggio), CSA (Canadian Securities Administrators), FCAC (Financial Consumer Agency), regolatori provinciali",
+                        complaints: "FCAC Complaints (agenzia consumatori federale), Ombudsman for Banking Services and Investments (OBSI), commissioni provinciali per i titoli, ADR settoriali",
+                        reporting: [
+                            { name: "Canadian Anti-Fraud Centre", url: "https://www.antifraudcentre-centreantifraude.ca" },
+                            { name: "RCMP (Royal Canadian Mounted Police)", url: "https://www.rcmp-grc.gc.ca/en/how-report-a-scam" },
+                            { name: "FINTRAC (segnalazioni sospette)", url: "https://fintrac-canafe.canada.ca" }
+                        ],
+                        contacts: "FCAC: info@fcac-acfc.gc.ca | Anti-Fraud Centre: info@antifraudcentre-centreantifraude.ca | FINTRAC: guidelines-lignesdirectrices@fintrac-canafe.gc.ca"
+                    },
+                    en: {
+                        legal: "Bank Act (federal banking law), Proceeds of Crime (Money Laundering) and Terrorist Financing Act, PIPEDA (data protection), Provincial Securities Acts, Consumer Protection Acts",
+                        responsibilities: "Deposit protection up to CAD 100,000 (CDIC), fee transparency, client suitability assessment, rigorous KYC standards, suspicious transaction reporting (FINTRAC)",
+                        authorities: "OSFI (Office of Superintendent of Financial Institutions), FINTRAC (anti-money laundering), CSA (Canadian Securities Administrators), FCAC (Financial Consumer Agency), provincial regulators",
+                        complaints: "FCAC Complaints (federal consumer agency), Ombudsman for Banking Services and Investments (OBSI), provincial securities commissions, sector-specific ADR",
+                        reporting: [
+                            { name: "Canadian Anti-Fraud Centre", url: "https://www.antifraudcentre-centreantifraude.ca" },
+                            { name: "RCMP (Royal Canadian Mounted Police)", url: "https://www.rcmp-grc.gc.ca/en/how-report-a-scam" },
+                            { name: "FINTRAC (suspicious reports)", url: "https://fintrac-canafe.canada.ca" }
+                        ],
+                        contacts: "FCAC: info@fcac-acfc.gc.ca | Anti-Fraud Centre: info@antifraudcentre-centreantifraude.ca | FINTRAC: guidelines-lignesdirectrices@fintrac-canafe.gc.ca"
+                    },
+                    de: {
+                        legal: "Bankengesetz (Bundesbankgesetz), Gesetz über Erträge aus Straftaten (Geldwäsche) und Terrorismusfinanzierung, PIPEDA (Datenschutz), Provinzielle Wertpapiergesetze, Verbraucherschutzgesetze",
+                        responsibilities: "Einlagensicherung bis CAD 100.000 (CDIC), Gebührentransparenz, Kundeneignungsbewertung, strenge KYC-Standards, Meldung verdächtiger Transaktionen (FINTRAC)",
+                        authorities: "OSFI (Amt des Superintendent für Finanzinstitute), FINTRAC (Geldwäschebekämpfung), CSA (Kanadische Wertpapierverwalter), FCAC (Finanzverbraucheragentur), Provinzaufsichtsbehörden",
+                        complaints: "FCAC-Beschwerden (Bundesverbraucheragentur), Ombudsmann für Bank- und Anlagedienstleistungen (OBSI), Provinzwertpapierkommissionen, branchenspezifische ADR",
+                        reporting: [
+                            { name: "Kanadisches Anti-Betrugs-Zentrum", url: "https://www.antifraudcentre-centreantifraude.ca" },
+                            { name: "RCMP (Royal Canadian Mounted Police)", url: "https://www.rcmp-grc.gc.ca/en/how-report-a-scam" },
+                            { name: "FINTRAC (verdächtige Meldungen)", url: "https://fintrac-canafe.canada.ca" }
+                        ],
+                        contacts: "FCAC: info@fcac-acfc.gc.ca | Anti-Betrugs-Zentrum: info@antifraudcentre-centreantifraude.ca | FINTRAC: guidelines-lignesdirectrices@fintrac-canafe.gc.ca"
+                    },
+                    es: {
+                        legal: "Ley de Bancos (ley bancaria federal), Ley de Productos del Delito (Lavado de Dinero) y Financiamiento del Terrorismo, PIPEDA (protección datos), Leyes de Valores provinciales, Leyes de Protección al Consumidor",
+                        responsibilities: "Protección depósitos hasta CAD 100.000 (CDIC), transparencia de comisiones, evaluación idoneidad del cliente, estándares KYC rigurosos, reporte transacciones sospechosas (FINTRAC)",
+                        authorities: "OSFI (Oficina del Superintendente de Instituciones Financieras), FINTRAC (antilavado), CSA (Administradores de Valores Canadienses), FCAC (Agencia del Consumidor Financiero), reguladores provinciales",
+                        complaints: "Quejas FCAC (agencia consumidor federal), Defensor de Servicios Bancarios e Inversiones (OBSI), comisiones de valores provinciales, ADR específicos del sector",
+                        reporting: [
+                            { name: "Centro Antifraude Canadiense", url: "https://www.antifraudcentre-centreantifraude.ca" },
+                            { name: "RCMP (Policía Montada de Canadá)", url: "https://www.rcmp-grc.gc.ca/en/how-report-a-scam" },
+                            { name: "FINTRAC (informes sospechosos)", url: "https://fintrac-canafe.canada.ca" }
+                        ],
+                        contacts: "FCAC: info@fcac-acfc.gc.ca | Centro Antifraude: info@antifraudcentre-centreantifraude.ca | FINTRAC: guidelines-lignesdirectrices@fintrac-canafe.gc.ca"
+                    }
+                }
+            }
+        ];
 
-                const card = document.createElement('div');
-                card.className = 'country-card';
-                card.innerHTML = `
-                    <div class="country-header">
-                        <div class="country-flag">${country.flag}</div>
-                        <div class="country-info">
-                            <h2>${country.name}</h2>
-                            <div class="region">${country.region}</div>
-                        </div>
-                    </div>
-                    <div class="info-section">
-                        <div class="info-label">Base Normativa</div>
-                        <div class="info-content">
-                            Framework completo di leggi bancarie, anti-riciclaggio e protezione consumatori
-                        </div>
-                    </div>
-                    <div class="info-section">
-                        <div class="info-label">Autorità Principali</div>
-                        <div class="info-content">
-                            ${country.authorities.content.split('</li>').slice(0, 2).join('</li>') + '</li></ul>'}
-                        </div>
-                    </div>
-                    <button class="btn-details" onclick="openModal('${key}')">
-                        📋 Vedi Dettagli Completi
-                    </button>
-                `;
-                grid.appendChild(card);
+        // Current language state
+        let currentLang = localStorage.getItem('preferredLanguage') || 'it';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupLanguageSelector();
+            setLanguage(currentLang);
+            renderCountries();
+            setupFilters();
+            setupSearch();
+        });
+
+        // Language selector setup
+        function setupLanguageSelector() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    setLanguage(lang);
+                });
             });
         }
 
-        // Open modal
-        function openModal(countryKey) {
-            const country = countriesData[countryKey];
-            const overlay = document.getElementById('modalOverlay');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
+        // Set language
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
 
-            // Set title
-            modalTitle.innerHTML = `
-                <div class="country-flag">${country.flag}</div>
-                <div class="modal-title-text">
-                    <h2>${country.name}</h2>
-                    <div class="region">${country.region}</div>
-                </div>
-            `;
-
-            // Set body
-            let bodyHTML = '';
-
-            // Legal Basis Section
-            bodyHTML += `
-                <div class="modal-section">
-                    <div class="modal-section-title">${country.legalBasis.title}</div>
-                    <div class="modal-info-row">
-                        <div class="modal-info-content">${country.legalBasis.content}</div>
-                    </div>
-                </div>
-            `;
-
-            // Bank Responsibility Section
-            bodyHTML += `
-                <div class="modal-section">
-                    <div class="modal-section-title">${country.bankResponsibility.title}</div>
-                    <div class="modal-info-row">
-                        <div class="modal-info-content">${country.bankResponsibility.content}</div>
-                    </div>
-                </div>
-            `;
-
-            // Authorities Section
-            bodyHTML += `
-                <div class="modal-section">
-                    <div class="modal-section-title">${country.authorities.title}</div>
-                    <div class="modal-info-row">
-                        <div class="modal-info-content">${country.authorities.content}</div>
-                    </div>
-                </div>
-            `;
-
-            // Complaint Mechanisms Section
-            bodyHTML += `
-                <div class="modal-section">
-                    <div class="modal-section-title">${country.complaintMechanisms.title}</div>
-                    <div class="modal-info-row">
-                        <div class="modal-info-content">${country.complaintMechanisms.content}</div>
-                    </div>
-                </div>
-            `;
-
-            // Fraud Reporting Section
-            bodyHTML += `
-                <div class="modal-section">
-                    <div class="modal-section-title">${country.fraudReporting.title}</div>
-                    <div class="modal-info-row">
-                        <div class="modal-info-content">
-                            ${country.fraudReporting.links.map(link => 
-                                `<a href="${link.url}" target="_blank" class="link-button">🔗 ${link.label}</a><br>`
-                            ).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            // Authority Emails Section
-            bodyHTML += `
-                <div class="modal-section">
-                    <div class="modal-section-title">${country.authorityEmails.title}</div>
-                    <div class="modal-info-row">
-                        <div class="email-list">
-                            ${country.authorityEmails.emails.map(email => `
-                                <div class="email-item">
-                                    <span class="email-label">${email.label}:</span>
-                                    <a href="mailto:${email.address}" class="email-address">${email.address}</a>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            modalBody.innerHTML = bodyHTML;
-
-            // Show modal with animation
-            overlay.style.display = 'flex';
-            setTimeout(() => overlay.classList.add('active'), 10);
+            // Update UI elements
+            updateUITranslations();
+            
+            // Re-render countries with new language
+            renderCountries();
         }
 
-        // Close modal
-        function closeModal() {
-            const overlay = document.getElementById('modalOverlay');
-            overlay.classList.remove('active');
-            setTimeout(() => overlay.style.display = 'none', 300);
+        // Update UI translations
+        function updateUITranslations() {
+            const trans = translations[currentLang];
+            
+            document.getElementById('mainTitle').textContent = trans.mainTitle;
+            document.getElementById('mainSubtitle').textContent = trans.mainSubtitle;
+            document.getElementById('searchInput').placeholder = trans.searchPlaceholder;
+            document.getElementById('filterAll').textContent = trans.filterAll;
+            document.getElementById('filterSouthern').textContent = trans.filterSouthern;
+            document.getElementById('filterWestern').textContent = trans.filterWestern;
+            document.getElementById('filterNorthern').textContent = trans.filterNorthern;
+            document.getElementById('filterNorthAmerica').textContent = trans.filterNorthAmerica;
+            document.getElementById('footerText').innerHTML = trans.footerText + ' | <span id="footerPurpose">' + trans.footerPurpose + '</span>';
         }
 
-        // Event listeners
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            renderCountries(e.target.value);
-        });
+        // Render countries
+        function renderCountries(filter = 'all', searchTerm = '') {
+            const grid = document.getElementById('countriesGrid');
+            const trans = translations[currentLang];
+            
+            let filtered = countriesData.filter(country => {
+                const matchesFilter = filter === 'all' || country.region === filter;
+                const matchesSearch = searchTerm === '' || 
+                    country.name[currentLang].toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    country.region.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    JSON.stringify(country.data[currentLang]).toLowerCase().includes(searchTerm.toLowerCase());
+                
+                return matchesFilter && matchesSearch;
+            });
 
-        document.getElementById('modalClose').addEventListener('click', closeModal);
-
-        document.getElementById('modalOverlay').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                closeModal();
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="no-results">${trans.noResults}</div>`;
+                return;
             }
-        });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
+            grid.innerHTML = filtered.map(country => {
+                const countryData = country.data[currentLang];
+                const reportingLinks = countryData.reporting.map(link => 
+                    `<a href="${link.url}" target="_blank" class="link-item">${link.name}</a>`
+                ).join('');
 
-        // Prevent modal content click from closing
-        document.getElementById('modalContent').addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+                return `
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="country-flag">${country.flag}</div>
+                            <div class="country-info">
+                                <h2>${country.name[currentLang]}</h2>
+                                <div class="country-region">${country.region}</div>
+                            </div>
+                        </div>
+                        <div class="country-content">
+                            <div class="section">
+                                <div class="section-title">${trans.sectionTitles.legal}</div>
+                                <div class="section-content">${countryData.legal}</div>
+                            </div>
+                            <div class="section">
+                                <div class="section-title">${trans.sectionTitles.responsibilities}</div>
+                                <div class="section-content">${countryData.responsibilities}</div>
+                            </div>
+                            <div class="section">
+                                <div class="section-title">${trans.sectionTitles.authorities}</div>
+                                <div class="section-content">${countryData.authorities}</div>
+                            </div>
+                            <div class="section">
+                                <div class="section-title">${trans.sectionTitles.complaints}</div>
+                                <div class="section-content">${countryData.complaints}</div>
+                            </div>
+                            <div class="section">
+                                <div class="section-title">${trans.sectionTitles.reporting}</div>
+                                <div class="section-content link-list">${reportingLinks}</div>
+                            </div>
+                            <div class="section">
+                                <div class="section-title">${trans.sectionTitles.contacts}</div>
+                                <div class="section-content">${countryData.contacts.split('|').map(contact => {
+                                    const parts = contact.trim().split(':');
+                                    return `<div><strong>${parts[0]}:</strong> <a href="mailto:${parts[1].trim()}" class="email-link">${parts[1].trim()}</a></div>`;
+                                }).join('')}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
 
-        // Initial render
-        renderCountries();
+        // Setup filters
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const region = btn.dataset.region;
+                    const searchTerm = document.getElementById('searchInput').value;
+                    renderCountries(region, searchTerm);
+                });
+            });
+        }
+
+        // Setup search
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const region = activeFilter ? activeFilter.dataset.region : 'all';
+                renderCountries(region, e.target.value);
+            });
+        }
     </script>
 </body>
 </html>
