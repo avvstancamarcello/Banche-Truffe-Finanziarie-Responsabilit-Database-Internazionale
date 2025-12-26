@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Internazionale - Banche, Truffe Finanziarie e Responsabilità</title>
+    <title>Database Internazionale Banche, Truffe Finanziarie e Responsabilità</title>
     <style>
         * {
             margin: 0;
@@ -21,10 +21,10 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
@@ -36,16 +36,15 @@
             text-align: center;
         }
 
-        h1 {
+        header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .subtitle {
+        header p {
             font-size: 1.2em;
             opacity: 0.9;
-            margin-top: 10px;
         }
 
         .content {
@@ -54,170 +53,97 @@
 
         .section {
             margin-bottom: 40px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
         }
 
         .section h2 {
             color: #1e3c72;
-            margin-bottom: 20px;
             font-size: 2em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
         }
 
         .section h3 {
             color: #2a5298;
-            margin: 25px 0 15px 0;
             font-size: 1.5em;
-        }
-
-        .section p, .section ul {
+            margin-top: 30px;
             margin-bottom: 15px;
+        }
+
+        .intro {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            margin-bottom: 30px;
+        }
+
+        .intro p {
             font-size: 1.1em;
-        }
-
-        .section ul {
-            margin-left: 30px;
-        }
-
-        .section li {
-            margin-bottom: 10px;
             line-height: 1.8;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .warning-box {
             background: #fff3cd;
             border-left: 5px solid #ffc107;
             padding: 20px;
+            border-radius: 8px;
             margin: 20px 0;
-            border-radius: 10px;
         }
 
-        .warning-box strong {
+        .warning-box h3 {
             color: #856404;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-top: 0;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .danger-box h3 {
+            color: #721c24;
+            margin-top: 0;
         }
 
         .info-box {
             background: #d1ecf1;
             border-left: 5px solid #17a2b8;
             padding: 20px;
+            border-radius: 8px;
             margin: 20px 0;
-            border-radius: 10px;
         }
 
-        .info-box strong {
+        .info-box h3 {
             color: #0c5460;
-            display: block;
+            margin-top: 0;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        ul li {
             margin-bottom: 10px;
-            font-size: 1.2em;
+            line-height: 1.6;
         }
 
-        .success-box {
-            background: #d4edda;
-            border-left: 5px solid #28a745;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
-
-        .success-box strong {
-            color: #155724;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 20px 10px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .database-embed {
-            margin: 30px 0;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .database-embed iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
-
-        footer {
-            background: #1e3c72;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 40px;
-        }
-
-        .emoji {
-            font-size: 1.2em;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            .section {
-                padding: 20px;
-            }
-
-            .cta-button {
-                display: block;
-                margin: 10px 0;
-            }
-        }
-
-        /* Table Styles */
         .authority-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: white;
-            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .authority-table thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
         }
 
@@ -234,8 +160,8 @@
         }
 
         .authority-table tbody tr:hover {
-            background: #f5f5f5;
-            transition: background 0.3s;
+            background-color: #f5f5f5;
+            transition: background-color 0.3s ease;
         }
 
         .authority-table tbody tr:last-child td {
@@ -255,12 +181,11 @@
         .authority-link {
             color: #667eea;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
         .authority-link:hover {
-            color: #764ba2;
+            color: #2a5298;
             text-decoration: underline;
         }
 
@@ -268,94 +193,112 @@
             display: inline-block;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.9em;
             font-weight: 600;
+            font-size: 0.9em;
             text-transform: uppercase;
         }
 
         .protection-high {
             background: #d4edda;
             color: #155724;
-            border: 1px solid #28a745;
         }
 
         .protection-medium {
             background: #fff3cd;
             color: #856404;
-            border: 1px solid #ffc107;
         }
 
         .protection-low {
             background: #f8d7da;
             color: #721c24;
-            border: 1px solid #dc3545;
+        }
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .contact-info h3 {
+            color: #1e3c72;
+            margin-top: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2a5298;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .authority-table {
+                font-size: 0.9em;
+            }
+
+            .authority-table th,
+            .authority-table td {
+                padding: 8px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🏦 Database Internazionale</h1>
-            <div class="subtitle">Banche, Truffe Finanziarie e Responsabilità</div>
-            <div class="subtitle">International Database of Banks, Financial Frauds and Responsibilities</div>
+            <h1>🌍 Database Internazionale</h1>
+            <p>Banche, Truffe Finanziarie e Responsabilità</p>
         </header>
 
         <div class="content">
-            <div class="section">
-                <h2><span class="emoji">🎯</span> Obiettivo del Progetto</h2>
-                <p>
-                    Questo database rappresenta un punto di riferimento essenziale per consumatori, investitori e professionisti 
-                    che desiderano verificare la <strong class="highlight">affidabilità e trasparenza</strong> delle istituzioni finanziarie a livello globale.
-                </p>
-                <p>
-                    Il nostro obiettivo è fornire informazioni dettagliate su:
-                </p>
-                <ul>
-                    <li><strong>Banche e intermediari finanziari</strong> registrati e regolamentati</li>
-                    <li><strong>Truffe finanziarie</strong> segnalate e documentate</li>
-                    <li><strong>Sanzioni e provvedimenti</strong> adottati dalle autorità di vigilanza</li>
-                    <li><strong>Livelli di protezione</strong> offerti nei diversi paesi</li>
-                    <li><strong>Strumenti di tutela</strong> disponibili per gli investitori</li>
-                </ul>
+            <div class="intro">
+                <p><strong>Benvenuti nel Database Internazionale delle Autorità di Vigilanza Finanziaria</strong></p>
+                <p>Questo database fornisce un elenco completo delle principali autorità di vigilanza finanziaria a livello mondiale, classificate in base al livello di protezione degli investitori che offrono.</p>
+                <p>Utilizza questa risorsa per verificare la legittimità di broker, banche e istituzioni finanziarie e proteggere i tuoi investimenti dalle truffe.</p>
             </div>
 
-            <div class="section">
-                <h2><span class="emoji">📊</span> Accedi al Database Completo</h2>
-                <div class="info-box">
-                    <strong>🔍 Database Interattivo</strong>
-                    Il database sottostante è aggiornato costantemente con nuove segnalazioni, sanzioni e informazioni 
-                    sulle istituzioni finanziarie. Puoi filtrare, cercare e analizzare i dati in tempo reale.
-                </div>
+            <section class="section">
+                <h2>📊 Classificazione delle Autorità di Vigilanza</h2>
                 
-                <div class="database-embed">
-                    <iframe class="airtable-embed" src="https://airtable.com/embed/appRZLH7mJNb02umy/shrZ1IgJh3jIVjn3m?backgroundColor=purple&viewControls=on" 
-                            frameborder="0" onmousewheel="" width="100%" height="533" 
-                            style="background: transparent; border: 1px solid #ccc;">
-                    </iframe>
+                <div class="info-box">
+                    <h3>Come Leggere Questo Database</h3>
+                    <ul>
+                        <li><strong>ALTA Protezione:</strong> Regolamentazione rigorosa, forte protezione degli investitori, meccanismi di compensazione efficaci</li>
+                        <li><strong>MEDIA Protezione:</strong> Regolamentazione presente ma con minori garanzie per gli investitori internazionali</li>
+                        <li><strong>BASSA Protezione:</strong> Regolamentazione minima o paradisi fiscali con scarsa supervisione</li>
+                    </ul>
                 </div>
 
-                <div class="warning-box">
-                    <strong>⚠️ Importante</strong>
-                    Prima di investire, verifica sempre che l'intermediario sia autorizzato dalle autorità competenti del tuo paese. 
-                    Diffida di promesse di rendimenti elevati e garantiti.
-                </div>
-            </div>
-
-            <div class="section">
-                <h2><span class="emoji">🌍</span> Autorità di Vigilanza Internazionali</h2>
-                <p>
-                    Le autorità di vigilanza finanziaria svolgono un ruolo cruciale nella protezione degli investitori 
-                    e nella regolamentazione dei mercati. Di seguito trovi i link diretti alle principali autorità organizzate 
-                    per livello di protezione degli investitori.
-                </p>
-
-                <h3><span class="emoji">🛡️</span> Paesi con ALTA Protezione degli Investitori</h3>
-                <div class="success-box">
-                    <strong>✅ Massima Tutela</strong>
-                    Questi paesi offrono i più elevati standard di protezione per gli investitori, con sistemi di 
-                    compensazione robusti, vigilanza rigorosa e forte applicazione delle normative.
-                </div>
-
+                <h3>🛡️ ALTA Protezione degli Investitori</h3>
                 <table class="authority-table">
                     <thead>
                         <tr>
@@ -368,234 +311,202 @@
                     <tbody>
                         <tr>
                             <td><span class="country-flag">🇮🇹</span><span class="country-name">Italia</span></td>
-                            <td>CONSOB</td>
-                            <td><a href="https://www.consob.it" target="_blank" class="authority-link">www.consob.it</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
+                            <td>CONSOB - Commissione Nazionale per le Società e la Borsa</td>
+                            <td><a href="https://www.consob.it" class="authority-link" target="_blank">www.consob.it</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
                         </tr>
                         <tr>
-                            <td><span class="country-flag">🇫🇷</span><span class="country-name">Francia</span></td>
-                            <td>AMF</td>
-                            <td><a href="https://www.amf-france.org" target="_blank" class="authority-link">www.amf-france.org</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
+                            <td><span class="country-flag">🇬🇧</span><span class="country-name">Regno Unito</span></td>
+                            <td>FCA - Financial Conduct Authority</td>
+                            <td><a href="https://www.fca.org.uk" class="authority-link" target="_blank">www.fca.org.uk</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇺🇸</span><span class="country-name">Stati Uniti</span></td>
+                            <td>SEC - Securities and Exchange Commission</td>
+                            <td><a href="https://www.sec.gov" class="authority-link" target="_blank">www.sec.gov</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇺🇸</span><span class="country-name">Stati Uniti</span></td>
+                            <td>CFTC - Commodity Futures Trading Commission</td>
+                            <td><a href="https://www.cftc.gov" class="authority-link" target="_blank">www.cftc.gov</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇩🇪</span><span class="country-name">Germania</span></td>
-                            <td>BaFin</td>
-                            <td><a href="https://www.bafin.de" target="_blank" class="authority-link">www.bafin.de</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
+                            <td>BaFin - Bundesanstalt für Finanzdienstleistungsaufsicht</td>
+                            <td><a href="https://www.bafin.de" class="authority-link" target="_blank">www.bafin.de</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇫🇷</span><span class="country-name">Francia</span></td>
+                            <td>AMF - Autorité des Marchés Financiers</td>
+                            <td><a href="https://www.amf-france.org" class="authority-link" target="_blank">www.amf-france.org</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇨🇭</span><span class="country-name">Svizzera</span></td>
+                            <td>FINMA - Swiss Financial Market Supervisory Authority</td>
+                            <td><a href="https://www.finma.ch" class="authority-link" target="_blank">www.finma.ch</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇦🇺</span><span class="country-name">Australia</span></td>
+                            <td>ASIC - Australian Securities and Investments Commission</td>
+                            <td><a href="https://www.asic.gov.au" class="authority-link" target="_blank">www.asic.gov.au</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇯🇵</span><span class="country-name">Giappone</span></td>
+                            <td>FSA - Financial Services Agency</td>
+                            <td><a href="https://www.fsa.go.jp/en" class="authority-link" target="_blank">www.fsa.go.jp</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇨🇦</span><span class="country-name">Canada</span></td>
+                            <td>IIROC - Investment Industry Regulatory Organization</td>
+                            <td><a href="https://www.iiroc.ca" class="authority-link" target="_blank">www.iiroc.ca</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇸🇬</span><span class="country-name">Singapore</span></td>
+                            <td>MAS - Monetary Authority of Singapore</td>
+                            <td><a href="https://www.mas.gov.sg" class="authority-link" target="_blank">www.mas.gov.sg</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇭🇰</span><span class="country-name">Hong Kong</span></td>
+                            <td>SFC - Securities and Futures Commission</td>
+                            <td><a href="https://www.sfc.hk" class="authority-link" target="_blank">www.sfc.hk</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇳🇱</span><span class="country-name">Paesi Bassi</span></td>
+                            <td>AFM - Autoriteit Financiële Markten</td>
+                            <td><a href="https://www.afm.nl" class="authority-link" target="_blank">www.afm.nl</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇪🇸</span><span class="country-name">Spagna</span></td>
-                            <td>CNMV</td>
-                            <td><a href="https://www.cnmv.es" target="_blank" class="authority-link">www.cnmv.es</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇳🇱</span><span class="country-name">Olanda</span></td>
-                            <td>AFM</td>
-                            <td><a href="https://www.afm.nl" target="_blank" class="authority-link">www.afm.nl</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇧🇪</span><span class="country-name">Belgio</span></td>
-                            <td>FSMA</td>
-                            <td><a href="https://www.fsma.be" target="_blank" class="authority-link">www.fsma.be</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇦🇹</span><span class="country-name">Austria</span></td>
-                            <td>FMA</td>
-                            <td><a href="https://www.fma.gv.at" target="_blank" class="authority-link">www.fma.gv.at</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇬🇷</span><span class="country-name">Grecia</span></td>
-                            <td>HCMC</td>
-                            <td><a href="https://www.hcmc.gr" target="_blank" class="authority-link">www.hcmc.gr</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇵🇱</span><span class="country-name">Polonia</span></td>
-                            <td>KNF</td>
-                            <td><a href="https://www.knf.gov.pl" target="_blank" class="authority-link">www.knf.gov.pl</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
+                            <td>CNMV - Comisión Nacional del Mercado de Valores</td>
+                            <td><a href="https://www.cnmv.es" class="authority-link" target="_blank">www.cnmv.es</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇸🇪</span><span class="country-name">Svezia</span></td>
                             <td>Finansinspektionen</td>
-                            <td><a href="https://www.fi.se" target="_blank" class="authority-link">www.fi.se</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇳🇴</span><span class="country-name">Norvegia</span></td>
-                            <td>Finanstilsynet</td>
-                            <td><a href="https://www.finanstilsynet.no" target="_blank" class="authority-link">www.finanstilsynet.no</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇫🇮</span><span class="country-name">Finlandia</span></td>
-                            <td>FIN-FSA</td>
-                            <td><a href="https://www.finanssivalvonta.fi" target="_blank" class="authority-link">www.finanssivalvonta.fi</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇮🇪</span><span class="country-name">Irlanda</span></td>
-                            <td>Central Bank</td>
-                            <td><a href="https://www.centralbank.ie" target="_blank" class="authority-link">www.centralbank.ie</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇬🇧</span><span class="country-name">Regno Unito</span></td>
-                            <td>FCA</td>
-                            <td><a href="https://www.fca.org.uk" target="_blank" class="authority-link">www.fca.org.uk</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇨🇭</span><span class="country-name">Svizzera</span></td>
-                            <td>FINMA</td>
-                            <td><a href="https://www.finma.ch" target="_blank" class="authority-link">www.finma.ch</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇮🇸</span><span class="country-name">Islanda</span></td>
-                            <td>FME/Central Bank</td>
-                            <td><a href="https://www.cb.is/financial-supervision/" target="_blank" class="authority-link">www.cb.is/financial-supervision/</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇵🇹</span><span class="country-name">Portogallo</span></td>
-                            <td>CMVM</td>
-                            <td><a href="https://www.cmvm.pt" target="_blank" class="authority-link">www.cmvm.pt</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇩🇰</span><span class="country-name">Danimarca</span></td>
-                            <td>DFSA</td>
-                            <td><a href="https://www.dfsa.dk" target="_blank" class="authority-link">www.dfsa.dk</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇨🇿</span><span class="country-name">Repubblica Ceca</span></td>
-                            <td>CNB</td>
-                            <td><a href="https://www.cnb.cz" target="_blank" class="authority-link">www.cnb.cz</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇭🇺</span><span class="country-name">Ungheria</span></td>
-                            <td>MNB</td>
-                            <td><a href="https://www.mnb.hu" target="_blank" class="authority-link">www.mnb.hu</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇷🇴</span><span class="country-name">Romania</span></td>
-                            <td>ASF</td>
-                            <td><a href="https://www.asf.ro" target="_blank" class="authority-link">www.asf.ro</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇧🇬</span><span class="country-name">Bulgaria</span></td>
-                            <td>FSC</td>
-                            <td><a href="https://www.fsc.bg" target="_blank" class="authority-link">www.fsc.bg</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇭🇷</span><span class="country-name">Croazia</span></td>
-                            <td>HANFA</td>
-                            <td><a href="https://www.hanfa.hr" target="_blank" class="authority-link">www.hanfa.hr</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇸🇰</span><span class="country-name">Slovacchia</span></td>
-                            <td>NBS</td>
-                            <td><a href="https://www.nbs.sk" target="_blank" class="authority-link">www.nbs.sk</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇸🇮</span><span class="country-name">Slovenia</span></td>
-                            <td>ATVP</td>
-                            <td><a href="https://www.a-tvp.si" target="_blank" class="authority-link">www.a-tvp.si</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇱🇺</span><span class="country-name">Lussemburgo</span></td>
-                            <td>CSSF</td>
-                            <td><a href="https://www.cssf.lu" target="_blank" class="authority-link">www.cssf.lu</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇨🇦</span><span class="country-name">Canada</span></td>
-                            <td>CSA</td>
-                            <td><a href="https://www.securities-administrators.ca" target="_blank" class="authority-link">www.securities-administrators.ca</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇦🇺</span><span class="country-name">Australia</span></td>
-                            <td>ASIC</td>
-                            <td><a href="https://www.asic.gov.au" target="_blank" class="authority-link">www.asic.gov.au</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇯🇵</span><span class="country-name">Giappone</span></td>
-                            <td>FSA</td>
-                            <td><a href="https://www.fsa.go.jp/en" target="_blank" class="authority-link">www.fsa.go.jp/en</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇸🇬</span><span class="country-name">Singapore</span></td>
-                            <td>MAS</td>
-                            <td><a href="https://www.mas.gov.sg" target="_blank" class="authority-link">www.mas.gov.sg</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇰🇷</span><span class="country-name">Corea del Sud</span></td>
-                            <td>FSC</td>
-                            <td><a href="https://www.fsc.go.kr/eng" target="_blank" class="authority-link">www.fsc.go.kr/eng</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇭🇰</span><span class="country-name">Hong Kong</span></td>
-                            <td>SFC</td>
-                            <td><a href="https://www.sfc.hk" target="_blank" class="authority-link">www.sfc.hk</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇱🇹</span><span class="country-name">Lituania</span></td>
-                            <td>Bank of Lithuania</td>
-                            <td><a href="https://www.lb.lt" target="_blank" class="authority-link">www.lb.lt</a></td>
-                            <td><span class="protection-badge protection-high">Alta</span></td>
+                            <td><a href="https://www.fi.se" class="authority-link" target="_blank">www.fi.se</a></td>
+                            <td><span class="protection-badge protection-high">ALTA</span></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <h3><span class="emoji">⚖️</span> Paesi con MEDIA Protezione degli Investitori</h3>
-                <div class="warning-box">
-                    <strong>⚠️ Attenzione Moderata</strong>
-                    Questi paesi hanno regolamentazione in fase di sviluppo. Si consiglia particolare attenzione nella verifica degli intermediari.
-                </div>
-                <ul>
-                    <li>🇺🇸 <strong>Stati Uniti</strong> - SEC (Securities and Exchange Commission) - <a href="https://www.sec.gov" target="_blank">www.sec.gov</a></li>
-                    <li>🇨🇳 <strong>Cina</strong> - CSRC (China Securities Regulatory Commission) - <a href="http://www.csrc.gov.cn/csrc_en/" target="_blank">www.csrc.gov.cn</a></li>
-                    <li>🇮🇳 <strong>India</strong> - SEBI (Securities and Exchange Board of India) - <a href="https://www.sebi.gov.in" target="_blank">www.sebi.gov.in</a></li>
-                    <li>🇧🇷 <strong>Brasile</strong> - CVM (Comissão de Valores Mobiliários) - <a href="https://www.gov.br/cvm" target="_blank">www.gov.br/cvm</a></li>
-                    <li>🇲🇽 <strong>Messico</strong> - CNBV (Comisión Nacional Bancaria y de Valores) - <a href="https://www.gob.mx/cnbv" target="_blank">www.gob.mx/cnbv</a></li>
-                    <li>🇦🇷 <strong>Argentina</strong> - CNV (Comisión Nacional de Valores) - <a href="https://www.argentina.gob.ar/cnv" target="_blank">www.argentina.gob.ar/cnv</a></li>
-                    <li>🇿🇦 <strong>Sudafrica</strong> - FSCA (Financial Sector Conduct Authority) - <a href="https://www.fsca.co.za" target="_blank">www.fsca.co.za</a></li>
-                    <li>🇹🇷 <strong>Turchia</strong> - CMB (Capital Markets Board) - <a href="https://www.spk.gov.tr/indexcont.aspx?submenuheader=-1" target="_blank">www.spk.gov.tr</a></li>
-                    <li>🇷🇺 <strong>Russia</strong> - Central Bank of Russia - <a href="https://www.cbr.ru/eng/" target="_blank">www.cbr.ru</a></li>
-                    <li>🇸🇦 <strong>Arabia Saudita</strong> - CMA (Capital Market Authority) - <a href="https://cma.org.sa/en/Pages/default.aspx" target="_blank">cma.org.sa</a></li>
-                    <li>🇦🇪 <strong>Emirati Arabi Uniti</strong> - SCA (Securities and Commodities Authority) - <a href="https://www.sca.gov.ae/en/home.aspx" target="_blank">www.sca.gov.ae</a></li>
-                    <li>🇹🇭 <strong>Thailandia</strong> - SEC Thailand - <a href="https://www.sec.or.th/EN/Pages/Home.aspx" target="_blank">www.sec.or.th</a></li>
-                    <li>🇲🇾 <strong>Malesia</strong> - SC (Securities Commission Malaysia) - <a href="https://www.sc.com.my" target="_blank">www.sc.com.my</a></li>
-                    <li>🇮🇩 <strong>Indonesia</strong> - OJK (Otoritas Jasa Keuangan) - <a href="https://www.ojk.go.id/en" target="_blank">www.ojk.go.id</a></li>
-                    <li>🇵🇭 <strong>Filippine</strong> - SEC Philippines - <a href="https://www.sec.gov.ph" target="_blank">www.sec.gov.ph</a></li>
-                </ul>
+                <h3>⚠️ MEDIA Protezione degli Investitori</h3>
+                <table class="authority-table">
+                    <thead>
+                        <tr>
+                            <th>Paese</th>
+                            <th>Autorità di Vigilanza</th>
+                            <th>Sito Web</th>
+                            <th>Protezione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="country-flag">🇺🇸</span><span class="country-name">Stati Uniti</span></td>
+                            <td>FBI - IC3 (Internet Crime Complaint Center)</td>
+                            <td><a href="https://www.ic3.gov/AnnualReport/Reports" class="authority-link" target="_blank">www.ic3.gov - Report Annuali</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇨🇳</span><span class="country-name">Cina</span></td>
+                            <td>CSRC - China Securities Regulatory Commission</td>
+                            <td><a href="http://www.csrc.gov.cn/csrc_en/" class="authority-link" target="_blank">www.csrc.gov.cn</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇮🇳</span><span class="country-name">India</span></td>
+                            <td>SEBI - Securities and Exchange Board of India</td>
+                            <td><a href="https://www.sebi.gov.in" class="authority-link" target="_blank">www.sebi.gov.in</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇧🇷</span><span class="country-name">Brasile</span></td>
+                            <td>CVM - Comissão de Valores Mobiliários</td>
+                            <td><a href="https://www.gov.br/cvm" class="authority-link" target="_blank">www.gov.br/cvm</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇲🇽</span><span class="country-name">Messico</span></td>
+                            <td>CNBV - Comisión Nacional Bancaria y de Valores</td>
+                            <td><a href="https://www.gob.mx/cnbv" class="authority-link" target="_blank">www.gob.mx/cnbv</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇦🇷</span><span class="country-name">Argentina</span></td>
+                            <td>CNV - Comisión Nacional de Valores</td>
+                            <td><a href="https://www.argentina.gob.ar/cnv" class="authority-link" target="_blank">www.argentina.gob.ar/cnv</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇿🇦</span><span class="country-name">Sudafrica</span></td>
+                            <td>FSCA - Financial Sector Conduct Authority</td>
+                            <td><a href="https://www.fsca.co.za" class="authority-link" target="_blank">www.fsca.co.za</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇹🇷</span><span class="country-name">Turchia</span></td>
+                            <td>CMB - Capital Markets Board of Turkey</td>
+                            <td><a href="https://www.cmb.gov.tr/en" class="authority-link" target="_blank">www.cmb.gov.tr</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇷🇺</span><span class="country-name">Russia</span></td>
+                            <td>Central Bank of Russia</td>
+                            <td><a href="https://www.cbr.ru/eng/" class="authority-link" target="_blank">www.cbr.ru</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇸🇦</span><span class="country-name">Arabia Saudita</span></td>
+                            <td>CMA - Capital Market Authority</td>
+                            <td><a href="https://cma.org.sa/en" class="authority-link" target="_blank">cma.org.sa</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇦🇪</span><span class="country-name">Emirati Arabi Uniti</span></td>
+                            <td>SCA - Securities and Commodities Authority</td>
+                            <td><a href="https://www.sca.gov.ae/en" class="authority-link" target="_blank">www.sca.gov.ae</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇹🇭</span><span class="country-name">Thailandia</span></td>
+                            <td>SEC - Securities and Exchange Commission</td>
+                            <td><a href="https://www.sec.or.th/EN" class="authority-link" target="_blank">www.sec.or.th</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇲🇾</span><span class="country-name">Malesia</span></td>
+                            <td>SC - Securities Commission Malaysia</td>
+                            <td><a href="https://www.sc.com.my" class="authority-link" target="_blank">www.sc.com.my</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇮🇩</span><span class="country-name">Indonesia</span></td>
+                            <td>OJK - Otoritas Jasa Keuangan</td>
+                            <td><a href="https://www.ojk.go.id/en" class="authority-link" target="_blank">www.ojk.go.id</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇵🇭</span><span class="country-name">Filippine</span></td>
+                            <td>SEC - Securities and Exchange Commission</td>
+                            <td><a href="https://www.sec.gov.ph" class="authority-link" target="_blank">www.sec.gov.ph</a></td>
+                            <td><span class="protection-badge protection-medium">MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                <h3><span class="emoji">⚠️</span> Paesi con BASSA Protezione degli Investitori</h3>
-                <div class="warning-box">
-                    <strong>🚨 MASSIMA ATTENZIONE</strong>
-                    Questi paesi presentano regolamentazione debole o assente. Alto rischio di frodi. Verificare sempre con estrema cautela.
-                </div>
-
+                <h3>🚨 BASSA Protezione degli Investitori</h3>
                 <table class="authority-table">
                     <thead>
                         <tr>
@@ -608,170 +519,163 @@
                     <tbody>
                         <tr>
                             <td><span class="country-flag">🇨🇾</span><span class="country-name">Cipro</span></td>
-                            <td>CySEC</td>
-                            <td><a href="https://www.cysec.gov.cy" target="_blank" class="authority-link">www.cysec.gov.cy</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇲🇹</span><span class="country-name">Malta</span></td>
-                            <td>MFSA</td>
-                            <td><a href="https://www.mfsa.mt" target="_blank" class="authority-link">www.mfsa.mt</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>CySEC - Cyprus Securities and Exchange Commission</td>
+                            <td><a href="https://www.cysec.gov.cy" class="authority-link" target="_blank">www.cysec.gov.cy</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇧🇿</span><span class="country-name">Belize</span></td>
-                            <td>IFSC</td>
-                            <td><a href="https://www.ifsc.gov.bz" target="_blank" class="authority-link">www.ifsc.gov.bz</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>IFSC - International Financial Services Commission</td>
+                            <td><a href="https://www.ifsc.gov.bz" class="authority-link" target="_blank">www.ifsc.gov.bz</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇻🇬</span><span class="country-name">Isole Vergini Britanniche</span></td>
-                            <td>FSC</td>
-                            <td><a href="https://www.bvifsc.vg" target="_blank" class="authority-link">www.bvifsc.vg</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>FSC - Financial Services Commission</td>
+                            <td><a href="https://www.bvifsc.vg" class="authority-link" target="_blank">www.bvifsc.vg</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇻🇺</span><span class="country-name">Vanuatu</span></td>
-                            <td>VFSC</td>
-                            <td><a href="https://www.vfsc.vu" target="_blank" class="authority-link">www.vfsc.vu</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>VFSC - Vanuatu Financial Services Commission</td>
+                            <td><a href="https://www.vfsc.vu" class="authority-link" target="_blank">www.vfsc.vu</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇸🇨</span><span class="country-name">Seychelles</span></td>
-                            <td>FSA</td>
-                            <td><a href="https://www.fsaseychelles.sc" target="_blank" class="authority-link">www.fsaseychelles.sc</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>FSA - Financial Services Authority</td>
+                            <td><a href="https://www.fsaseychelles.sc" class="authority-link" target="_blank">www.fsaseychelles.sc</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇲🇺</span><span class="country-name">Mauritius</span></td>
-                            <td>FSC</td>
-                            <td><a href="https://www.fscmauritius.org" target="_blank" class="authority-link">www.fscmauritius.org</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>FSC - Financial Services Commission</td>
+                            <td><a href="https://www.fscmauritius.org" class="authority-link" target="_blank">www.fscmauritius.org</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
                             <td><span class="country-flag">🇰🇳</span><span class="country-name">Saint Kitts e Nevis</span></td>
-                            <td>NFRC</td>
-                            <td><a href="https://www.sknfrc.com" target="_blank" class="authority-link">www.sknfrc.com</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td>FSU - Financial Services Unit</td>
+                            <td><a href="https://www.ske.gov.kn" class="authority-link" target="_blank">www.ske.gov.kn</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                         <tr>
-                            <td><span class="country-flag">🇱🇨</span><span class="country-name">Saint Lucia</span></td>
-                            <td>FSA</td>
-                            <td><a href="https://www.slufsa.org" target="_blank" class="authority-link">www.slufsa.org</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇻🇨</span><span class="country-name">Saint Vincent e Grenadine</span></td>
-                            <td>FSA</td>
-                            <td><a href="https://www.svgfsa.com" target="_blank" class="authority-link">www.svgfsa.com</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇩🇲</span><span class="country-name">Dominica</span></td>
-                            <td>FSU</td>
-                            <td><a href="https://www.dominica.gov.dm/services/financial-services" target="_blank" class="authority-link">www.dominica.gov.dm</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇦🇬</span><span class="country-name">Antigua e Barbuda</span></td>
-                            <td>FSRC</td>
-                            <td><a href="https://www.fsrc.ag" target="_blank" class="authority-link">www.fsrc.ag</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇰🇾</span><span class="country-name">Isole Cayman</span></td>
-                            <td>CIMA</td>
-                            <td><a href="https://www.cima.ky" target="_blank" class="authority-link">www.cima.ky</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇧🇸</span><span class="country-name">Bahamas</span></td>
-                            <td>SCB</td>
-                            <td><a href="https://www.scb.gov.bs" target="_blank" class="authority-link">www.scb.gov.bs</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇵🇦</span><span class="country-name">Panama</span></td>
-                            <td>SMV</td>
-                            <td><a href="https://www.supervalores.gob.pa" target="_blank" class="authority-link">www.supervalores.gob.pa</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="country-flag">🇲🇼</span><span class="country-name">Malawi</span></td>
-                            <td>RBM</td>
-                            <td><a href="https://www.rbm.mw" target="_blank" class="authority-link">www.rbm.mw</a></td>
-                            <td><span class="protection-badge protection-low">Bassa</span></td>
+                            <td><span class="country-flag">🇲🇭</span><span class="country-name">Isole Marshall</span></td>
+                            <td>No Regulatory Authority</td>
+                            <td><a href="#" class="authority-link" target="_blank">N/A</a></td>
+                            <td><span class="protection-badge protection-low">BASSA</span></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </section>
 
-            <div class="section">
-                <h2><span class="emoji">🔍</span> Come Proteggersi dalle Truffe</h2>
-                <div class="warning-box">
-                    <strong>🛡️ Verifica Prima di Investire</strong>
-                    La prevenzione è la migliore protezione contro le truffe finanziarie.
-                </div>
-                <ul>
-                    <li><strong>Verifica l'autorizzazione</strong>: Controlla sempre che l'intermediario sia registrato presso l'autorità di vigilanza del tuo paese</li>
-                    <li><strong>Diffida delle promesse irrealistiche</strong>: Rendimenti garantiti molto elevati sono spesso segnale di truffa</li>
-                    <li><strong>Informati sulla protezione</strong>: Verifica se esiste un fondo di garanzia che protegge i tuoi investimenti</li>
-                    <li><strong>Documenta tutto</strong>: Conserva tutta la documentazione relativa ai tuoi investimenti</li>
-                    <li><strong>Segnala le irregolarità</strong>: Contatta immediatamente le autorità se sospetti una truffa</li>
-                    <li><strong>Consulta professionisti</strong>: Rivolgiti a consulenti finanziari indipendenti e regolamentati</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <h2><span class="emoji">📢</span> Contribuisci al Database</h2>
-                <div class="info-box">
-                    <strong>🤝 La Tua Esperienza Può Aiutare Altri</strong>
-                    Se hai informazioni su truffe finanziarie, intermediari non autorizzati o esperienze negative con istituzioni finanziarie, 
-                    condividile con noi per aiutare altri investitori.
-                </div>
-                <p>
-                    Puoi contribuire inviando:
-                </p>
-                <ul>
-                    <li>Segnalazioni di truffe o intermediari sospetti</li>
-                    <li>Documentazione di sanzioni o provvedimenti disciplinari</li>
-                    <li>Informazioni su nuove autorità di vigilanza</li>
-                    <li>Aggiornamenti su modifiche normative</li>
-                    <li>Testimonianze di esperienze dirette (anonime se preferisci)</li>
-                </ul>
+            <section class="section">
+                <h2>🚨 Come Riconoscere una Truffa Finanziaria</h2>
                 
-                <div style="text-align: center;">
-                    <a href="mailto:avv.stancamarcello@gmail.com" class="cta-button">
-                        📧 Invia una Segnalazione
-                    </a>
+                <div class="danger-box">
+                    <h3>⚠️ Segnali di Allarme Principali</h3>
+                    <ul>
+                        <li><strong>Promesse di rendimenti garantiti elevati</strong> - Nessun investimento legittimo può garantire profitti certi</li>
+                        <li><strong>Pressione a investire rapidamente</strong> - I truffatori creano urgenza artificiale</li>
+                        <li><strong>Mancanza di documentazione ufficiale</strong> - Broker legittimi forniscono sempre documentazione completa</li>
+                        <li><strong>Difficoltà nei prelievi</strong> - Scuse continue per non restituire i fondi</li>
+                        <li><strong>Regolamentazione in paradisi fiscali</strong> - Broker regolamentati in paesi con bassa protezione</li>
+                        <li><strong>Contatti non verificabili</strong> - Numeri di telefono esteri, indirizzi email generici</li>
+                        <li><strong>Bonus troppo generosi</strong> - Bonus elevati spesso nascondono condizioni impossibili</li>
+                    </ul>
                 </div>
-            </div>
 
-            <div class="section">
-                <h2><span class="emoji">⚖️</span> Informazioni Legali</h2>
-                <div class="info-box">
-                    <strong>📋 Disclaimer</strong>
-                    Le informazioni contenute in questo database sono fornite a scopo informativo e non costituiscono consulenza legale o finanziaria. 
-                    Verifica sempre le informazioni con fonti ufficiali prima di prendere decisioni di investimento.
+                <div class="warning-box">
+                    <h3>🔍 Come Verificare un Broker</h3>
+                    <ol>
+                        <li>Controlla la registrazione presso l'autorità di vigilanza nel sito ufficiale</li>
+                        <li>Verifica che l'indirizzo della società sia reale e verificabile</li>
+                        <li>Cerca recensioni indipendenti e reclami online</li>
+                        <li>Controlla se ci sono avvisi delle autorità di vigilanza</li>
+                        <li>Verifica la presenza di una licenza bancaria o finanziaria valida</li>
+                        <li>Assicurati che offrano una protezione del capitale degli investitori</li>
+                    </ol>
                 </div>
-                <p>
-                    Questo progetto è gestito da professionisti del settore legale e finanziario con l'obiettivo di aumentare 
-                    la trasparenza e la protezione degli investitori a livello internazionale.
-                </p>
-                <p>
-                    <strong>Contatti Legali:</strong><br>
-                    Avv. Marcello Stanca<br>
-                    Email: avv.stancamarcello@gmail.com
-                </p>
-            </div>
+            </section>
+
+            <section class="section">
+                <h2>📞 Cosa Fare se Sei Stato Truffato</h2>
+                
+                <div class="info-box">
+                    <h3>Passi Immediati da Seguire</h3>
+                    <ol>
+                        <li><strong>Interrompi ogni comunicazione</strong> con i truffatori</li>
+                        <li><strong>Raccogli tutte le prove:</strong>
+                            <ul>
+                                <li>Screenshot di conversazioni e transazioni</li>
+                                <li>Email e messaggi ricevuti</li>
+                                <li>Ricevute di pagamento e bonifici</li>
+                                <li>Documenti e contratti ricevuti</li>
+                            </ul>
+                        </li>
+                        <li><strong>Contatta immediatamente:</strong>
+                            <ul>
+                                <li>La tua banca per bloccare eventuali ulteriori transazioni</li>
+                                <li>La Polizia Postale (per l'Italia: <a href="https://www.commissariatodips.it" target="_blank">www.commissariatodips.it</a>)</li>
+                                <li>CONSOB (<a href="https://www.consob.it" target="_blank">www.consob.it</a>)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Presenta una denuncia formale</strong> presso le autorità competenti</li>
+                        <li><strong>Consulta un avvocato specializzato</strong> in truffe finanziarie</li>
+                        <li><strong>Segnala il caso</strong> alle autorità di vigilanza europee (ESMA)</li>
+                    </ol>
+                </div>
+
+                <div class="contact-info">
+                    <h3>📧 Contatti Utili in Italia</h3>
+                    <ul>
+                        <li><strong>CONSOB:</strong> <a href="https://www.consob.it" target="_blank">www.consob.it</a></li>
+                        <li><strong>Polizia Postale:</strong> <a href="https://www.commissariatodips.it" target="_blank">www.commissariatodips.it</a></li>
+                        <li><strong>Guardia di Finanza:</strong> 117</li>
+                        <li><strong>Arbitro Bancario Finanziario (ABF):</strong> <a href="https://www.arbitrobancariofinanziario.it" target="_blank">www.arbitrobancariofinanziario.it</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>💡 Consigli per Investire in Sicurezza</h2>
+                
+                <div class="info-box">
+                    <ul>
+                        <li>✅ Scegli solo broker regolamentati in paesi con ALTA protezione</li>
+                        <li>✅ Verifica sempre la licenza sul sito ufficiale dell'autorità di vigilanza</li>
+                        <li>✅ Inizia con piccoli importi per testare il servizio</li>
+                        <li>✅ Non investire mai più di quanto puoi permetterti di perdere</li>
+                        <li>✅ Diversifica i tuoi investimenti</li>
+                        <li>✅ Leggi attentamente tutti i documenti contrattuali</li>
+                        <li>✅ Diffida di promesse di guadagni facili e veloci</li>
+                        <li>✅ Consulta un consulente finanziario indipendente</li>
+                        <li>✅ Mantieni il controllo completo dei tuoi fondi</li>
+                        <li>✅ Controlla regolarmente i tuoi estratti conto</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🌐 Risorse Aggiuntive</h2>
+                
+                <ul>
+                    <li><strong>IOSCO</strong> - International Organization of Securities Commissions: <a href="https://www.iosco.org" target="_blank">www.iosco.org</a></li>
+                    <li><strong>ESMA</strong> - European Securities and Markets Authority: <a href="https://www.esma.europa.eu" target="_blank">www.esma.europa.eu</a></li>
+                    <li><strong>IOSCO Investor Alerts</strong>: Database delle truffe segnalate a livello mondiale</li>
+                    <li><strong>FCA Warning List</strong>: Lista nera di broker non autorizzati nel Regno Unito</li>
+                    <li><strong>CONSOB Avvisi</strong>: Avvisi su società non autorizzate in Italia</li>
+                </ul>
+            </section>
         </div>
 
         <footer>
-            <p>&copy; 2024 Database Internazionale Banche e Truffe Finanziarie</p>
-            <p>Un progetto per la protezione degli investitori a livello globale</p>
-            <p style="margin-top: 15px; font-size: 0.9em;">
-                🌍 Insieme per un sistema finanziario più trasparente e sicuro
+            <p><strong>⚖️ Database Internazionale Banche e Truffe Finanziarie</strong></p>
+            <p>Aggiornato regolarmente con le informazioni più recenti</p>
+            <p style="margin-top: 20px; font-size: 0.9em;">
+                <em>Disclaimer: Questo database è fornito solo a scopo informativo. Verifica sempre le informazioni presso le autorità ufficiali competenti prima di prendere qualsiasi decisione di investimento.</em>
             </p>
+            <p style="margin-top: 10px;">© 2025 - Tutti i diritti riservati</p>
         </footer>
     </div>
 </body>
