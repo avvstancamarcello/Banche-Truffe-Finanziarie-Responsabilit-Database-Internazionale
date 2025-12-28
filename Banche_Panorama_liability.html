@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Bancario Internazionale -- Truffe Finanziarie e Responsabilità</title>
+    <title>Database Internazionale - Banche, Truffe Finanziarie e Responsabilità</title>
     <style>
         * {
             margin: 0;
@@ -38,8 +38,9 @@
         }
 
         .language-selector {
-            justify-content: center;
-            margin-top: 15px;
+            position: absolute;
+            top: 20px;
+            right: 30px;
             display: flex;
             gap: 10px;
             background: rgba(255,255,255,0.2);
@@ -383,13 +384,13 @@
                 <button class="lang-btn" onclick="changeLanguage('de')">🇩🇪 DE</button>
                 <button class="lang-btn" onclick="changeLanguage('es')">🇪🇸 ES</button>
             </div>
-            <h1 data-i18n="title">Database Bancario Internazionale</h1>
-            <p class="subtitle" data-i18n="subtitle">Truffe Finanziarie - Responsabilità della Banca</p>
+            <h1 data-i18n="title">Database Internazionale</h1>
+            <p class="subtitle" data-i18n="subtitle">Banche, Truffe Finanziarie e Responsabilità</p>
         </header>
 
         <div class="content">
             <div class="eu-references">
-                <h3 data-i18n="euReferences">Riferimenti Istituzionali Europei ed FBI in USA</h3>
+                <h3 data-i18n="euReferences">Riferimenti Istituzionali Europei</h3>
                 <p>
                     <strong>ESMA</strong> - European Securities and Markets Authority: 
                     <a href="https://www.esma.europa.eu" target="_blank">https://www.esma.europa.eu</a>
@@ -402,10 +403,6 @@
                     <strong>FBI IC3</strong> - Internet Crime Complaint Center: 
                     <a href="https://www.ic3.gov/AnnualReport/Reports" target="_blank">https://www.ic3.gov/AnnualReport/Reports</a>
                 </p>
-                <p>
-                    <strong>IOSCO i-SCAN</strong> - International Organization of Securities Commissions: 
-                    <a href="https://www.iosco.org/i-scan/" target="_blank">https://www.iosco.org/i-scan/</a>
-                </p>
             </div>
         </div>
 
@@ -417,21 +414,20 @@
                 <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll">Tutti i Paesi</button>
                 <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh">Protezione Altissima</button>
                 <button class="filter-btn" onclick="filterCountries('ue')" data-i18n="filterEU">Paesi UE</button>
-                <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU">Paesi non-UE</button>
             </div>
         </div>
 
         <div class="stats">
             <div class="stat-card">
-                <div class="stat-number" id="totalCountries">29</div>
+                <div class="stat-number" id="totalCountries">15</div>
                 <div class="stat-label" data-i18n="statCountries">Paesi Monitorati</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="euCountries">14</div>
+                <div class="stat-number" id="euCountries">5</div>
                 <div class="stat-label" data-i18n="statEU">Paesi UE</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="highProtection">14</div>
+                <div class="stat-number" id="highProtection">8</div>
                 <div class="stat-label" data-i18n="statHighProtection">Protezione Altissima</div>
             </div>
         </div>
@@ -443,7 +439,7 @@
         </div>
 
         <footer>
-            <p data-i18n="footer">© 2024 Database Inter Bancario Internazionale - Truffe Finanziarie Responsabilità della Banca. Tutti i diritti riservati.</p>
+            <p data-i18n="footer">© 2024 Database Internazionale - Banche, Truffe Finanziarie e Responsabilità. Tutti i diritti riservati.</p>
             <p data-i18n="footerNote">Questo database è a scopo informativo. Consultare sempre le autorità competenti.</p>
         </footer>
     </div>
@@ -459,13 +455,12 @@
         // Translation data
         const translations = {
             it: {
-                title: "Database Bancario Internazionale",
-                subtitle: "Banca Truffe Finanziarie Responsabilità",
+                title: "Database Internazionale",
+                subtitle: "Banche, Truffe Finanziarie e Responsabilità",
                 searchPlaceholder: "Cerca per paese o autorità...",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Altissima",
                 filterEU: "Paesi UE",
-                filterNonEU: "Paesi non-UE",
                 statCountries: "Paesi Monitorati",
                 statEU: "Paesi UE",
                 statHighProtection: "Protezione Altissima",
@@ -474,11 +469,11 @@
                 authority: "Autorità Competente",
                 protectionLevel: "Livello Protezione",
                 legalBasis: "Base Legale",
-                complaintMechanism: "Mecanismo Reclami",
+                complaintMechanism: "Meccanismo Reclami",
                 fraudReportLink: "Link Segnalazione Frodi",
                 authorityEmail: "Email Autorità",
                 notes: "Note",
-                euReferences: "Riferimenti Istituzionali Europei ed USA FBI",
+                euReferences: "Riferimenti Istituzionali Europei",
                 euCommission: "Commissione Europea"
             },
             en: {
@@ -488,7 +483,6 @@
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
-                filterNonEU: "Non-EU Countries",
                 statCountries: "Monitored Countries",
                 statEU: "EU Countries",
                 statHighProtection: "Highest Protection",
@@ -511,7 +505,6 @@
                 filterAll: "Alle Länder",
                 filterHigh: "Höchster Schutz",
                 filterEU: "EU-Länder",
-                filterNonEU: "Nicht-EU-Länder",
                 statCountries: "Überwachte Länder",
                 statEU: "EU-Länder",
                 statHighProtection: "Höchster Schutz",
@@ -534,7 +527,6 @@
                 filterAll: "Todos los Países",
                 filterHigh: "Máxima Protección",
                 filterEU: "Países UE",
-                filterNonEU: "Países no UE",
                 statCountries: "Países Monitoreados",
                 statEU: "Países UE",
                 statHighProtection: "Máxima Protección",
@@ -549,35 +541,11 @@
                 notes: "Notas",
                 euReferences: "Referencias Institucionales Europeas",
                 euCommission: "Comisión Europea"
-            },
-            fr: {
-                title: "Base de Données Internationale",
-                subtitle: "Banques, Fraude Financière et Responsabilité",
-                searchPlaceholder: "Rechercher par pays ou autorité...",
-                filterAll: "Tous les pays",
-                filterHigh: "Protection Maximale",
-                filterEU: "Pays de l'UE",
-                filterNonEU: "Pays hors UE",
-                statCountries: "Pays Surveillés",
-                statEU: "Pays de l'UE",
-                statHighProtection: "Protection Maximale",
-                footer: "© 2024 Base de Données Internationale - Banques, Fraude Financière et Responsabilité. Tous droits réservés.",
-                footerNote: "Cette base de données est à titre informatif. Consultez toujours les autorités compétentes.",
-                authority: "Autorité Compétente",
-                protectionLevel: "Niveau de Protection",
-                legalBasis: "Base Légale",
-                complaintMechanism: "Mécanisme de Réclamation",
-                fraudReportLink: "Lien de Signalement de Fraude",
-                authorityEmail: "Email de l'Autorité",
-                notes: "Notes",
-                euReferences: "Références Institutionnelles Européennes et USA FBI",
-                euCommission: "Commission Européenne"
             }
         };
 
-        // Country data from our conversation - 29 COUNTRIES
+        // Country data from CSV - ALPHABETICALLY ORDERED (A-Z)
         const countriesData = {
-            // Original 15 countries from the template
             arabia_saudita: {
                 flag: "🇸🇦",
                 names: { it: "Arabia Saudita", en: "Saudi Arabia", de: "Saudi-Arabien", es: "Arabia Saudita" },
@@ -623,7 +591,7 @@
                 complaintMechanism: "Procons, CVM",
                 fraudReportLink: "https://www.gov.br/cvm/pt-br/assuntos/sac",
                 authorityEmail: "sac@cvm.gov.br",
-                notes: "Il BCB (Banco Centrale) gestisce il registro delle istituzioni finanziarie autorizzate.",
+                notes: "Il BCB (Banco Central) gestisce il registro delle istituzioni finanziarie autorizzate.",
                 isEU: false
             },
             canada: {
@@ -753,336 +721,9 @@
                 protectionLevel: "Altissimo",
                 legalBasis: "PSD2/PSD3, TUF, Codice del Consumo",
                 complaintMechanism: "ACF (Arbitro per le Controversie Finanziarie), CONSOB",
-                fraudAllertLink: "https://www.consob.it/web/area-pubblica/occhio-alle-truffe",
-		fraudReportLink: "https://www.consob.it/web/investor-education/l-invio-di-esposti",
+                fraudReportLink: "https://www.consob.it/web/area-pubblica/segnalazioni",
                 authorityEmail: "consob@consob.it",
-                notes: "CONSOB pubblica liste nere degli operatori non autorizzati. DSA, PSD3, PSR aplicabili.",
-                isEU: true
-            },
-            
-            // NEW COUNTRIES ADDED FROM OUR CONVERSATION (14 countries)
-            andorra: {
-                flag: "🇦🇩",
-                names: { it: "Andorra", en: "Andorra", de: "Andorra", es: "Andorra" },
-                authority: "Institut Andorrà de Finances (IAF)",
-                protectionLevel: "Alto",
-                legalBasis: "PSD2 (recepite)",
-                complaintMechanism: "Servizio di Reclami Finanziari (IAF)",
-                fraudReportLink: "https://www.iaf.ad/",
-                authorityEmail: "informacio@iaf.ad",
-                notes: "Ha recepito PSD2. Quadro legale moderno.",
-                isEU: false
-            },
-            austria: {
-                flag: "🇦🇹",
-                names: { it: "Austria", en: "Austria", de: "Österreich", es: "Austria" },
-                authority: "Financial Market Authority (FMA)",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "FMA Ombudsman",
-                fraudReportLink: "https://www.fma.gv.at/en/consumers/complaints/",
-                authorityEmail: "service@fma.gv.at",
-                notes: "Standard UE pienamente applicati.",
-                isEU: true
-            },
-            belgio: {
-                flag: "🇧🇪",
-                names: { it: "Belgio", en: "Belgium", de: "Belgien", es: "Bélgica" },
-                authority: "FSMA - Financial Services and Markets Authority",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "Ombudsman Finanziario",
-                fraudReportLink: "https://www.fsma.be/en/consumer/complaints",
-                authorityEmail: "info@fsma.be",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            bulgaria: {
-                flag: "🇧🇬",
-                names: { it: "Bulgaria", en: "Bulgaria", de: "Bulgarien", es: "Bulgaria" },
-                authority: "Financial Supervision Commission (FSC)",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "Commissione di Supervisione Finanziaria",
-                fraudReportLink: "https://www.fsc.bg/en/",
-                authorityEmail: "fsc@fsc.bg",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            cipro: {
-                flag: "🇨🇾",
-                names: { it: "Cipro", en: "Cyprus", de: "Zypern", es: "Chipre" },
-                authority: "CySEC - Cyprus Securities and Exchange Commission",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "CySEC Complaints",
-                fraudReportLink: "https://www.cysec.gov.cy/en-GB/complaints/how-to-complain/",
-                authorityEmail: "complaints@cysec.gov.cy",
-                notes: "Standard UE applicati nonostante passati problemi.",
-                isEU: true
-            },
-            croazia: {
-                flag: "🇭🇷",
-                names: { it: "Croazia", en: "Croatia", de: "Kroatien", es: "Croacia" },
-                authority: "HANFA - Croatian Financial Services Supervisory Agency",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "HANFA Complaints",
-                fraudReportLink: "https://www.hanfa.hr/en/for-consumers/how-to-submit-a-complaint/",
-                authorityEmail: "info@hanfa.hr",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            estonia: {
-                flag: "🇪🇪",
-                names: { it: "Estonia", en: "Estonia", de: "Estland", es: "Estonia" },
-                authority: "Finantsinspektsioon",
-                protectionLevel: "Alto",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "Finantsinspektsioon Complaints",
-                fraudReportLink: "https://www.fi.ee/en/consumers/complaints",
-                authorityEmail: "info@fi.ee",
-                notes: "Società digitale, ma usata come hub per frodi.",
-                isEU: true
-            },
-            finlandia: {
-                flag: "🇫🇮",
-                names: { it: "Finlandia", en: "Finland", de: "Finnland", es: "Finlandia" },
-                authority: "FIN-FSA - Finnish Financial Supervisory Authority",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "FIN-FSA Complaints",
-                fraudReportLink: "https://www.finanssivalvonta.fi/en/consumers/complaints/",
-                authorityEmail: "registry@finanssivalvonta.fi",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            india: {
-                flag: "🇮🇳",
-                names: { it: "India", en: "India", de: "Indien", es: "India" },
-                authority: "SEBI - Securities and Exchange Board of India",
-                protectionLevel: "Alto",
-                legalBasis: "Linee guida RBI, SEBI Act",
-                complaintMechanism: "SEBI SCORES",
-                fraudReportLink: "https://scores.gov.in/scores/Welcome.html",
-                authorityEmail: "sebi@sebi.gov.in",
-                notes: "Quadro in rapido rafforzamento.",
-                isEU: false
-            },
-            irlanda: {
-                flag: "🇮🇪",
-                names: { it: "Irlanda", en: "Ireland", de: "Irland", es: "Irlanda" },
-                authority: "Central Bank of Ireland",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "Central Bank Complaints",
-                fraudReportLink: "https://www.centralbank.ie/consumer-hub/how-to-make-a-complaint",
-                authorityEmail: "enquiries@centralbank.ie",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            lettonia: {
-                flag: "🇱🇻",
-                names: { it: "Lettonia", en: "Latvia", de: "Lettland", es: "Letonia" },
-                authority: "Financial and Capital Market Commission (FKTK)",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "FKTK Complaints",
-                fraudReportLink: "https://www.fktk.lv/en/consumers/complaints/",
-                authorityEmail: "info@fktk.lv",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            lituania: {
-                flag: "🇱🇹",
-                names: { it: "Lituania", en: "Lithuania", de: "Litauen", es: "Lituania" },
-                authority: "Bank of Lithuania",
-                protectionLevel: "Alto",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "Bank of Lithuania Complaints",
-                fraudReportLink: "https://www.lb.lt/en/consumer-complaints",
-                authorityEmail: "info@lb.lt",
-                notes: "Autorità innovativa e pro-consumer.",
-                isEU: true
-            },
-            lussemburgo: {
-                flag: "🇱🇺",
-                names: { it: "Lussemburgo", en: "Luxembourg", de: "Luxemburg", es: "Luxemburgo" },
-                authority: "CSSF - Commission de Surveillance du Secteur Financier",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "CSSF Complaints",
-                fraudReportLink: "https://www.cssf.lu/en/consumer-information/contact-form/",
-                authorityEmail: "info@cssf.lu",
-                notes: "Standard UE pienamente applicati.",
-                isEU: true
-            },
-            malta: {
-                flag: "🇲🇹",
-                names: { it: "Malta", en: "Malta", de: "Malta", es: "Malta" },
-                authority: "MFSA - Malta Financial Services Authority",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "MFSA Complaints",
-                fraudReportLink: "https://www.mfsa.mt/consumers/make-complaint/",
-                authorityEmail: "consumers@mfsa.mt",
-                notes: "Standard UE, attenta al fintech.",
-                isEU: true
-            },
-            nigeria: {
-                flag: "🇳🇬",
-                names: { it: "Nigeria", en: "Nigeria", de: "Nigeria", es: "Nigeria" },
-                authority: "SEC Nigeria - Securities and Exchange Commission",
-                protectionLevel: "Medio-Alto",
-                legalBasis: "Regole CBN, Investment and Securities Act",
-                complaintMechanism: "SEC Complaints",
-                fraudReportLink: "https://sec.gov.ng/complaints-management/",
-                authorityEmail: "sec@sec.gov.ng",
-                notes: "Forte su frodi non autorizzate, debole su APP fraud.",
-                isEU: false
-            },
-            paesi_bassi: {
-                flag: "🇳🇱",
-                names: { it: "Paesi Bassi", en: "Netherlands", de: "Niederlande", es: "Países Bajos" },
-                authority: "AFM - Authority for the Financial Markets",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "AFM Complaints",
-                fraudReportLink: "https://www.afm.nl/en/consumenten/klacht-indienen",
-                authorityEmail: "info@afm.nl",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            polonia: {
-                flag: "🇵🇱",
-                names: { it: "Polonia", en: "Poland", de: "Polen", es: "Polonia" },
-                authority: "KNF - Komisja Nadzoru Finansowego",
-                protectionLevel: "Alto",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "KNF Complaints",
-                fraudReportLink: "https://www.knf.gov.pl/en/",
-                authorityEmail: "knf@knf.gov.pl",
-                notes: "Autorità dei consumatori molto attiva.",
-                isEU: true
-            },
-            portogallo: {
-                flag: "🇵🇹",
-                names: { it: "Portogallo", en: "Portugal", de: "Portugal", es: "Portugal" },
-                authority: "CMVM - Comissão do Mercado de Valores Mobiliários",
-                protectionLevel: "Alto",
-                legalBasis: "PSD2/PSD3, Norme BdP",
-                complaintMechanism: "Centro de Resolução de Conflitos (CRC), CMVM",
-                fraudReportLink: "https://www.livroreclamacoes.pt/Inicio/",
-                authorityEmail: "cmvm@cmvm.pt",
-                notes: "Arbitrato obbligatorio ed efficiente.",
-                isEU: true
-            },
-            regno_unito: {
-                flag: "🇬🇧",
-                names: { it: "Regno Unito", en: "United Kingdom", de: "Vereinigtes Königreich", es: "Reino Unido" },
-                authority: "FCA - Financial Conduct Authority",
-                protectionLevel: "Altissimo",
-                legalBasis: "CRM Code, PSR 2017",
-                complaintMechanism: "Financial Ombudsman Service (FOS)",
-                fraudReportLink: "https://www.fca.org.uk/consumers/report-scam-unauthorised-firm",
-                authorityEmail: "firm.queries@fca.org.uk",
-                notes: "Pioniere, ma protezione principalmente per clienti diretti delle banche UK.",
-                isEU: false
-            },
-            repubblica_slovacca: {
-                flag: "🇸🇰",
-                names: { it: "Repubblica Slovacca", en: "Slovakia", de: "Slowakei", es: "Eslovaquia" },
-                authority: "National Bank of Slovakia (NBS)",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "NBS Complaints",
-                fraudReportLink: "https://www.nbs.sk/en/consumer-protection/complaints",
-                authorityEmail: "nbs@nbs.sk",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            repubblica_slovena: {
-                flag: "🇸🇮",
-                names: { it: "Repubblica Slovena", en: "Slovenia", de: "Slowenien", es: "Eslovenia" },
-                authority: "Bank of Slovenia",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "Bank of Slovenia Complaints",
-                fraudReportLink: "https://www.bsi.si/en/consumer-information/complaints",
-                authorityEmail: "info@bsi.si",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            romania: {
-                flag: "🇷🇴",
-                names: { it: "Romania", en: "Romania", de: "Rumänien", es: "Rumanía" },
-                authority: "ASF - Financial Supervisory Authority",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "ASF Complaints",
-                fraudReportLink: "https://asfromania.ro/en/consumers/how-to-make-a-complaint",
-                authorityEmail: "asf@asfromania.ro",
-                notes: "Standard UE applicati.",
-                isEU: true
-            },
-            singapore: {
-                flag: "🇸🇬",
-                names: { it: "Singapore", en: "Singapore", de: "Singapur", es: "Singapur" },
-                authority: "MAS - Monetary Authority of Singapore",
-                protectionLevel: "Alto",
-                legalBasis: "Linee guida MAS, Dovere di Cura",
-                complaintMechanism: "Reclamo a MAS, Tribunali",
-                fraudReportLink: "https://www.mas.gov.sg/contact-us/make-a-complaint",
-                authorityEmail: "consumers@mas.gov.sg",
-                notes: "Autorità rigorosa, pressione regolatoria forte.",
-                isEU: false
-            },
-            spagna: {
-                flag: "🇪🇸",
-                names: { it: "Spagna", en: "Spain", de: "Spanien", es: "España" },
-                authority: "CNMV - Comisión Nacional del Mercado de Valores",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, Diritto bancario",
-                complaintMechanism: "Servizio di Reclamazioni (BdE), CNMV",
-                fraudReportLink: "https://www.cnmv.es/portal/Consultas/Reclamaciones.aspx",
-                authorityEmail: "atencionciudadano@cnmv.es",
-                notes: "Giurisprudenza molto favorevole, sistema di reclami forte.",
-                isEU: true
-            },
-            sudafrica: {
-                flag: "🇿🇦",
-                names: { it: "Sudafrica", en: "South Africa", de: "Südafrika", es: "Sudáfrica" },
-                authority: "FSCA - Financial Sector Conduct Authority",
-                protectionLevel: "Alto",
-                legalBasis: "CPA, Financial Sector Regulation Act",
-                complaintMechanism: "Ombud for Banking Services, FSCA",
-                fraudReportLink: "https://www.fsca.co.za/Pages/Contact-Us-Complaints.aspx",
-                authorityEmail: "info@fsca.co.za",
-                notes: "Ombudsman potente e indipendente.",
-                isEU: false
-            },
-            svizzera: {
-                flag: "🇨🇭",
-                names: { it: "Svizzera", en: "Switzerland", de: "Schweiz", es: "Suiza" },
-                authority: "FINMA - Autorità federale di vigilanza sui mercati finanziari",
-                protectionLevel: "Medio-Alto",
-                legalBasis: "LFSP (ZaDiG), Codice delle Obbligazioni",
-                complaintMechanism: "Ombudsman bancari, FINMA",
-                fraudReportLink: "https://www.finma.ch/en/",
-                authorityEmail: "info@finma.ch",
-                notes: "Sistema meno favorevole dell'UE/UK per APP fraud.",
-                isEU: false
-            },
-            ungheria: {
-                flag: "🇭🇺",
-                names: { it: "Ungheria", en: "Hungary", de: "Ungarn", es: "Hungría" },
-                authority: "MNB - Magyar Nemzeti Bank",
-                protectionLevel: "Altissimo",
-                legalBasis: "PSD2/PSD3, DSA",
-                complaintMechanism: "MNB Complaints",
-                fraudReportLink: "https://www.mnb.hu/en/supervision/complaints",
-                authorityEmail: "info@mnb.hu",
-                notes: "Standard UE applicati.",
+                notes: "CONSOB pubblica liste nere degli operatori non autorizzati. DSA, PSD3, PSR applicabili.",
                 isEU: true
             }
         };
@@ -1106,12 +747,8 @@
             // Update active button
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.includes(lang === 'it' ? '🇮🇹' : 
-                                           lang === 'en' ? '🇬🇧' : 
-                                           lang === 'de' ? '🇩🇪' : '🇪🇸')) {
-                    btn.classList.add('active');
-                }
             });
+            event.target.classList.add('active');
             
             // Update all translated elements
             document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -1123,9 +760,7 @@
             
             // Update placeholder
             const searchInput = document.getElementById('searchInput');
-            if (translations[lang].searchPlaceholder) {
-                searchInput.placeholder = translations[lang].searchPlaceholder;
-            }
+            searchInput.placeholder = translations[lang].searchPlaceholder;
             
             // Re-render countries with new language
             renderCountries();
@@ -1145,7 +780,6 @@
                 // Apply filter
                 if (currentFilter === 'altissimo' && country.protectionLevel !== 'Altissimo') return;
                 if (currentFilter === 'ue' && !country.isEU) return;
-                if (currentFilter === 'non-ue' && country.isEU) return;
                 
                 const card = document.createElement('div');
                 card.className = 'country-card';
@@ -1190,15 +824,8 @@
             // Update active button
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.includes(
-                    filter === 'all' ? translations[currentLanguage].filterAll :
-                    filter === 'altissimo' ? translations[currentLanguage].filterHigh :
-                    filter === 'ue' ? translations[currentLanguage].filterEU :
-                    translations[currentLanguage].filterNonEU
-                )) {
-                    btn.classList.add('active');
-                }
             });
+            event.target.classList.add('active');
             
             renderCountries();
         }
